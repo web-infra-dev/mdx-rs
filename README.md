@@ -9,7 +9,7 @@ This is a Node.js binding for MDX compliation of [Modern.js Doc](https://modernj
 Thanks to [mdxjs-rs](https://github.com/wooorm/mdxjs-rs), the awesome Rust library authored by [wooorm](https://github.com/wooorm).We forked this library and customize it for Modern.js Doc, such as:
 
 - Add Node.js binding so that we can use it in Node.js.
-- Implement the logic of custom code block DOM struction
+- Implement the logic of custom code block DOM structure
 - Implement container grammer like `:::tip` in [@modern-js/remark-container](https://github.com/web-infra-dev/modern.js/tree/main/packages/toolkit/remark-container).
 - ...
 
