@@ -1,4 +1,4 @@
-# @modern-js/mdx-binding
+# @modern-js/mdx-rs-binding
 
 This is a Node.js binding for MDX compliation of [Modern.js Doc](https://modernjs.dev/doc-tools) which is a modern documentation tool based on [Rspack](https://www.rspack.org/).
 
