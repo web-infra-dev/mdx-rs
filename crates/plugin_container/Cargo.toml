@@ -1,0 +1,10 @@
+[package]
+name = "mdx_plugin_container"
+version = "0.1.0"
+edition = "2021"
+keywords = ["markdown", "mdx", "compile"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+hast = { path = "../hast" }

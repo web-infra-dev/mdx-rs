@@ -1,0 +1,36 @@
+{
+  "name": "@modern-js/mdx-rs-binding",
+  "description": "MDX compilation binding for Modern.js",
+  "version": "0.0.0",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "napi": {
+    "name": "mdx-binding-core",
+    "triples": {
+      "additional": [
+        "aarch64-apple-darwin"
+      ]
+    }
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@napi-rs/cli": "^2.14.8",
+    "typescript": "^5.0.2",
+    "vitest": "^0.29.7"
+  },
+  "ava": {
+    "timeout": "3m"
+  },
+  "engines": {
+    "node": ">= 10"
+  },
+  "scripts": {
+    "artifacts": "napi artifacts",
+    "build": "napi build --cargo-cwd crates/binding --platform --release",
+    "build:debug": "napi build --cargo-cwd crates/binding --platform",
+    "prepublishOnly": "napi prepublish -t npm",
+    "test": "pnpm build:debug && vitest run",
+    "universal": "napi universal",
+    "version": "napi version"
+  }
+}
