@@ -36,12 +36,25 @@ use mdx_plugin_container::mdx_plugin_container;
 use mdx_plugin_external_link::mdx_plugin_external_link;
 use mdx_plugin_frontmatter::mdx_plugin_frontmatter;
 use mdx_plugin_header_anchor::mdx_plugin_header_anchor;
+use mdx_plugin_normalize_link::mdx_plugin_normalize_link;
 use mdx_plugin_toc::mdx_plugin_toc;
 
 pub use crate::configuration::{MdxConstructs, MdxParseOptions, Options};
 pub use crate::mdx_plugin_recma_document::JsxRuntime;
 
-pub fn compile(value: &String, filepath: &String) -> String {
+pub struct CompileResult {
+  pub code: String,
+  pub links: Vec<String>,
+}
+
+pub fn compile(
+  value: &String,
+  filepath: &String,
+  development: bool,
+  root: &String,
+  default_lang: &String,
+) -> CompileResult {
+  let is_mdx = filepath.ends_with(".mdx");
   let parse_options = ParseOptions {
     constructs: Constructs {
       frontmatter: true,
@@ -52,7 +65,12 @@ pub fn compile(value: &String, filepath: &String) -> String {
       gfm_strikethrough: true,
       gfm_table: true,
       gfm_task_list_item: true,
-      ..Constructs::mdx()
+      // If is_mdx is true, use mdx constructs, or use markdown constructs
+      ..if is_mdx {
+        Constructs::mdx()
+      } else {
+        Constructs::default()
+      }
     },
     gfm_strikethrough_single_tilde: false,
     math_text_single_dollar: false,
@@ -67,14 +85,14 @@ pub fn compile(value: &String, filepath: &String) -> String {
     jsx_runtime: Some(JsxRuntime::Automatic),
   };
   let rewrite_options = RewriteOptions {
-    development: true,
+    development,
     provider_import_source: Some("@mdx-js/react".to_string()),
   };
   let build_options = BuildOptions { development: true };
 
   let location = Location::new(value.as_bytes());
   let mut mdast =
-    to_mdast(value.as_str(), &parse_options).expect(format!("value: {}", value).as_str());
+    to_mdast(value.as_str(), &parse_options).expect(format!("filepath: {}", filepath).as_str());
   mdx_plugin_toc(&mut mdast);
   mdx_plugin_frontmatter(&mut mdast);
   let mut hast = mdast_util_to_hast(&mdast);
@@ -82,6 +100,7 @@ pub fn compile(value: &String, filepath: &String) -> String {
   mdx_plugin_container(&mut hast);
   mdx_plugin_code_block(&mut hast);
   mdx_plugin_external_link(&mut hast);
+  let links = mdx_plugin_normalize_link(&mut hast, root, filepath, default_lang);
   let mut program = hast_util_to_swc(&hast, Some(filepath.to_string()), Some(&location))
     .expect(format!("file: {}", filepath).as_str());
   mdx_plugin_recma_document(&mut program, &document_options, Some(&location))
@@ -89,5 +108,6 @@ pub fn compile(value: &String, filepath: &String) -> String {
   mdx_plugin_recma_jsx_rewrite(&mut program, &rewrite_options, Some(&location));
 
   swc_util_build_jsx(&mut program, &build_options, Some(&location)).unwrap();
-  serialize(&mut program.module, Some(&program.comments))
+  let code = serialize(&mut program.module, Some(&program.comments));
+  CompileResult { code, links }
 }

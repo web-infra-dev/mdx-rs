@@ -6,9 +6,12 @@ import { compile } from "../index.js";
 
 describe("compile", () => {
   test("container grammer", async (t) => {
-    let result = await compile(
+    let { code: result } = await compile(
       readFileSync(path.join(__dirname, "./container.md"), "utf8"),
-      "xxx.mdx"
+      "xxx.mdx",
+      true,
+      "xxx",
+      ""
     );
 
     expect(result).toMatchSnapshot();

@@ -1,5 +1,5 @@
 [package]
-name = "mdx-rs-binding"
+name = "mdx_rs_binding"
 version = "0.1.0"
 edition = "2021"
 
@@ -11,8 +11,9 @@ crate-type = ["cdylib"]
 [dependencies]
 mdx_rs = { path = "../mdx_rs" }
 # Default enable napi4 feature, see https://nodejs.org/api/n-api.html#node-api-version-matrix
-napi = { version = "2.11.1", default-features = false, features = ["napi4"] }
-napi-derive = "2.11.0"
+napi = { version = "2.9.1", default-features = false, features = ["napi7"] }
+napi-derive = "2.9.1"
+crossbeam-channel = "0.5.6"
 
 [build-dependencies]
 napi-build = "2.0.1"
