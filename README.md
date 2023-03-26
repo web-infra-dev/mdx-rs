@@ -2,9 +2,7 @@
 
 This is a Node.js binding for MDX compliation of [Modern.js Doc](https://modernjs.dev/doc-tools) which is a modern documentation tool based on [Rspack](https://www.rspack.org/).
 
-## Credits
-
-Thanks to [mdxjs-rs](https://github.com/wooorm/mdxjs-rs), the awesome Rust library authored by [wooorm](https://github.com/wooorm).We forked this library and customize it for Modern.js Doc, adding the following features:
+We forked [mdxjs-rs](https://github.com/wooorm/mdxjs-rs) and customize it for Modern.js Doc, adding the following features:
 
 | Crate                                                       | Description                                                                                                                                                         |
 | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -17,5 +15,9 @@ Thanks to [mdxjs-rs](https://github.com/wooorm/mdxjs-rs), the awesome Rust libra
 | [mdx_plugin_header_anchor](./crates/plugin_header_anchor)   | Add anchor for every header.                                                                                                                                        |
 | [mdx_plugin_normalize_link](./crates/plugin_normalize_link) | Normalize link to complete url base on current filepath.                                                                                                            |
 | [slugger](./crates/slugger)                                 | Generate slug for header, port from [github-slugger](https://github.com/Flet/github-slugger).                                                                       |
+
+## Credits
+
+Thanks to [mdxjs-rs](https://github.com/wooorm/mdxjs-rs), the awesome Rust library authored by [wooorm](https://github.com/wooorm).
 
 Also, thanks to [napi-rs](https://github.com/napi-rs/napi-rs), authored by [Brooooooklyn](https://github.com/Brooooooklyn), which is a great solution to help us build Node.js binding for Rust.

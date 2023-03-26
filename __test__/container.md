@@ -14,6 +14,6 @@ This is a `block` of type `warning`
 This is a `block` of type `danger`
 :::
 
-:::tip Custom Title
+:::tip{title="Custom Title"}
 This is a `block` of `Custom Title`
 :::

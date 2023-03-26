@@ -3,6 +3,23 @@
 //! This plugin is used to parse the container in markdown.
 use hast;
 
+// parse title from `title="xxx"` or `title=xxx` or `title='xxx'`
+pub fn parse_title_from_meta(title_meta: &str) -> String {
+  let mut title = title_meta;
+  let quote = title_meta.chars().nth(6).unwrap();
+  if quote != '"' && quote != '\'' {
+    // ignore the last char, bacause it is "}"
+    let last_index = title.rfind("}").unwrap_or(title.len());
+    title = &title[6..last_index];
+  } else {
+    title = &title[7..];
+    // find the last index of quote
+    let last_index = title.rfind(quote).unwrap_or(title.len());
+    title = &title[..last_index];
+  }
+  title.to_string()
+}
+
 pub fn parse_container_meta(meta: &str) -> (String, String) {
   // 1. parse the content before \n
   // 2. parse the type after `:::`, such as tip, warning, etc. The type properly has a space before `:::`.
@@ -19,23 +36,13 @@ pub fn parse_container_meta(meta: &str) -> (String, String) {
   // Parse the type and title individually. Such as :::tip title="title" -> ("tip", "title="title"}")
   let container_type = type_and_title.next().unwrap_or("").trim();
   // Get the content before \n and trim the space.
-  let mut title = type_and_title.next().unwrap_or("");
+  let mut title = type_and_title.next().unwrap_or("").to_string();
 
   // The title is properly `title="title"` or `title='title'`, we need to parse this case.
   if title.starts_with("title=") {
-    let quote = title.chars().nth(6).unwrap();
-    if quote != '"' && quote != '\'' {
-      // ignore the last char, bacause it is "}"
-      title = &title[6..title.len() - 1];
-    } else {
-      title = &title[7..];
-      // find the last index of quote
-      let last_index = title.rfind(quote).unwrap_or(title.len());
-      title = &title[..last_index];
-    }
+    title = parse_title_from_meta(&title);
   }
-  title = title.trim();
-  (container_type.into(), title.into())
+  (container_type.into(), title.trim().to_string())
 }
 
 fn create_new_container_node(
@@ -96,7 +103,6 @@ fn traverse_children(root: &mut hast::Root) {
   let mut container_content_start_index = 0;
   let mut container_content_end_index = 0;
   let mut index = 0;
-
   while index < root.children.len() {
     let child = &root.children[index];
     if let hast::Node::Element(element) = child {
@@ -105,6 +111,10 @@ fn traverse_children(root: &mut hast::Root) {
         if let Some(hast::Node::Text(text)) = element.children.first() {
           if text.value.starts_with(":::") {
             (container_type, container_title) = parse_container_meta(&text.value);
+            // If the second element is MdxExpression, we parse the value and reassign the container_title
+            if let Some(hast::Node::MdxExpression(expression)) = element.children.get(1) {
+              container_title = parse_title_from_meta(&expression.value);
+            }
             container_content_start = true;
             container_content_start_index = index;
             // :::tip\nThis is a tip
@@ -133,6 +143,15 @@ fn traverse_children(root: &mut hast::Root) {
             if i == 0 && index == container_content_start_index {
               continue;
             }
+
+            if i == 1 && index == container_content_start_index {
+              if let hast::Node::MdxExpression(expression) = child {
+                if expression.value.starts_with("title=") {
+                  continue;
+                }
+              }
+            }
+
             if let hast::Node::Text(text) = child {
               if text.value.ends_with(":::") {
                 let extra_text = text.value.split(":::").next().unwrap_or("");
@@ -233,6 +252,13 @@ mod tests {
   use super::*;
 
   #[test]
+  fn test_parse_title_from_meta() {
+    assert_eq!(parse_title_from_meta("title=\"Note\""), "Note");
+    assert_eq!(parse_title_from_meta("title=\'Note\'"), "Note");
+    assert_eq!(parse_title_from_meta("title=Note"), "Note");
+  }
+
+  #[test]
   fn test_parse_container_meta() {
     assert_eq!(
       parse_container_meta(":::tip Note"),
@@ -312,6 +338,258 @@ mod tests {
     assert_eq!(
       parse_container_meta(":::note{title=}"),
       ("note".into(), "".into()),
+    );
+  }
+
+  #[test]
+  fn test_container_plugin_with_normal_title() {
+    let mut root = hast::Node::Root(hast::Root {
+      children: vec![
+        hast::Node::Element(hast::Element {
+          tag_name: "p".into(),
+          properties: vec![],
+          children: vec![hast::Node::Text(hast::Text {
+            value: ":::tip Note".into(),
+            position: None,
+          })],
+          position: None,
+        }),
+        hast::Node::Element(hast::Element {
+          tag_name: "p".into(),
+          properties: vec![],
+          children: vec![hast::Node::Text(hast::Text {
+            value: "This is a tip".into(),
+            position: None,
+          })],
+          position: None,
+        }),
+        hast::Node::Element(hast::Element {
+          tag_name: "p".into(),
+          properties: vec![],
+          children: vec![hast::Node::Text(hast::Text {
+            value: ":::".into(),
+            position: None,
+          })],
+          position: None,
+        }),
+      ],
+      position: None,
+    });
+
+    mdx_plugin_container(&mut root);
+
+    assert_eq!(
+      root,
+      hast::Node::Root(hast::Root {
+        children: vec![hast::Node::Element(hast::Element {
+          tag_name: "div".into(),
+          properties: vec![(
+            "className".into(),
+            hast::PropertyValue::SpaceSeparated(vec!["modern-directive".into(), "tip".into()])
+          ),],
+          children: vec![
+            hast::Node::Element(hast::Element {
+              tag_name: "p".into(),
+              properties: vec![(
+                "className".into(),
+                hast::PropertyValue::SpaceSeparated(vec!["modern-directive-title".into()])
+              )],
+              children: vec![hast::Node::Text(hast::Text {
+                value: "Note".into(),
+                position: None,
+              })],
+              position: None,
+            }),
+            hast::Node::Element(hast::Element {
+              tag_name: "div".into(),
+              properties: vec![(
+                "className".into(),
+                hast::PropertyValue::SpaceSeparated(vec!["modern-directive-content".into()])
+              )],
+              children: vec![hast::Node::Element(hast::Element {
+                tag_name: "p".into(),
+                properties: vec![],
+                children: vec![hast::Node::Text(hast::Text {
+                  value: "This is a tip".into(),
+                  position: None,
+                })],
+                position: None,
+              })],
+              position: None,
+            })
+          ],
+          position: None,
+        })],
+        position: None,
+      })
+    );
+  }
+
+  #[test]
+  fn test_container_plugin_with_empty_title() {
+    let mut root = hast::Node::Root(hast::Root {
+      children: vec![
+        hast::Node::Element(hast::Element {
+          tag_name: "p".into(),
+          properties: vec![],
+          children: vec![hast::Node::Text(hast::Text {
+            value: ":::tip".into(),
+            position: None,
+          })],
+          position: None,
+        }),
+        hast::Node::Element(hast::Element {
+          tag_name: "p".into(),
+          properties: vec![],
+          children: vec![hast::Node::Text(hast::Text {
+            value: "This is a tip".into(),
+            position: None,
+          })],
+          position: None,
+        }),
+        hast::Node::Element(hast::Element {
+          tag_name: "p".into(),
+          properties: vec![],
+          children: vec![hast::Node::Text(hast::Text {
+            value: ":::".into(),
+            position: None,
+          })],
+          position: None,
+        }),
+      ],
+      position: None,
+    });
+
+    mdx_plugin_container(&mut root);
+
+    assert_eq!(
+      root,
+      hast::Node::Root(hast::Root {
+        children: vec![hast::Node::Element(hast::Element {
+          tag_name: "div".into(),
+          properties: vec![(
+            "className".into(),
+            hast::PropertyValue::SpaceSeparated(vec!["modern-directive".into(), "tip".into()])
+          ),],
+          children: vec![
+            hast::Node::Element(hast::Element {
+              tag_name: "p".into(),
+              properties: vec![(
+                "className".into(),
+                hast::PropertyValue::SpaceSeparated(vec!["modern-directive-title".into()])
+              )],
+              children: vec![hast::Node::Text(hast::Text {
+                value: "TIP".into(),
+                position: None,
+              })],
+              position: None,
+            }),
+            hast::Node::Element(hast::Element {
+              tag_name: "div".into(),
+              properties: vec![(
+                "className".into(),
+                hast::PropertyValue::SpaceSeparated(vec!["modern-directive-content".into()])
+              )],
+              children: vec![hast::Node::Element(hast::Element {
+                tag_name: "p".into(),
+                properties: vec![],
+                children: vec![hast::Node::Text(hast::Text {
+                  value: "This is a tip".into(),
+                  position: None,
+                })],
+                position: None,
+              })],
+              position: None,
+            })
+          ],
+          position: None,
+        })],
+        position: None,
+      })
+    );
+  }
+
+  #[test]
+  fn test_container_plugin_with_title_assign() {
+    let mut root = hast::Node::Root(hast::Root {
+      children: vec![
+        hast::Node::Element(hast::Element {
+          tag_name: "p".into(),
+          properties: vec![],
+          children: vec![hast::Node::Text(hast::Text {
+            value: ":::tip{title=\"Note\"}".into(),
+            position: None,
+          })],
+          position: None,
+        }),
+        hast::Node::Element(hast::Element {
+          tag_name: "p".into(),
+          properties: vec![],
+          children: vec![hast::Node::Text(hast::Text {
+            value: "This is a tip".into(),
+            position: None,
+          })],
+          position: None,
+        }),
+        hast::Node::Element(hast::Element {
+          tag_name: "p".into(),
+          properties: vec![],
+          children: vec![hast::Node::Text(hast::Text {
+            value: ":::".into(),
+            position: None,
+          })],
+          position: None,
+        }),
+      ],
+      position: None,
+    });
+
+    mdx_plugin_container(&mut root);
+
+    assert_eq!(
+      root,
+      hast::Node::Root(hast::Root {
+        children: vec![hast::Node::Element(hast::Element {
+          tag_name: "div".into(),
+          properties: vec![(
+            "className".into(),
+            hast::PropertyValue::SpaceSeparated(vec!["modern-directive".into(), "tip".into()])
+          ),],
+          children: vec![
+            hast::Node::Element(hast::Element {
+              tag_name: "p".into(),
+              properties: vec![(
+                "className".into(),
+                hast::PropertyValue::SpaceSeparated(vec!["modern-directive-title".into()])
+              )],
+              children: vec![hast::Node::Text(hast::Text {
+                value: "Note".into(),
+                position: None,
+              })],
+              position: None,
+            }),
+            hast::Node::Element(hast::Element {
+              tag_name: "div".into(),
+              properties: vec![(
+                "className".into(),
+                hast::PropertyValue::SpaceSeparated(vec!["modern-directive-content".into()])
+              )],
+              children: vec![hast::Node::Element(hast::Element {
+                tag_name: "p".into(),
+                properties: vec![],
+                children: vec![hast::Node::Text(hast::Text {
+                  value: "This is a tip".into(),
+                  position: None,
+                })],
+                position: None,
+              })],
+              position: None,
+            })
+          ],
+          position: None,
+        })],
+        position: None,
+      })
     );
   }
 }
