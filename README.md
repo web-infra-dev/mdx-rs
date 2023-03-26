@@ -6,7 +6,7 @@ This is a Node.js binding for MDX compliation of [Modern.js Doc](https://modernj
 
 Thanks to [mdxjs-rs](https://github.com/wooorm/mdxjs-rs), the awesome Rust library authored by [wooorm](https://github.com/wooorm).We forked this library and customize it for Modern.js Doc, adding the following features:
 
-| Link                                                        | Description                                                                                                                                                         |
+| Crate                                                       | Description                                                                                                                                                         |
 | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [mdx_rs_binding](./crates/binding)                          | 🔥 Add Node.js binding so that we can use it in Node.js.                                                                                                            |
 | [mdx_plugin_container](./crates/plugin_container)           | Implement container grammar like `:::tip` in [@modern-js/remark-container](https://github.com/web-infra-dev/modern.js/tree/main/packages/toolkit/remark-container). |
