@@ -1,3 +1,4 @@
+use mdx_plugin_toc::TocItem;
 use mdx_rs::{self, CompileResult};
 // mod thread_safe_function;
 
@@ -10,9 +11,29 @@ use napi::{
 };
 
 #[napi(object)]
+pub struct Toc {
+  pub text: String,
+  pub id: String,
+  pub depth: u8,
+}
+
+#[napi(object)]
 pub struct Output {
   pub code: String,
   pub links: Vec<String>,
+  pub html: String,
+  pub title: String,
+  pub toc: Vec<Toc>,
+}
+
+impl From<TocItem> for Toc {
+  fn from(item: TocItem) -> Self {
+    Self {
+      text: item.text,
+      id: item.id,
+      depth: item.depth,
+    }
+  }
 }
 
 impl From<CompileResult> for Output {
@@ -20,6 +41,9 @@ impl From<CompileResult> for Output {
     Self {
       code: res.code,
       links: res.links,
+      html: res.html,
+      title: res.title,
+      toc: res.toc.into_iter().map(|item| item.into()).collect(),
     }
   }
 }
@@ -36,6 +60,16 @@ impl Task for Compiler {
     let mut obj = env.create_object()?;
     obj.set_named_property("code", output.code)?;
     obj.set_named_property("links", output.links)?;
+    obj.set_named_property("html", output.html)?;
+    obj.set_named_property("title", output.title)?;
+    obj.set_named_property(
+      "toc",
+      output
+        .toc
+        .into_iter()
+        .map(|item| item.into())
+        .collect::<Vec<Toc>>(),
+    )?;
     Ok(obj)
   }
 }

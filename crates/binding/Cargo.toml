@@ -14,6 +14,7 @@ mdx_rs = { path = "../mdx_rs" }
 napi = { version = "2.9.1", default-features = false, features = ["napi7"] }
 napi-derive = "2.9.1"
 crossbeam-channel = "0.5.6"
+mdx_plugin_toc = { path = "../plugin_toc" }
 
 [build-dependencies]
 napi-build = "2.0.1"

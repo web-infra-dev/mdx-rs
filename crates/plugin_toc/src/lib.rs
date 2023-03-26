@@ -6,10 +6,15 @@ use markdown::mdast;
 use slugger::Slugger;
 
 #[derive(Debug, Clone)]
-struct TocItem {
-  text: String,
-  depth: u8,
-  id: String,
+pub struct TocItem {
+  pub text: String,
+  pub depth: u8,
+  pub id: String,
+}
+
+pub struct TocResult {
+  pub title: String,
+  pub toc: Vec<TocItem>,
 }
 
 pub fn collect_title_in_mdast(node: &mdast::Node) -> String {
@@ -27,7 +32,7 @@ pub fn collect_title_in_mdast(node: &mdast::Node) -> String {
   title.replace("\"", "\\\"").replace("'", "\\\'")
 }
 
-pub fn mdx_plugin_toc(node: &mut mdast::Node) {
+pub fn mdx_plugin_toc(node: &mut mdast::Node) -> TocResult {
   let mut toc: Vec<TocItem> = vec![];
   let mut title = String::new();
   let mut slugger = Slugger::new();
@@ -74,6 +79,8 @@ pub fn mdx_plugin_toc(node: &mut mdast::Node) {
     });
     root.children.extend(vec![title_exports, toc_exports]);
   }
+
+  TocResult { title, toc }
 }
 
 #[cfg(test)]

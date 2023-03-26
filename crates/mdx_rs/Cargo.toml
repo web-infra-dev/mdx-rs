@@ -13,6 +13,7 @@ mdx_plugin_frontmatter = { path = "../plugin_frontmatter" }
 mdx_plugin_header_anchor = { path = "../plugin_header_anchor" }
 mdx_plugin_normalize_link = { path = "../plugin_normalize_link" }
 mdx_plugin_toc = { path = "../plugin_toc" }
+mdx_plugin_html = { path = "../plugin_html" }
 hast = { path = "../hast" }
 markdown = { workspace = true }
 pretty_assertions = { workspace = true }

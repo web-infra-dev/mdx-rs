@@ -14,6 +14,7 @@ We forked [mdxjs-rs](https://github.com/wooorm/mdxjs-rs) and customize it for Mo
 | [mdx_plugin_external_link](./crates/plugin_external_link)   | Add `target="_blank"` and `rel="noopener noreferrer"` to external link.                                                                                             |
 | [mdx_plugin_header_anchor](./crates/plugin_header_anchor)   | Add anchor for every header.                                                                                                                                        |
 | [mdx_plugin_normalize_link](./crates/plugin_normalize_link) | Normalize link to complete url base on current filepath.                                                                                                            |
+| [mdx_plugin_html](./crates/plugin_html)                     | Serialize hast to html string                                                                                                                                       |
 | [slugger](./crates/slugger)                                 | Generate slug for header, port from [github-slugger](https://github.com/Flet/github-slugger).                                                                       |
 
 ## Credits
