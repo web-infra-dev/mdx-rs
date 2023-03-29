@@ -3,6 +3,7 @@
 
 ### Bug Fixes
 
+* ci ([624d729](https://github.com/web-infra-dev/mdx-rs-binding/commit/624d7299dba2490b94f9f041b66c3d560530ee69))
 * container plugin error in mdx expression title ([cd6dbe7](https://github.com/web-infra-dev/mdx-rs-binding/commit/cd6dbe77ca12322e711f9406d807bce92b8b269a))
 
 

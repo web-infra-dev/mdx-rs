@@ -1,15 +1,15 @@
 {
-  "name": "@modern-js/mdx-rs-binding-darwin-arm64",
+  "name": "@modern-js/mdx-rs-binding-win32-arm64-msvc",
   "version": "0.0.0",
   "os": [
-    "darwin"
+    "win32"
   ],
   "cpu": [
     "arm64"
   ],
-  "main": "mdx-binding-core.darwin-arm64.node",
+  "main": "mdx-binding-core.win32-arm64-msvc.node",
   "files": [
-    "mdx-binding-core.darwin-arm64.node"
+    "mdx-binding-core.win32-arm64-msvc.node"
   ],
   "description": "",
   "keywords": [],

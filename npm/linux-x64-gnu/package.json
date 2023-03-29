@@ -1,5 +1,5 @@
 {
-  "name": "@cool/core-linux-x64-gnu",
+  "name": "@modern-js/mdx-rs-binding-linux-x64-gnu",
   "version": "0.0.0",
   "os": [
     "linux"
@@ -7,15 +7,19 @@
   "cpu": [
     "x64"
   ],
-  "main": "core.linux-x64-gnu.node",
+  "main": "mdx-binding-core.linux-x64-gnu.node",
   "files": [
-    "core.linux-x64-gnu.node"
+    "mdx-binding-core.linux-x64-gnu.node"
   ],
+  "description": "",
+  "keywords": [],
+  "author": "",
   "license": "MIT",
   "engines": {
-    "node": ">= 10"
+    "node": ">=14.12"
   },
-  "libc": [
-    "glibc"
-  ]
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  }
 }

@@ -1,5 +1,5 @@
 {
-  "name": "@cool/core-win32-x64-msvc",
+  "name": "@modern-js/mdx-rs-binding-win32-x64-msvc",
   "version": "0.0.0",
   "os": [
     "win32"
@@ -7,12 +7,19 @@
   "cpu": [
     "x64"
   ],
-  "main": "core.win32-x64-msvc.node",
+  "main": "mdx-binding-core.win32-x64-msvc.node",
   "files": [
-    "core.win32-x64-msvc.node"
+    "mdx-binding-core.win32-x64-msvc.node"
   ],
+  "description": "",
+  "keywords": [],
+  "author": "",
   "license": "MIT",
   "engines": {
-    "node": ">= 10"
+    "node": ">=14.12"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
   }
 }

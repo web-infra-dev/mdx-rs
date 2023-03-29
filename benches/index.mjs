@@ -25,7 +25,13 @@ async function benchMdxjs() {
 async function benchMdxRs() {
   await Promise.all(
     new Array(800).fill(0).map(async (_, index) => {
-      await compileByMdxRs(content, `${index}.md`, true, "", "");
+      await compileByMdxRs({
+        value: content,
+        filepath: examplePath,
+        development: true,
+        root: "",
+        defaultLang: "",
+      });
     })
   );
 }

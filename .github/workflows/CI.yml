@@ -1,8 +1,12 @@
 name: CI
 
+concurrency:
+  group: ci-${{ github.head_ref }}
+  cancel-in-progress: true
+
 env:
   DEBUG: "napi:*"
-  APP_NAME: "mdx-rs"
+  APP_NAME: "mdx-binding-core"
   MACOSX_DEPLOYMENT_TARGET: "10.13"
   # https://github.com/SchrodingerZhu/snmalloc-rs
   CACHE_FRIENDLY_OFFSET: 64
@@ -53,13 +57,13 @@ jobs:
               docker pull $DOCKER_REGISTRY_URL/napi-rs/napi-rs/nodejs-rust:lts-debian
               docker tag $DOCKER_REGISTRY_URL/napi-rs/napi-rs/nodejs-rust:lts-debian builder
             build: |
-              docker run --rm -v ~/.cargo/git:/root/.cargo/git -v ~/.cargo/registry:/root/.cargo/registry -v $(pwd):/build -w /build builder sh -c "npm install -g pnpm@6 && pnpm install && pnpm build && strip swc-plugins.linux-x64-gnu.node"
+              docker run --rm -v ~/.cargo/git:/root/.cargo/git -v ~/.cargo/registry:/root/.cargo/registry -v $(pwd):/build -w /build builder sh -c "npm install -g pnpm@6 && pnpm install && pnpm build && strip mdx-binding-core.linux-x64-gnu.node"
           - host: ubuntu-latest
             target: "x86_64-unknown-linux-musl"
             docker: |
               docker pull $DOCKER_REGISTRY_URL/napi-rs/napi-rs/nodejs-rust:lts-alpine
               docker tag $DOCKER_REGISTRY_URL/napi-rs/napi-rs/nodejs-rust:lts-alpine builder
-            build: docker run --rm -v ~/.cargo/git:/root/.cargo/git -v ~/.cargo/registry:/root/.cargo/registry -v $(pwd):/build -w /build builder sh -c "apk add --update cmake && npx pnpm@6 install && npx pnpm@6 build && strip swc-plugins.linux-x64-musl.node"
+            build: docker run --rm -v ~/.cargo/git:/root/.cargo/git -v ~/.cargo/registry:/root/.cargo/registry -v $(pwd):/build -w /build builder sh -c "apk add --update cmake && npx pnpm@6 install && npx pnpm@6 build && strip mdx-binding-core.linux-x64-musl.node"
           - host: macos-latest
             target: "aarch64-apple-darwin"
             build: |
@@ -77,7 +81,7 @@ jobs:
               sudo apt-get install g++-aarch64-linux-gnu gcc-aarch64-linux-gnu -y
             build: |
               pnpm build -- --target=aarch64-unknown-linux-gnu
-              aarch64-linux-gnu-strip swc-plugins.linux-arm64-gnu.node
+              aarch64-linux-gnu-strip mdx-binding-core.linux-arm64-gnu.node
           - host: ubuntu-latest
             target: "armv7-unknown-linux-gnueabihf"
             setup: |
@@ -85,13 +89,13 @@ jobs:
               sudo apt-get install gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf -y
             build: |
               pnpm build -- --target=armv7-unknown-linux-gnueabihf
-              arm-linux-gnueabihf-strip swc-plugins.linux-arm-gnueabihf.node
+              arm-linux-gnueabihf-strip mdx-binding-core.linux-arm-gnueabihf.node
           - host: ubuntu-latest
             target: "aarch64-unknown-linux-musl"
             docker: |
               docker pull ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-alpine
               docker tag ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-alpine builder
-            build: docker run --rm -v ~/.cargo/git:/root/.cargo/git -v ~/.cargo/registry:/root/.cargo/registry -v $(pwd):/swc-plugins -w /swc-plugins builder sh -c "rustup target add aarch64-unknown-linux-musl && npx pnpm@6 install && npx pnpm@6 build -- --target=aarch64-unknown-linux-musl && /aarch64-linux-musl-cross/bin/aarch64-linux-musl-strip *.node"
+            build: docker run --rm -v ~/.cargo/git:/root/.cargo/git -v ~/.cargo/registry:/root/.cargo/registry -v $(pwd):/mdx-rs-binding -w /mdx-rs-binding builder sh -c "rustup target add aarch64-unknown-linux-musl && npx pnpm@6 install && npx pnpm@6 build -- --target=aarch64-unknown-linux-musl && /aarch64-linux-musl-cross/bin/aarch64-linux-musl-strip *.node"
           - host: windows-latest
             target: "aarch64-pc-windows-msvc"
             build: pnpm build -- --target aarch64-pc-windows-msvc

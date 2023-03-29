@@ -1,5 +1,5 @@
 {
-  "name": "@cool/core-darwin-x64",
+  "name": "@modern-js/mdx-rs-binding-darwin-x64",
   "version": "0.0.0",
   "os": [
     "darwin"
@@ -7,12 +7,19 @@
   "cpu": [
     "x64"
   ],
-  "main": "core.darwin-x64.node",
+  "main": "mdx-binding-core.darwin-x64.node",
   "files": [
-    "core.darwin-x64.node"
+    "mdx-binding-core.darwin-x64.node"
   ],
+  "description": "",
+  "keywords": [],
+  "author": "",
   "license": "MIT",
   "engines": {
-    "node": ">= 10"
+    "node": ">=14.12"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
   }
 }
