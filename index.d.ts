@@ -15,6 +15,13 @@ export interface Output {
   title: string
   toc: Array<Toc>
 }
+export interface CompileOptions {
+  value: string
+  filepath: string
+  development: boolean
+  root: string
+  defaultLang: string
+}
 /** Turn MDX into JavaScript. */
-export function compile(value: string, filepath: string, development: boolean, root: string, defaultLang: string): Promise<Output>
-export function compileSync(value: string, filepath: string, development: boolean, root: string, defaultLang: string): Output
+export function compile(options: CompileOptions): Promise<Output>
+export function compileSync(options: CompileOptions): Output

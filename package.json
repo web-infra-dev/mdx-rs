@@ -14,7 +14,10 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@mdx-js/mdx": "^2.3.0",
     "@napi-rs/cli": "^2.14.8",
+    "benchmark": "^2.1.4",
+    "cli-table": "^0.3.11",
     "typescript": "^5.0.2",
     "vitest": "^0.29.7"
   },

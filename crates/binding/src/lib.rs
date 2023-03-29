@@ -1,6 +1,5 @@
 use mdx_plugin_toc::TocItem;
 use mdx_rs::{self, CompileResult};
-// mod thread_safe_function;
 
 #[macro_use]
 extern crate napi_derive;
@@ -24,6 +23,15 @@ pub struct Output {
   pub html: String,
   pub title: String,
   pub toc: Vec<Toc>,
+}
+
+#[napi(object)]
+pub struct CompileOptions {
+  pub value: String,
+  pub filepath: String,
+  pub development: bool,
+  pub root: String,
+  pub default_lang: String,
 }
 
 impl From<TocItem> for Toc {
@@ -112,13 +120,14 @@ impl Compiler {
 
 /// Turn MDX into JavaScript.
 #[napi(ts_return_type = "Promise<Output>")]
-pub fn compile(
-  value: String,
-  filepath: String,
-  development: bool,
-  root: String,
-  default_lang: String,
-) -> AsyncTask<Compiler> {
+pub fn compile(options: CompileOptions) -> AsyncTask<Compiler> {
+  let CompileOptions {
+    value,
+    filepath,
+    development,
+    root,
+    default_lang,
+  } = options;
   AsyncTask::new(Compiler::new(
     value,
     filepath,
@@ -129,13 +138,14 @@ pub fn compile(
 }
 
 #[napi]
-pub fn compile_sync(
-  value: String,
-  filepath: String,
-  development: bool,
-  root: String,
-  default_lang: String,
-) -> Output {
+pub fn compile_sync(options: CompileOptions) -> Output {
+  let CompileOptions {
+    value,
+    filepath,
+    development,
+    root,
+    default_lang,
+  } = options;
   let mut compiler = Compiler::new(value, filepath, development, root, default_lang);
   compiler.compile().into()
 }
