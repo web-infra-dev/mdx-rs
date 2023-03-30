@@ -1,4 +1,14 @@
-# 0.0.0 (2023-03-29)
+## [0.0.1](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.0.0...v0.0.1) (2023-03-30)
+
+
+### Bug Fixes
+
+* development mode specify ([9ff54d9](https://github.com/web-infra-dev/mdx-rs-binding/commit/9ff54d9dfb475ac1fe9b984997b37b26b10ef1a7))
+* public access ([1e8eb5e](https://github.com/web-infra-dev/mdx-rs-binding/commit/1e8eb5ec26f146be77536da48d2140ad09dd2bf6))
+
+
+
+# [0.0.0](https://github.com/web-infra-dev/mdx-rs-binding/compare/6e5b1f29211ef840aab03708ccfb8a9f841239d0...v0.0.0) (2023-03-30)
 
 
 ### Bug Fixes
