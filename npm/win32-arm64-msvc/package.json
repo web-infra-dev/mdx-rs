@@ -1,0 +1,25 @@
+{
+  "name": "@modern-js/mdx-rs-binding-win32-arm64-msvc",
+  "version": "0.0.0",
+  "os": [
+    "win32"
+  ],
+  "cpu": [
+    "arm64"
+  ],
+  "main": "mdx-binding-core.win32-arm64-msvc.node",
+  "files": [
+    "mdx-binding-core.win32-arm64-msvc.node"
+  ],
+  "description": "",
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.12"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  }
+}

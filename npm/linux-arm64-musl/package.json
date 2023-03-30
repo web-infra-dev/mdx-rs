@@ -1,0 +1,25 @@
+{
+  "name": "@modern-js/mdx-rs-binding-linux-arm64-musl",
+  "version": "0.0.0",
+  "os": [
+    "linux"
+  ],
+  "cpu": [
+    "arm64"
+  ],
+  "main": "mdx-binding-core.linux-arm64-musl.node",
+  "files": [
+    "mdx-binding-core.linux-arm64-musl.node"
+  ],
+  "description": "",
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.12"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  }
+}

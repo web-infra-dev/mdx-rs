@@ -1,0 +1,21 @@
+[package]
+name = "mdx_rs"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+mdx_plugin_code_block = { path = "../plugin_code_block" }
+mdx_plugin_container = { path = "../plugin_container" }
+mdx_plugin_external_link = { path = "../plugin_external_link" }
+mdx_plugin_frontmatter = { path = "../plugin_frontmatter" }
+mdx_plugin_header_anchor = { path = "../plugin_header_anchor" }
+mdx_plugin_normalize_link = { path = "../plugin_normalize_link" }
+mdx_plugin_toc = { path = "../plugin_toc" }
+mdx_plugin_html = { path = "../plugin_html" }
+hast = { path = "../hast" }
+markdown = { workspace = true }
+pretty_assertions = { workspace = true }
+swc_core = { workspace = true }
+slugger = { path = "../slugger" }

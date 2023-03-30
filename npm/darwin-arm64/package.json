@@ -1,0 +1,25 @@
+{
+  "name": "@modern-js/mdx-rs-binding-darwin-arm64",
+  "version": "0.0.0",
+  "os": [
+    "darwin"
+  ],
+  "cpu": [
+    "arm64"
+  ],
+  "main": "mdx-binding-core.darwin-arm64.node",
+  "files": [
+    "mdx-binding-core.darwin-arm64.node"
+  ],
+  "description": "",
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.12"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "@modern-js/mdx-rs-binding-linux-arm-gnueabihf",
+  "version": "0.0.0",
+  "os": [
+    "linux"
+  ],
+  "cpu": [
+    "arm"
+  ],
+  "main": "mdx-binding-core.linux-arm-gnueabihf.node",
+  "files": [
+    "mdx-binding-core.linux-arm-gnueabihf.node"
+  ],
+  "description": "",
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.12"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  }
+}
