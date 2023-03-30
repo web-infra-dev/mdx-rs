@@ -92,11 +92,11 @@ pub fn compile(
     development,
     provider_import_source: Some("@mdx-js/react".to_string()),
   };
-  let build_options = BuildOptions { development: true };
+  let build_options = BuildOptions { development };
 
   let location = Location::new(value.as_bytes());
   let mut mdast =
-    to_mdast(value.as_str(), &parse_options).expect(format!("filepath: {}", filepath).as_str());
+    to_mdast(value.as_str(), &parse_options).expect(format!("value: {}", value).as_str());
   let toc_result = mdx_plugin_toc(&mut mdast);
   mdx_plugin_frontmatter(&mut mdast);
   let mut hast = mdast_util_to_hast(&mdast);

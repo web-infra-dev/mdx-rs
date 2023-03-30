@@ -38,7 +38,7 @@ fn transform_pre_code_element(node: &mut hast::Node) {
             }
           }
         }
-        for part in meta.split(',') {
+        for part in meta.split(' ') {
           let part = part.trim();
           if part.starts_with("title=") {
             title = Some(part[6..].trim_matches('"'));
