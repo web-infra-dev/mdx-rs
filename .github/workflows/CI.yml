@@ -387,13 +387,13 @@ jobs:
       - test-linux-aarch64-musl-binding
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Setup node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: 14
-          check-latest: true
+          node-version: "16.x"
+          registry-url: "https://registry.npmjs.org"
 
       - name: Install pnpm
         run: npm install -g pnpm@6
@@ -424,7 +424,7 @@ jobs:
 
       - name: Publish
         if: "startsWith(github.event.head_commit.message, 'chore(release): publish')"
-        run: pnpm publish --no-git-checks
+        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
