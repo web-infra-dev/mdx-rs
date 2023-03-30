@@ -398,6 +398,9 @@ jobs:
       - name: Install pnpm
         run: npm install -g pnpm@6
 
+      - name: Setup npmrc
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+
       - name: Cache NPM dependencies
         uses: actions/cache@v2
         with:
