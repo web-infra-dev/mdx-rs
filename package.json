@@ -55,5 +55,16 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org",
     "access": "public"
+  },
+  "optionalDependencies": {
+    "@modern-js/mdx-rs-binding-linux-arm64-musl": "0.0.0",
+    "@modern-js/mdx-rs-binding-linux-x64-musl": "0.0.0",
+    "@modern-js/mdx-rs-binding-linux-arm64-gnu": "0.0.0",
+    "@modern-js/mdx-rs-binding-linux-x64-gnu": "0.0.0",
+    "@modern-js/mdx-rs-binding-linux-arm-gnueabihf": "0.0.0",
+    "@modern-js/mdx-rs-binding-win32-x64-msvc": "0.0.0",
+    "@modern-js/mdx-rs-binding-win32-arm64-msvc": "0.0.0",
+    "@modern-js/mdx-rs-binding-darwin-arm64": "0.0.0",
+    "@modern-js/mdx-rs-binding-darwin-x64": "0.0.0"
   }
 }
