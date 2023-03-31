@@ -29,6 +29,7 @@
     "cli-table": "^0.3.11",
     "conventional-changelog": "^3.1.25",
     "conventional-changelog-cli": "^2.2.2",
+    "release-it": "^15.9.3",
     "typescript": "^5.0.2",
     "vitest": "^0.29.7"
   },
@@ -48,9 +49,6 @@
     "version": "napi version",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
     "release-commit": "pnpm changelog && git add -A && git commit -m \"chore(release): publish v$npm_package_version\""
-  },
-  "dependencies": {
-    "release-it": "^15.9.3"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org",
