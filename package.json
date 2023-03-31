@@ -29,7 +29,6 @@
     "cli-table": "^0.3.11",
     "conventional-changelog": "^3.1.25",
     "conventional-changelog-cli": "^2.2.2",
-    "release-it": "^15.9.3",
     "typescript": "^5.0.2",
     "vitest": "^0.29.7"
   },
