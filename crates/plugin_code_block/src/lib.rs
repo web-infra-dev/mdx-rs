@@ -162,7 +162,7 @@ mod tests {
         tag_name: "code".into(),
         properties: vec![(
           "meta".into(),
-          hast::PropertyValue::SpaceSeparated(vec!["title=\"My Rust Code\"".into()]),
+          hast::PropertyValue::SpaceSeparated(vec!["title=\"My-Rust-Code\"".into()]),
         )],
         children: vec![hast::Node::Text(hast::Text {
           value: "fn main() {\n   println!(\"Hello, world!\");\n}".into(),
@@ -191,7 +191,7 @@ mod tests {
               hast::PropertyValue::SpaceSeparated(vec!["modern-code-title".into()]),
             )],
             children: vec![hast::Node::Text(hast::Text {
-              value: "My Rust Code".into(),
+              value: "My-Rust-Code".into(),
               position: None,
             })],
             position: None,
@@ -222,7 +222,7 @@ mod tests {
                   tag_name: "code".into(),
                   properties: vec![(
                     "meta".into(),
-                    hast::PropertyValue::SpaceSeparated(vec!["title=\"My Rust Code\"".into()]),
+                    hast::PropertyValue::SpaceSeparated(vec!["title=\"My-Rust-Code\"".into()]),
                   )],
                   children: vec![hast::Node::Text(hast::Text {
                     value: "fn main() {\n   println!(\"Hello, world!\");\n}".into(),

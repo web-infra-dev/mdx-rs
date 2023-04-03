@@ -223,7 +223,7 @@ mod tests {
       assert_eq!(
         root.children[7],
         mdast::Node::MdxjsEsm(mdast::MdxjsEsm {
-          value: "export const toc = [{ text: \"HelloWorld\", depth: 2, id: \"helloworld\" },{ text: \"HelloWorld\", depth: 3, id: \"helloworld-1\" },{ text: \"HelloWorld\", depth: 4, id: \"helloworld-2\" }];"
+          value: "export const toc = [{ text: \"HelloWorld\", depth: 2, id: \"helloworld-1\" },{ text: \"HelloWorld\", depth: 3, id: \"helloworld-2\" },{ text: \"HelloWorld\", depth: 4, id: \"helloworld-3\" }];"
             .to_string(),
           position: None,
           stops: vec![],

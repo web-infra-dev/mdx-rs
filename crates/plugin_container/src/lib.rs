@@ -60,7 +60,7 @@ fn create_new_container_node(
   };
 
   let container_title_node = hast::Element {
-    tag_name: "p".into(),
+    tag_name: "div".into(),
     properties: vec![(
       "className".into(),
       hast::PropertyValue::SpaceSeparated(vec!["modern-directive-title".into()]),
@@ -389,7 +389,7 @@ mod tests {
           ),],
           children: vec![
             hast::Node::Element(hast::Element {
-              tag_name: "p".into(),
+              tag_name: "div".into(),
               properties: vec![(
                 "className".into(),
                 hast::PropertyValue::SpaceSeparated(vec!["modern-directive-title".into()])
@@ -473,7 +473,7 @@ mod tests {
           ),],
           children: vec![
             hast::Node::Element(hast::Element {
-              tag_name: "p".into(),
+              tag_name: "div".into(),
               properties: vec![(
                 "className".into(),
                 hast::PropertyValue::SpaceSeparated(vec!["modern-directive-title".into()])
@@ -557,7 +557,7 @@ mod tests {
           ),],
           children: vec![
             hast::Node::Element(hast::Element {
-              tag_name: "p".into(),
+              tag_name: "div".into(),
               properties: vec![(
                 "className".into(),
                 hast::PropertyValue::SpaceSeparated(vec!["modern-directive-title".into()])
