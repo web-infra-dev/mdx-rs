@@ -8,7 +8,6 @@ const table = new Table({
   head: ["Name", "Time Spend"],
 });
 
-// Esm 环境中实现 __dirname
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
 const examplePath = path.resolve(__dirname, "./fixtures/example.md");
