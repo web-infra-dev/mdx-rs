@@ -94,6 +94,22 @@ fn create_new_container_node(
   })
 }
 
+fn wrap_node_with_paragraph(
+  properties: &[(String, hast::PropertyValue)],
+  children: &[hast::Node],
+) -> hast::Node {
+  let mut paragraph = hast::Element {
+    tag_name: "p".into(),
+    properties: properties.to_vec(),
+    children: Vec::new(),
+    position: None,
+  };
+
+  paragraph.children.extend_from_slice(children);
+
+  hast::Node::Element(paragraph)
+}
+
 fn traverse_children(root: &mut hast::Root) {
   let mut container_type = String::new();
   let mut container_title = String::new();
@@ -124,11 +140,15 @@ fn traverse_children(root: &mut hast::Root) {
                 container_content_end = true;
                 container_content_end_index = index;
                 break;
-              }
-              container_content.push(hast::Node::Text(hast::Text {
-                value: line.into(),
-                position: None,
-              }));
+              };
+
+              container_content.push(wrap_node_with_paragraph(
+                &element.properties.clone(),
+                &vec![hast::Node::Text(hast::Text {
+                  value: line.into(),
+                  position: None,
+                })],
+              ));
             }
           }
         }
@@ -169,15 +189,16 @@ fn traverse_children(root: &mut hast::Root) {
             fragments.push(child.clone());
           }
           if fragments.len() > 0 {
-            if index == container_content_start_index {
-              container_content.extend(fragments);
+            if index == container_content_start_index && !container_content.is_empty() {
+              let first_node = container_content.first_mut().unwrap();
+              let mut children = first_node.children().unwrap().to_vec();
+              children.extend(fragments);
+              *first_node.children_mut().unwrap() = children.into();
             } else {
-              container_content.push(hast::Node::Element(hast::Element {
-                tag_name: "p".into(),
-                properties: element.properties.clone(),
-                children: fragments,
-                position: None,
-              }));
+              container_content.push(wrap_node_with_paragraph(
+                &element.properties.clone(),
+                &fragments,
+              ));
             }
           }
         } else {

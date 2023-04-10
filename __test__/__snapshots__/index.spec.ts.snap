@@ -1,6 +1,273 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`compile > container grammer 1`] = `
+exports[`compile > should render container content correctly 1`] = `
+"<div className=\\"\\">
+  <div className=\\"\\">TIP</div>
+  <div className=\\"\\">
+    <p>First line <code>block</code></p>
+    <p>Second line <code>block2</code></p>
+  </div>
+</div>
+<div className=\\"\\">
+  <div className=\\"\\">TIP</div>
+  <div className=\\"\\">
+    <ul>
+      <li>List item 1 <code>block</code>。</li>
+      <li>List item 2 <code>block2</code>。</li>
+    </ul>
+  </div>
+</div>
+<div className=\\"\\">
+  <div className=\\"\\">TIP</div>
+  <div className=\\"\\">
+    <p>Some code:</p>
+    <div className=\\"\\">
+      <div className=\\"\\">
+        <button className=\\"\\"></button>
+        <pre className=\\"\\"><code className=\\"\\">console.log('hello world');
+</code></pre>
+      </div>
+    </div>
+  </div>
+</div>
+"
+`;
+
+exports[`compile > should render container content correctly 2`] = `
+"import { Fragment as _Fragment, jsxDEV as _jsxDEV } from \\"react/jsx-dev-runtime\\";
+import { useMDXComponents as _provideComponents } from \\"@mdx-js/react\\";
+export const frontmatter = {};
+export const title = '';
+export const toc = [];
+function _createMdxContent(props) {
+    const _components = Object.assign({
+        div: \\"div\\",
+        p: \\"p\\",
+        code: \\"code\\",
+        ul: \\"ul\\",
+        li: \\"li\\",
+        button: \\"button\\",
+        pre: \\"pre\\"
+    }, _provideComponents(), props.components);
+    return _jsxDEV(_Fragment, {
+        children: [
+            _jsxDEV(_components.div, {
+                className: \\"modern-directive tip\\",
+                children: [
+                    _jsxDEV(_components.div, {
+                        className: \\"modern-directive-title\\",
+                        children: \\"TIP\\"
+                    }, undefined, false, {
+                        fileName: \\"xxx.mdx\\"
+                    }, this),
+                    _jsxDEV(_components.div, {
+                        className: \\"modern-directive-content\\",
+                        children: [
+                            _jsxDEV(_components.p, {
+                                children: [
+                                    \\"First line \\",
+                                    _jsxDEV(_components.code, {
+                                        children: \\"block\\"
+                                    }, undefined, false, {
+                                        fileName: \\"xxx.mdx\\",
+                                        lineNumber: 2,
+                                        columnNumber: 12
+                                    }, this)
+                                ]
+                            }, undefined, true, {
+                                fileName: \\"xxx.mdx\\"
+                            }, this),
+                            \\"\\\\n\\",
+                            _jsxDEV(_components.p, {
+                                children: [
+                                    \\"Second line \\",
+                                    _jsxDEV(_components.code, {
+                                        children: \\"block2\\"
+                                    }, undefined, false, {
+                                        fileName: \\"xxx.mdx\\",
+                                        lineNumber: 4,
+                                        columnNumber: 13
+                                    }, this),
+                                    \\"\\\\n\\"
+                                ]
+                            }, undefined, true, {
+                                fileName: \\"xxx.mdx\\"
+                            }, this)
+                        ]
+                    }, undefined, true, {
+                        fileName: \\"xxx.mdx\\"
+                    }, this)
+                ]
+            }, undefined, true, {
+                fileName: \\"xxx.mdx\\"
+            }, this),
+            \\"\\\\n\\",
+            _jsxDEV(_components.div, {
+                className: \\"modern-directive tip\\",
+                children: [
+                    _jsxDEV(_components.div, {
+                        className: \\"modern-directive-title\\",
+                        children: \\"TIP\\"
+                    }, undefined, false, {
+                        fileName: \\"xxx.mdx\\"
+                    }, this),
+                    _jsxDEV(_components.div, {
+                        className: \\"modern-directive-content\\",
+                        children: [
+                            \\"\\\\n\\",
+                            _jsxDEV(_components.ul, {
+                                children: [
+                                    \\"\\\\n\\",
+                                    _jsxDEV(_components.li, {
+                                        children: [
+                                            \\"List item 1 \\",
+                                            _jsxDEV(_components.code, {
+                                                children: \\"block\\"
+                                            }, undefined, false, {
+                                                fileName: \\"xxx.mdx\\",
+                                                lineNumber: 9,
+                                                columnNumber: 15
+                                            }, this),
+                                            \\"。\\"
+                                        ]
+                                    }, undefined, true, {
+                                        fileName: \\"xxx.mdx\\",
+                                        lineNumber: 9,
+                                        columnNumber: 1
+                                    }, this),
+                                    \\"\\\\n\\",
+                                    _jsxDEV(_components.li, {
+                                        children: [
+                                            \\"List item 2 \\",
+                                            _jsxDEV(_components.code, {
+                                                children: \\"block2\\"
+                                            }, undefined, false, {
+                                                fileName: \\"xxx.mdx\\",
+                                                lineNumber: 10,
+                                                columnNumber: 15
+                                            }, this),
+                                            \\"。\\"
+                                        ]
+                                    }, undefined, true, {
+                                        fileName: \\"xxx.mdx\\",
+                                        lineNumber: 10,
+                                        columnNumber: 1
+                                    }, this),
+                                    \\"\\\\n\\"
+                                ]
+                            }, undefined, true, {
+                                fileName: \\"xxx.mdx\\",
+                                lineNumber: 9,
+                                columnNumber: 1
+                            }, this),
+                            \\"\\\\n\\"
+                        ]
+                    }, undefined, true, {
+                        fileName: \\"xxx.mdx\\"
+                    }, this)
+                ]
+            }, undefined, true, {
+                fileName: \\"xxx.mdx\\"
+            }, this),
+            \\"\\\\n\\",
+            _jsxDEV(_components.div, {
+                className: \\"modern-directive tip\\",
+                children: [
+                    _jsxDEV(_components.div, {
+                        className: \\"modern-directive-title\\",
+                        children: \\"TIP\\"
+                    }, undefined, false, {
+                        fileName: \\"xxx.mdx\\"
+                    }, this),
+                    _jsxDEV(_components.div, {
+                        className: \\"modern-directive-content\\",
+                        children: [
+                            \\"\\\\n\\",
+                            _jsxDEV(_components.p, {
+                                children: \\"Some code:\\"
+                            }, undefined, false, {
+                                fileName: \\"xxx.mdx\\"
+                            }, this),
+                            \\"\\\\n\\",
+                            _jsxDEV(_components.div, {
+                                className: \\"language-\\",
+                                children: _jsxDEV(_components.div, {
+                                    className: \\"modern-code-content\\",
+                                    children: [
+                                        _jsxDEV(_components.button, {
+                                            className: \\"copy\\"
+                                        }, undefined, false, {
+                                            fileName: \\"xxx.mdx\\"
+                                        }, this),
+                                        _jsxDEV(_components.pre, {
+                                            className: \\"code\\",
+                                            children: _jsxDEV(_components.code, {
+                                                className: \\"language-ts\\",
+                                                children: \\"console.log('hello world');\\\\n\\"
+                                            }, undefined, false, {
+                                                fileName: \\"xxx.mdx\\",
+                                                lineNumber: 18,
+                                                columnNumber: 1
+                                            }, this)
+                                        }, undefined, false, {
+                                            fileName: \\"xxx.mdx\\"
+                                        }, this)
+                                    ]
+                                }, undefined, true, {
+                                    fileName: \\"xxx.mdx\\"
+                                }, this)
+                            }, undefined, false, {
+                                fileName: \\"xxx.mdx\\",
+                                lineNumber: 18,
+                                columnNumber: 1
+                            }, this),
+                            \\"\\\\n\\"
+                        ]
+                    }, undefined, true, {
+                        fileName: \\"xxx.mdx\\"
+                    }, this)
+                ]
+            }, undefined, true, {
+                fileName: \\"xxx.mdx\\"
+            }, this)
+        ]
+    }, undefined, true, {
+        fileName: \\"xxx.mdx\\",
+        lineNumber: 1,
+        columnNumber: 1
+    }, this);
+}
+function MDXContent(props = {}) {
+    const { wrapper: MDXLayout  } = Object.assign({}, _provideComponents(), props.components);
+    return MDXLayout ? _jsxDEV(MDXLayout, Object.assign({}, props, {
+        children: _jsxDEV(_createMdxContent, props, undefined, false, {
+            fileName: \\"xxx.mdx\\"
+        }, this)
+    }), undefined, false, {
+        fileName: \\"xxx.mdx\\"
+    }, this) : _createMdxContent(props);
+}
+export default MDXContent;
+"
+`;
+
+exports[`compile > should render container title correctly 1`] = `
+"<div className=\\"\\">
+  <div className=\\"\\">Custom Title</div>
+  <div className=\\"\\">
+    <p>This is a <code>block</code> of <code>Custom Title</code></p>
+  </div>
+</div>
+<div className=\\"\\">
+  <div className=\\"\\">Custom Title</div>
+  <div className=\\"\\">
+    <p>This is a <code>block</code> of <code>Custom Title</code></p>
+  </div>
+</div>
+"
+`;
+
+exports[`compile > should render container title correctly 2`] = `
 "import { Fragment as _Fragment, jsxDEV as _jsxDEV } from \\"react/jsx-dev-runtime\\";
 import { useMDXComponents as _provideComponents } from \\"@mdx-js/react\\";
 export const frontmatter = {};
@@ -17,148 +284,38 @@ function _createMdxContent(props) {
             _jsxDEV(_components.div, {
                 className: \\"modern-directive tip\\",
                 children: [
-                    _jsxDEV(_components.p, {
+                    _jsxDEV(_components.div, {
                         className: \\"modern-directive-title\\",
-                        children: \\"TIP\\"
+                        children: \\"Custom Title\\"
                     }, undefined, false, {
                         fileName: \\"xxx.mdx\\"
                     }, this),
                     _jsxDEV(_components.div, {
                         className: \\"modern-directive-content\\",
-                        children: [
-                            \\"This is a \\",
-                            _jsxDEV(_components.code, {
-                                children: \\"block\\"
-                            }, undefined, false, {
-                                fileName: \\"xxx.mdx\\",
-                                lineNumber: 2,
-                                columnNumber: 11
-                            }, this),
-                            \\" of type \\",
-                            _jsxDEV(_components.code, {
-                                children: \\"tip\\"
-                            }, undefined, false, {
-                                fileName: \\"xxx.mdx\\",
-                                lineNumber: 2,
-                                columnNumber: 27
-                            }, this),
-                            \\"\\\\n\\"
-                        ]
-                    }, undefined, true, {
-                        fileName: \\"xxx.mdx\\"
-                    }, this)
-                ]
-            }, undefined, true, {
-                fileName: \\"xxx.mdx\\"
-            }, this),
-            \\"\\\\n\\",
-            _jsxDEV(_components.div, {
-                className: \\"modern-directive info\\",
-                children: [
-                    _jsxDEV(_components.p, {
-                        className: \\"modern-directive-title\\",
-                        children: \\"INFO\\"
+                        children: _jsxDEV(_components.p, {
+                            children: [
+                                \\"\\\\nThis is a \\",
+                                _jsxDEV(_components.code, {
+                                    children: \\"block\\"
+                                }, undefined, false, {
+                                    fileName: \\"xxx.mdx\\",
+                                    lineNumber: 2,
+                                    columnNumber: 11
+                                }, this),
+                                \\" of \\",
+                                _jsxDEV(_components.code, {
+                                    children: \\"Custom Title\\"
+                                }, undefined, false, {
+                                    fileName: \\"xxx.mdx\\",
+                                    lineNumber: 2,
+                                    columnNumber: 22
+                                }, this),
+                                \\"\\\\n\\"
+                            ]
+                        }, undefined, true, {
+                            fileName: \\"xxx.mdx\\"
+                        }, this)
                     }, undefined, false, {
-                        fileName: \\"xxx.mdx\\"
-                    }, this),
-                    _jsxDEV(_components.div, {
-                        className: \\"modern-directive-content\\",
-                        children: [
-                            \\"This is a \\",
-                            _jsxDEV(_components.code, {
-                                children: \\"block\\"
-                            }, undefined, false, {
-                                fileName: \\"xxx.mdx\\",
-                                lineNumber: 6,
-                                columnNumber: 11
-                            }, this),
-                            \\" of type \\",
-                            _jsxDEV(_components.code, {
-                                children: \\"info\\"
-                            }, undefined, false, {
-                                fileName: \\"xxx.mdx\\",
-                                lineNumber: 6,
-                                columnNumber: 27
-                            }, this),
-                            \\"\\\\n\\"
-                        ]
-                    }, undefined, true, {
-                        fileName: \\"xxx.mdx\\"
-                    }, this)
-                ]
-            }, undefined, true, {
-                fileName: \\"xxx.mdx\\"
-            }, this),
-            \\"\\\\n\\",
-            _jsxDEV(_components.div, {
-                className: \\"modern-directive warning\\",
-                children: [
-                    _jsxDEV(_components.p, {
-                        className: \\"modern-directive-title\\",
-                        children: \\"WARNING\\"
-                    }, undefined, false, {
-                        fileName: \\"xxx.mdx\\"
-                    }, this),
-                    _jsxDEV(_components.div, {
-                        className: \\"modern-directive-content\\",
-                        children: [
-                            \\"This is a \\",
-                            _jsxDEV(_components.code, {
-                                children: \\"block\\"
-                            }, undefined, false, {
-                                fileName: \\"xxx.mdx\\",
-                                lineNumber: 10,
-                                columnNumber: 11
-                            }, this),
-                            \\" of type \\",
-                            _jsxDEV(_components.code, {
-                                children: \\"warning\\"
-                            }, undefined, false, {
-                                fileName: \\"xxx.mdx\\",
-                                lineNumber: 10,
-                                columnNumber: 27
-                            }, this),
-                            \\"\\\\n\\"
-                        ]
-                    }, undefined, true, {
-                        fileName: \\"xxx.mdx\\"
-                    }, this)
-                ]
-            }, undefined, true, {
-                fileName: \\"xxx.mdx\\"
-            }, this),
-            \\"\\\\n\\",
-            _jsxDEV(_components.div, {
-                className: \\"modern-directive danger\\",
-                children: [
-                    _jsxDEV(_components.p, {
-                        className: \\"modern-directive-title\\",
-                        children: \\"DANGER\\"
-                    }, undefined, false, {
-                        fileName: \\"xxx.mdx\\"
-                    }, this),
-                    _jsxDEV(_components.div, {
-                        className: \\"modern-directive-content\\",
-                        children: [
-                            \\"This is a \\",
-                            _jsxDEV(_components.code, {
-                                children: \\"block\\"
-                            }, undefined, false, {
-                                fileName: \\"xxx.mdx\\",
-                                lineNumber: 14,
-                                columnNumber: 11
-                            }, this),
-                            \\" of type \\",
-                            _jsxDEV(_components.code, {
-                                children: \\"danger\\"
-                            }, undefined, false, {
-                                fileName: \\"xxx.mdx\\",
-                                lineNumber: 14,
-                                columnNumber: 27
-                            }, this),
-                            \\"\\\\n\\"
-                        ]
-                    }, undefined, true, {
                         fileName: \\"xxx.mdx\\"
                     }, this)
                 ]
@@ -169,7 +326,7 @@ function _createMdxContent(props) {
             _jsxDEV(_components.div, {
                 className: \\"modern-directive tip\\",
                 children: [
-                    _jsxDEV(_components.p, {
+                    _jsxDEV(_components.div, {
                         className: \\"modern-directive-title\\",
                         children: \\"Custom Title\\"
                     }, undefined, false, {
@@ -177,26 +334,356 @@ function _createMdxContent(props) {
                     }, this),
                     _jsxDEV(_components.div, {
                         className: \\"modern-directive-content\\",
-                        children: [
-                            \\"\\\\nThis is a \\",
-                            _jsxDEV(_components.code, {
-                                children: \\"block\\"
-                            }, undefined, false, {
-                                fileName: \\"xxx.mdx\\",
-                                lineNumber: 18,
-                                columnNumber: 11
-                            }, this),
-                            \\" of \\",
-                            _jsxDEV(_components.code, {
-                                children: \\"Custom Title\\"
-                            }, undefined, false, {
-                                fileName: \\"xxx.mdx\\",
-                                lineNumber: 18,
-                                columnNumber: 22
-                            }, this),
-                            \\"\\\\n\\"
-                        ]
-                    }, undefined, true, {
+                        children: _jsxDEV(_components.p, {
+                            children: [
+                                \\"This is a \\",
+                                _jsxDEV(_components.code, {
+                                    children: \\"block\\"
+                                }, undefined, false, {
+                                    fileName: \\"xxx.mdx\\",
+                                    lineNumber: 6,
+                                    columnNumber: 11
+                                }, this),
+                                \\" of \\",
+                                _jsxDEV(_components.code, {
+                                    children: \\"Custom Title\\"
+                                }, undefined, false, {
+                                    fileName: \\"xxx.mdx\\",
+                                    lineNumber: 6,
+                                    columnNumber: 22
+                                }, this),
+                                \\"\\\\n\\"
+                            ]
+                        }, undefined, true, {
+                            fileName: \\"xxx.mdx\\"
+                        }, this)
+                    }, undefined, false, {
+                        fileName: \\"xxx.mdx\\"
+                    }, this)
+                ]
+            }, undefined, true, {
+                fileName: \\"xxx.mdx\\"
+            }, this)
+        ]
+    }, undefined, true, {
+        fileName: \\"xxx.mdx\\",
+        lineNumber: 1,
+        columnNumber: 1
+    }, this);
+}
+function MDXContent(props = {}) {
+    const { wrapper: MDXLayout  } = Object.assign({}, _provideComponents(), props.components);
+    return MDXLayout ? _jsxDEV(MDXLayout, Object.assign({}, props, {
+        children: _jsxDEV(_createMdxContent, props, undefined, false, {
+            fileName: \\"xxx.mdx\\"
+        }, this)
+    }), undefined, false, {
+        fileName: \\"xxx.mdx\\"
+    }, this) : _createMdxContent(props);
+}
+export default MDXContent;
+"
+`;
+
+exports[`compile > should render container type correctly 1`] = `
+"<div className=\\"\\">
+  <div className=\\"\\">TIP</div>
+  <div className=\\"\\">
+    <p>This is a <code>block</code> of type <code>tip</code></p>
+  </div>
+</div>
+<div className=\\"\\">
+  <div className=\\"\\">INFO</div>
+  <div className=\\"\\">
+    <p>This is a <code>block</code> of type <code>info</code></p>
+  </div>
+</div>
+<div className=\\"\\">
+  <div className=\\"\\">NOTE</div>
+  <div className=\\"\\">
+    <p>This is a <code>block</code> of type <code>info</code></p>
+  </div>
+</div>
+<div className=\\"\\">
+  <div className=\\"\\">WARNING</div>
+  <div className=\\"\\">
+    <p>This is a <code>block</code> of type <code>warning</code></p>
+  </div>
+</div>
+<div className=\\"\\">
+  <div className=\\"\\">DANGER</div>
+  <div className=\\"\\">
+    <p>This is a <code>block</code> of type <code>danger</code></p>
+  </div>
+</div>
+<div className=\\"\\">
+  <div className=\\"\\">CAUTION</div>
+  <div className=\\"\\">
+    <p>This is a <code>block</code> of type <code>danger</code></p>
+  </div>
+</div>
+"
+`;
+
+exports[`compile > should render container type correctly 2`] = `
+"import { Fragment as _Fragment, jsxDEV as _jsxDEV } from \\"react/jsx-dev-runtime\\";
+import { useMDXComponents as _provideComponents } from \\"@mdx-js/react\\";
+export const frontmatter = {};
+export const title = '';
+export const toc = [];
+function _createMdxContent(props) {
+    const _components = Object.assign({
+        div: \\"div\\",
+        p: \\"p\\",
+        code: \\"code\\"
+    }, _provideComponents(), props.components);
+    return _jsxDEV(_Fragment, {
+        children: [
+            _jsxDEV(_components.div, {
+                className: \\"modern-directive tip\\",
+                children: [
+                    _jsxDEV(_components.div, {
+                        className: \\"modern-directive-title\\",
+                        children: \\"TIP\\"
+                    }, undefined, false, {
+                        fileName: \\"xxx.mdx\\"
+                    }, this),
+                    _jsxDEV(_components.div, {
+                        className: \\"modern-directive-content\\",
+                        children: _jsxDEV(_components.p, {
+                            children: [
+                                \\"This is a \\",
+                                _jsxDEV(_components.code, {
+                                    children: \\"block\\"
+                                }, undefined, false, {
+                                    fileName: \\"xxx.mdx\\",
+                                    lineNumber: 2,
+                                    columnNumber: 11
+                                }, this),
+                                \\" of type \\",
+                                _jsxDEV(_components.code, {
+                                    children: \\"tip\\"
+                                }, undefined, false, {
+                                    fileName: \\"xxx.mdx\\",
+                                    lineNumber: 2,
+                                    columnNumber: 27
+                                }, this),
+                                \\"\\\\n\\"
+                            ]
+                        }, undefined, true, {
+                            fileName: \\"xxx.mdx\\"
+                        }, this)
+                    }, undefined, false, {
+                        fileName: \\"xxx.mdx\\"
+                    }, this)
+                ]
+            }, undefined, true, {
+                fileName: \\"xxx.mdx\\"
+            }, this),
+            \\"\\\\n\\",
+            _jsxDEV(_components.div, {
+                className: \\"modern-directive info\\",
+                children: [
+                    _jsxDEV(_components.div, {
+                        className: \\"modern-directive-title\\",
+                        children: \\"INFO\\"
+                    }, undefined, false, {
+                        fileName: \\"xxx.mdx\\"
+                    }, this),
+                    _jsxDEV(_components.div, {
+                        className: \\"modern-directive-content\\",
+                        children: _jsxDEV(_components.p, {
+                            children: [
+                                \\"This is a \\",
+                                _jsxDEV(_components.code, {
+                                    children: \\"block\\"
+                                }, undefined, false, {
+                                    fileName: \\"xxx.mdx\\",
+                                    lineNumber: 6,
+                                    columnNumber: 11
+                                }, this),
+                                \\" of type \\",
+                                _jsxDEV(_components.code, {
+                                    children: \\"info\\"
+                                }, undefined, false, {
+                                    fileName: \\"xxx.mdx\\",
+                                    lineNumber: 6,
+                                    columnNumber: 27
+                                }, this),
+                                \\"\\\\n\\"
+                            ]
+                        }, undefined, true, {
+                            fileName: \\"xxx.mdx\\"
+                        }, this)
+                    }, undefined, false, {
+                        fileName: \\"xxx.mdx\\"
+                    }, this)
+                ]
+            }, undefined, true, {
+                fileName: \\"xxx.mdx\\"
+            }, this),
+            \\"\\\\n\\",
+            _jsxDEV(_components.div, {
+                className: \\"modern-directive note\\",
+                children: [
+                    _jsxDEV(_components.div, {
+                        className: \\"modern-directive-title\\",
+                        children: \\"NOTE\\"
+                    }, undefined, false, {
+                        fileName: \\"xxx.mdx\\"
+                    }, this),
+                    _jsxDEV(_components.div, {
+                        className: \\"modern-directive-content\\",
+                        children: _jsxDEV(_components.p, {
+                            children: [
+                                \\"This is a \\",
+                                _jsxDEV(_components.code, {
+                                    children: \\"block\\"
+                                }, undefined, false, {
+                                    fileName: \\"xxx.mdx\\",
+                                    lineNumber: 10,
+                                    columnNumber: 11
+                                }, this),
+                                \\" of type \\",
+                                _jsxDEV(_components.code, {
+                                    children: \\"info\\"
+                                }, undefined, false, {
+                                    fileName: \\"xxx.mdx\\",
+                                    lineNumber: 10,
+                                    columnNumber: 27
+                                }, this),
+                                \\"\\\\n\\"
+                            ]
+                        }, undefined, true, {
+                            fileName: \\"xxx.mdx\\"
+                        }, this)
+                    }, undefined, false, {
+                        fileName: \\"xxx.mdx\\"
+                    }, this)
+                ]
+            }, undefined, true, {
+                fileName: \\"xxx.mdx\\"
+            }, this),
+            \\"\\\\n\\",
+            _jsxDEV(_components.div, {
+                className: \\"modern-directive warning\\",
+                children: [
+                    _jsxDEV(_components.div, {
+                        className: \\"modern-directive-title\\",
+                        children: \\"WARNING\\"
+                    }, undefined, false, {
+                        fileName: \\"xxx.mdx\\"
+                    }, this),
+                    _jsxDEV(_components.div, {
+                        className: \\"modern-directive-content\\",
+                        children: _jsxDEV(_components.p, {
+                            children: [
+                                \\"This is a \\",
+                                _jsxDEV(_components.code, {
+                                    children: \\"block\\"
+                                }, undefined, false, {
+                                    fileName: \\"xxx.mdx\\",
+                                    lineNumber: 14,
+                                    columnNumber: 11
+                                }, this),
+                                \\" of type \\",
+                                _jsxDEV(_components.code, {
+                                    children: \\"warning\\"
+                                }, undefined, false, {
+                                    fileName: \\"xxx.mdx\\",
+                                    lineNumber: 14,
+                                    columnNumber: 27
+                                }, this),
+                                \\"\\\\n\\"
+                            ]
+                        }, undefined, true, {
+                            fileName: \\"xxx.mdx\\"
+                        }, this)
+                    }, undefined, false, {
+                        fileName: \\"xxx.mdx\\"
+                    }, this)
+                ]
+            }, undefined, true, {
+                fileName: \\"xxx.mdx\\"
+            }, this),
+            \\"\\\\n\\",
+            _jsxDEV(_components.div, {
+                className: \\"modern-directive danger\\",
+                children: [
+                    _jsxDEV(_components.div, {
+                        className: \\"modern-directive-title\\",
+                        children: \\"DANGER\\"
+                    }, undefined, false, {
+                        fileName: \\"xxx.mdx\\"
+                    }, this),
+                    _jsxDEV(_components.div, {
+                        className: \\"modern-directive-content\\",
+                        children: _jsxDEV(_components.p, {
+                            children: [
+                                \\"This is a \\",
+                                _jsxDEV(_components.code, {
+                                    children: \\"block\\"
+                                }, undefined, false, {
+                                    fileName: \\"xxx.mdx\\",
+                                    lineNumber: 18,
+                                    columnNumber: 11
+                                }, this),
+                                \\" of type \\",
+                                _jsxDEV(_components.code, {
+                                    children: \\"danger\\"
+                                }, undefined, false, {
+                                    fileName: \\"xxx.mdx\\",
+                                    lineNumber: 18,
+                                    columnNumber: 27
+                                }, this),
+                                \\"\\\\n\\"
+                            ]
+                        }, undefined, true, {
+                            fileName: \\"xxx.mdx\\"
+                        }, this)
+                    }, undefined, false, {
+                        fileName: \\"xxx.mdx\\"
+                    }, this)
+                ]
+            }, undefined, true, {
+                fileName: \\"xxx.mdx\\"
+            }, this),
+            \\"\\\\n\\",
+            _jsxDEV(_components.div, {
+                className: \\"modern-directive caution\\",
+                children: [
+                    _jsxDEV(_components.div, {
+                        className: \\"modern-directive-title\\",
+                        children: \\"CAUTION\\"
+                    }, undefined, false, {
+                        fileName: \\"xxx.mdx\\"
+                    }, this),
+                    _jsxDEV(_components.div, {
+                        className: \\"modern-directive-content\\",
+                        children: _jsxDEV(_components.p, {
+                            children: [
+                                \\"This is a \\",
+                                _jsxDEV(_components.code, {
+                                    children: \\"block\\"
+                                }, undefined, false, {
+                                    fileName: \\"xxx.mdx\\",
+                                    lineNumber: 22,
+                                    columnNumber: 11
+                                }, this),
+                                \\" of type \\",
+                                _jsxDEV(_components.code, {
+                                    children: \\"danger\\"
+                                }, undefined, false, {
+                                    fileName: \\"xxx.mdx\\",
+                                    lineNumber: 22,
+                                    columnNumber: 27
+                                }, this),
+                                \\"\\\\n\\"
+                            ]
+                        }, undefined, true, {
+                            fileName: \\"xxx.mdx\\"
+                        }, this)
+                    }, undefined, false, {
                         fileName: \\"xxx.mdx\\"
                     }, this)
                 ]
