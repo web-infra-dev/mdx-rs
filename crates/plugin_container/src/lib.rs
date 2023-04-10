@@ -95,15 +95,19 @@ fn create_new_container_node(
 }
 
 fn wrap_node_with_paragraph(
-  properties: Vec<(String, hast::PropertyValue)>,
-  children: Vec<hast::Node>,
+  properties: &[(String, hast::PropertyValue)],
+  children: &[hast::Node],
 ) -> hast::Node {
-  hast::Node::Element(hast::Element {
+  let mut paragraph = hast::Element {
     tag_name: "p".into(),
-    properties,
-    children,
+    properties: properties.to_vec(),
+    children: Vec::new(),
     position: None,
-  })
+  };
+
+  paragraph.children.extend_from_slice(children);
+
+  hast::Node::Element(paragraph)
 }
 
 fn traverse_children(root: &mut hast::Root) {
@@ -139,8 +143,8 @@ fn traverse_children(root: &mut hast::Root) {
               };
 
               container_content.push(wrap_node_with_paragraph(
-                element.properties.clone(),
-                vec![hast::Node::Text(hast::Text {
+                &element.properties.clone(),
+                &vec![hast::Node::Text(hast::Text {
                   value: line.into(),
                   position: None,
                 })],
@@ -187,8 +191,8 @@ fn traverse_children(root: &mut hast::Root) {
           if fragments.len() > 0 {
             if container_content.is_empty() {
               container_content.push(wrap_node_with_paragraph(
-                element.properties.clone(),
-                fragments,
+                &element.properties.clone(),
+                &fragments,
               ));
             } else {
               let first_node = container_content.first_mut().unwrap();
