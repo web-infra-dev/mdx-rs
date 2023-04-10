@@ -189,16 +189,16 @@ fn traverse_children(root: &mut hast::Root) {
             fragments.push(child.clone());
           }
           if fragments.len() > 0 {
-            if container_content.is_empty() {
-              container_content.push(wrap_node_with_paragraph(
-                &element.properties.clone(),
-                &fragments,
-              ));
-            } else {
+            if index == container_content_start_index && !container_content.is_empty() {
               let first_node = container_content.first_mut().unwrap();
               let mut children = first_node.children().unwrap().to_vec();
               children.extend(fragments);
               *first_node.children_mut().unwrap() = children.into();
+            } else {
+              container_content.push(wrap_node_with_paragraph(
+                &element.properties.clone(),
+                &fragments,
+              ));
             }
           }
         } else {
