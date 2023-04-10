@@ -20,7 +20,7 @@ exports[`compile > should render container content correctly 1`] = `
 <div className=\\"\\">
   <div className=\\"\\">TIP</div>
   <div className=\\"\\">
-    <p>This will be some code:</p>
+    <p>Some code:</p>
     <div className=\\"\\">
       <div className=\\"\\">
         <button className=\\"\\"></button>
@@ -184,7 +184,7 @@ function _createMdxContent(props) {
                         children: [
                             \\"\\\\n\\",
                             _jsxDEV(_components.p, {
-                                children: \\"This will be some code:\\"
+                                children: \\"Some code:\\"
                             }, undefined, false, {
                                 fileName: \\"xxx.mdx\\"
                             }, this),

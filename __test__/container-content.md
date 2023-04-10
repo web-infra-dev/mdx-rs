@@ -13,7 +13,7 @@ Second line `block2`
 
 :::tip
 
-This will be some code:
+Some code:
 
 ```ts
 console.log('hello world');
