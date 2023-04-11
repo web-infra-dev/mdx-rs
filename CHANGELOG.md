@@ -1,3 +1,12 @@
+## [0.1.1](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.1.0...v0.1.1) (2023-04-11)
+
+
+### Bug Fixes
+
+* handle external image src ([bc515fb](https://github.com/web-infra-dev/mdx-rs-binding/commit/bc515fbf54a33b8e643e448458467b27a75121d6))
+
+
+
 # [0.1.0](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.0.2...v0.1.0) (2023-04-11)
 
 
