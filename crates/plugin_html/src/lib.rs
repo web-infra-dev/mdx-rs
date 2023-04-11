@@ -65,8 +65,8 @@ mod tests {
     let element = Node::Element(hast::Element {
       tag_name: "div".to_string(),
       properties: vec![(
-        "class".to_string(),
-        hast::PropertyValue::String("container".to_string()),
+        "a".to_string(),
+        hast::PropertyValue::String("1".to_string()),
       )],
       children: vec![text],
       position: None,
@@ -78,6 +78,6 @@ mod tests {
 
     let html = mdx_plugin_html(&root);
 
-    assert_eq!(html, "<div class=\"container\">hello world</div>");
+    assert_eq!(html, "<div a=\"1\">hello world</div>");
   }
 }

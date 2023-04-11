@@ -56,7 +56,6 @@ pub fn compile(
   filepath: &String,
   development: bool,
   root: &String,
-  default_lang: &String,
 ) -> CompileResult {
   let is_mdx = filepath.ends_with(".mdx");
   let parse_options = ParseOptions {
@@ -104,7 +103,7 @@ pub fn compile(
   mdx_plugin_container(&mut hast);
   mdx_plugin_code_block(&mut hast);
   mdx_plugin_external_link(&mut hast);
-  let links = mdx_plugin_normalize_link(&mut hast, root, filepath, default_lang);
+  let links = mdx_plugin_normalize_link(&mut hast, root, filepath);
   let html = mdx_plugin_html(&hast);
   let mut program = hast_util_to_swc(&hast, Some(filepath.to_string()), Some(&location))
     .expect(format!("file: {}", filepath).as_str());

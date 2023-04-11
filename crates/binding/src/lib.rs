@@ -31,7 +31,6 @@ pub struct CompileOptions {
   pub filepath: String,
   pub development: bool,
   pub root: String,
-  pub default_lang: String,
 }
 
 impl From<TocItem> for Toc {
@@ -87,34 +86,20 @@ pub struct Compiler {
   filepath: String,
   development: bool,
   root: String,
-  default_lang: String,
 }
 
 impl Compiler {
-  pub fn new(
-    value: String,
-    filepath: String,
-    development: bool,
-    root: String,
-    default_lang: String,
-  ) -> Self {
+  pub fn new(value: String, filepath: String, development: bool, root: String) -> Self {
     Self {
       value,
       filepath,
       development,
       root,
-      default_lang,
     }
   }
 
   fn compile(&mut self) -> CompileResult {
-    mdx_rs::compile(
-      &self.value,
-      &self.filepath,
-      self.development,
-      &self.root,
-      &self.default_lang,
-    )
+    mdx_rs::compile(&self.value, &self.filepath, self.development, &self.root)
   }
 }
 
@@ -126,15 +111,8 @@ pub fn compile(options: CompileOptions) -> AsyncTask<Compiler> {
     filepath,
     development,
     root,
-    default_lang,
   } = options;
-  AsyncTask::new(Compiler::new(
-    value,
-    filepath,
-    development,
-    root,
-    default_lang,
-  ))
+  AsyncTask::new(Compiler::new(value, filepath, development, root))
 }
 
 #[napi]
@@ -144,8 +122,7 @@ pub fn compile_sync(options: CompileOptions) -> Output {
     filepath,
     development,
     root,
-    default_lang,
   } = options;
-  let mut compiler = Compiler::new(value, filepath, development, root, default_lang);
+  let mut compiler = Compiler::new(value, filepath, development, root);
   compiler.compile().into()
 }
