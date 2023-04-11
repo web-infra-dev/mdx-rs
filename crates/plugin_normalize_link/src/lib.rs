@@ -122,6 +122,9 @@ fn mdx_plugin_normalize_link_impl(
         // Then we will generate a mdxjsEsm node to import the image and push it into images
         if let Some(src) = src {
           if let (_, hast::PropertyValue::String(src)) = src {
+            if PROTOCOLS.iter().any(|protocol| src.starts_with(protocol)) {
+              return links;
+            }
             let index = images.len();
             images.push(generate_ast_import(index, root, src, filepath));
             // Here we have to transform the element type to MdxJsxElement instead of replace src property
@@ -179,6 +182,9 @@ fn mdx_plugin_normalize_link_impl(
         if let Some(src) = src {
           if let hast::AttributeContent::Property(property) = src {
             if let Some(hast::AttributeValue::Literal(value)) = &mut property.value {
+              if PROTOCOLS.iter().any(|protocol| value.starts_with(protocol)) {
+                return links;
+              }
               let index = images.len();
               images.push(generate_ast_import(index, root, value, filepath));
               property.value = Some(hast::AttributeValue::Expression(
