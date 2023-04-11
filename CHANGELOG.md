@@ -1,3 +1,25 @@
+# [0.1.0](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.0.2...v0.1.0) (2023-04-11)
+
+
+### Bug Fixes
+
+* should render p tag for every line in container ([8bc96b5](https://github.com/web-infra-dev/mdx-rs-binding/commit/8bc96b53ce9fc6e7f9c70eccc1fbce681cae3bc8))
+* should wrap container content with p tag ([ef34367](https://github.com/web-infra-dev/mdx-rs-binding/commit/ef3436736a61d6ba4d655e9691bd1568a249208e))
+* skip class name in htm plugin ([bc2a3a4](https://github.com/web-infra-dev/mdx-rs-binding/commit/bc2a3a44d224aafe32ad59f205fbe593e5e6f0ee))
+
+
+### Features
+
+* remove default_lang in normalize_link ([90fc8c3](https://github.com/web-infra-dev/mdx-rs-binding/commit/90fc8c38337233ebdacb1ce688d27c2e8aebfbc5))
+* support img assets in normalize_link plugin ([cb00c66](https://github.com/web-infra-dev/mdx-rs-binding/commit/cb00c66f15375a4032b04c5b9fe1a85ca0307efe))
+
+
+### Performance Improvements
+
+* prefer using reference ([1de9387](https://github.com/web-infra-dev/mdx-rs-binding/commit/1de9387753681970509429ecbe1e2c6d50678251))
+
+
+
 ## [0.0.2](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.0.1...v0.0.2) (2023-04-03)
 
 
