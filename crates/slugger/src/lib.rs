@@ -9,6 +9,10 @@ pub struct Slugger {
   occurrences: HashMap<String, i32>,
 }
 
+fn normalize_slug(value: &String) -> String {
+  value.replace(" ", "-").replace(".", "-")
+}
+
 impl Slugger {
   /**
    * Create a new slug class.
@@ -42,7 +46,7 @@ impl Slugger {
 
     self.occurrences.insert(result.clone(), 0);
 
-    result.replace(" ", "-")
+    normalize_slug(&result)
   }
 
   /**
@@ -75,7 +79,7 @@ pub fn slug(value: &String, maintain_case: bool) -> String {
   } else {
     value.to_lowercase()
   };
-  result.replace(" ", "-")
+  normalize_slug(&result)
 }
 
 #[cfg(test)]

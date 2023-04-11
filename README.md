@@ -1,8 +1,15 @@
-# @modern-js/mdx-binding
+# @modern-js/mdx-rs-binding
 
 This is a Node.js binding for MDX compliation of [Modern.js Doc](https://modernjs.dev/doc-tools) which is a modern documentation tool based on [Rspack](https://www.rspack.org/).
 
-We forked [mdxjs-rs](https://github.com/wooorm/mdxjs-rs) and customize it for Modern.js Doc, adding the following features:
+It can be 5~10x faster than compiler in pure JavaScript version.The [benchmark](./benches/index.mjs) result of `@modern-js/mdx-rs-binding` vs `@mdx-js/mdx` is as follows:
+
+| Tool | Time |
+| --- | ---- |
+| @modern-js/mdx-rs-binding    | 537 ms |
+| @mdx-js/mdx  | 3268 ms |
+
+We forked [mdxjs-rs](https://github.com/wooorm/mdxjs-rs), the Rust version of mdx compiler and customize it for Modern.js Doc, adding the following features:
 
 | Crate                                                       | Description                                                                                                                                                         |
 | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
