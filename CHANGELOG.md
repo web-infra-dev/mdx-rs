@@ -1,3 +1,12 @@
+## [0.1.2](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.1.1...v0.1.2) (2023-04-11)
+
+
+### Bug Fixes
+
+* slug normalize ([80eb470](https://github.com/web-infra-dev/mdx-rs-binding/commit/80eb47019c232a8f087d8d914f2a5dda977ca3c6))
+
+
+
 ## [0.1.1](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.1.0...v0.1.1) (2023-04-11)
 
 
