@@ -21,6 +21,10 @@ pub fn mdx_plugin_html_impl(node: &Node) -> String {
       let mut html = String::new();
       html.push_str(&format!("<{}", element.tag_name));
       for (key, value) in &element.properties {
+        // skip className
+        if key == "className" {
+          continue;
+        }
         html.push_str(&format!(" {}=\"{}\"", key, display_property_value(value)));
       }
       html.push_str(">");
