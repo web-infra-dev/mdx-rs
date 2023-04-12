@@ -4,7 +4,7 @@ This is a Node.js binding for MDX compliation of [Modern.js Doc](https://modernj
 
 It can be 5~10x faster than compiler in pure JavaScript version.The [benchmark](./benches/index.mjs) result of `@modern-js/mdx-rs-binding` vs `@mdx-js/mdx` is as follows:
 
-| Tool | Time |
+| Tool | Time Spend |
 | --- | ---- |
 | @modern-js/mdx-rs-binding    | 537 ms |
 | @mdx-js/mdx  | 3268 ms |
