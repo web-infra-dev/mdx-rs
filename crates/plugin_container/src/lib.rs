@@ -238,9 +238,7 @@ fn traverse_children(root: &mut hast::Root) {
 
     if container_content_start && !container_content_end {
       // Exclude the MdxExpression、MdxjsEsm Node
-      if let hast::Node::MdxJsxElement(_) | hast::Node::MdxjsEsm(_) | hast::Node::MdxExpression(_) =
-        child
-      {
+      if let hast::Node::MdxExpression(_) = child {
         continue;
       }
       container_content.push(child.clone());
@@ -602,6 +600,84 @@ mod tests {
                   value: "This is a tip".into(),
                   position: None,
                 })],
+                position: None,
+              })],
+              position: None,
+            })
+          ],
+          position: None,
+        })],
+        position: None,
+      })
+    );
+  }
+
+  #[test]
+  fn test_container_plugin_with_mdx_flow_in_content() {
+    let mut root = hast::Node::Root(hast::Root {
+      children: vec![
+        hast::Node::Element(hast::Element {
+          tag_name: "p".into(),
+          properties: vec![],
+          children: vec![hast::Node::Text(hast::Text {
+            value: ":::tip".into(),
+            position: None,
+          })],
+          position: None,
+        }),
+        hast::Node::MdxJsxElement(hast::MdxJsxElement {
+          name: Some("Rspack".into()),
+          attributes: vec![],
+          children: vec![],
+          position: None,
+        }),
+        hast::Node::Element(hast::Element {
+          tag_name: "p".into(),
+          properties: vec![],
+          children: vec![hast::Node::Text(hast::Text {
+            value: ":::".into(),
+            position: None,
+          })],
+          position: None,
+        }),
+      ],
+      position: None,
+    });
+
+    mdx_plugin_container(&mut root);
+
+    assert_eq!(
+      root,
+      hast::Node::Root(hast::Root {
+        children: vec![hast::Node::Element(hast::Element {
+          tag_name: "div".into(),
+          properties: vec![(
+            "className".into(),
+            hast::PropertyValue::SpaceSeparated(vec!["modern-directive".into(), "tip".into()])
+          ),],
+          children: vec![
+            hast::Node::Element(hast::Element {
+              tag_name: "div".into(),
+              properties: vec![(
+                "className".into(),
+                hast::PropertyValue::SpaceSeparated(vec!["modern-directive-title".into()])
+              )],
+              children: vec![hast::Node::Text(hast::Text {
+                value: "TIP".into(),
+                position: None,
+              })],
+              position: None,
+            }),
+            hast::Node::Element(hast::Element {
+              tag_name: "div".into(),
+              properties: vec![(
+                "className".into(),
+                hast::PropertyValue::SpaceSeparated(vec!["modern-directive-content".into()])
+              )],
+              children: vec![hast::Node::MdxJsxElement(hast::MdxJsxElement {
+                name: Some("Rspack".into()),
+                attributes: vec![],
+                children: vec![],
                 position: None,
               })],
               position: None,
