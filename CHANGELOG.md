@@ -1,3 +1,12 @@
+## [0.1.3](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.1.2...v0.1.3) (2023-04-13)
+
+
+### Bug Fixes
+
+* jsx element support in container ([725083d](https://github.com/web-infra-dev/mdx-rs-binding/commit/725083d61bafb436f7693aee068cd3ea8dbb458d))
+
+
+
 ## [0.1.2](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.1.1...v0.1.2) (2023-04-11)
 
 
