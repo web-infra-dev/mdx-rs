@@ -24,6 +24,74 @@ We forked [mdxjs-rs](https://github.com/wooorm/mdxjs-rs), the Rust version of md
 | [mdx_plugin_html](./crates/plugin_html)                     | Serialize hast to html string                                                                                                                                       |
 | [slugger](./crates/slugger)                                 | Generate slug for header, port from [github-slugger](https://github.com/Flet/github-slugger).                                                                       |
 
+
+## Install
+
+```bash
+# npm
+npm install @modern-js/mdx-rs-binding
+# yarn
+yarn add @modern-js/mdx-rs-binding
+# pnpm
+pnpm install @modern-js/mdx-rs-binding
+```
+
+## Usage
+
+```js
+import { compile } from '@modern-js/mdx-rs-binding';
+
+async function main() {
+  const mdx = `
+  # Hello World
+
+  This is a demo of @modern-js/mdx-rs-binding
+  `;
+
+  const result = await compile(mdx, {
+    // The mdx content
+    value: content,
+    // File path of the mdx file, the compiler will determine the different syntax(md/mdx) based on the file extension
+    filepath: "xxx.mdx",
+    // Whether to enable development mode, default is false
+    development: true,
+    // Current working directory, can be empty string
+    root: "",
+  });
+
+  console.log(result);
+}
+```
+
+Of course, you can also the `compileSync` function to compile mdx synchronously, which is not recommended because it will block the event loop and slow down the compile process.
+
+
+```js
+import { compileSync } from '@modern-js/mdx-rs-binding';
+
+function main() {
+  const mdx = `
+  # Hello World
+
+  This is a demo of @modern-js/mdx-rs-binding
+  `;
+
+  const result = compileSync(mdx, {
+    // The mdx content
+    value: content,
+    // File path of the mdx file, can be empty string
+    filepath: "",
+    // Whether to enable development mode, default is false
+    development: true,
+    // Current working directory, can be empty string
+    root: "",
+  });
+
+  console.log(result);
+}
+```
+
+
 ## Credits
 
 Thanks to [mdxjs-rs](https://github.com/wooorm/mdxjs-rs), the awesome Rust library authored by [wooorm](https://github.com/wooorm).

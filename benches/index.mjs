@@ -26,10 +26,9 @@ async function benchMdxRs() {
     new Array(800).fill(0).map(async (_, index) => {
       await compileByMdxRs({
         value: content,
-        filepath: examplePath,
+        filepath: "",
         development: true,
         root: "",
-        defaultLang: "",
       });
     })
   );
