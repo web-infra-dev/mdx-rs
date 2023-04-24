@@ -1,9 +1,23 @@
+## [0.1.4](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.1.3...v0.1.4) (2023-04-24)
+
+
+### Bug Fixes
+
+* nest ../ path not work ([1478e06](https://github.com/web-infra-dev/mdx-rs-binding/commit/1478e06fd23e125b7b9139818750b784af948021))
+
+
+### Features
+
+* add install and usage in readme ([2973e1a](https://github.com/web-infra-dev/mdx-rs-binding/commit/2973e1a08115a337a8a5fd1caa8b2290748b4013))
+
+
+
 ## [0.1.3](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.1.2...v0.1.3) (2023-04-13)
 
 
 ### Bug Fixes
 
-* jsx element support in container ([725083d](https://github.com/web-infra-dev/mdx-rs-binding/commit/725083d61bafb436f7693aee068cd3ea8dbb458d))
+* jsx element support in container ([0f880cf](https://github.com/web-infra-dev/mdx-rs-binding/commit/0f880cf4c3eb2829d45fd5224a3846646b665f71))
 
 
 
