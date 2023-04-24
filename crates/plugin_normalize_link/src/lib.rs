@@ -50,7 +50,8 @@ fn normalize_link(url: &String, root: &String, filepath: &String) -> String {
       }
 
       while url.starts_with("../") {
-        url = url.replace("../", "");
+        // only replace the first ../
+        url.replace_range(0..3, "");
         base_dir = base_dir.parent().unwrap();
       }
 
@@ -267,7 +268,7 @@ mod tests {
     );
     assert_eq!(
       normalize_link(&"../../guide/config.md".to_string(), &root, &filepath),
-      "/zh/guide/config".to_string()
+      "/guide/config".to_string()
     );
   }
 
@@ -294,7 +295,9 @@ mod tests {
         name: Some("img".to_string()),
         attributes: vec![hast::AttributeContent::Property(hast::MdxJsxAttribute {
           name: "src".to_string(),
-          value: Some(hast::AttributeValue::Literal("../assets/a.png".to_string())),
+          value: Some(hast::AttributeValue::Literal(
+            "../../assets/a.png".to_string(),
+          )),
         })],
         children: vec![],
         position: None,
@@ -308,7 +311,7 @@ mod tests {
       if let hast::Node::MdxjsEsm(esm) = &root.children[0] {
         assert_eq!(
           esm.value,
-          "import image_0 from \"/zh/assets/a.png\";".to_string()
+          "import image_0 from \"/assets/a.png\";".to_string()
         );
       }
       if let hast::Node::MdxJsxElement(element) = &root.children[1] {
