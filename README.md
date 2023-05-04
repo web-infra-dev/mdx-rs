@@ -42,15 +42,15 @@ pnpm install @modern-js/mdx-rs-binding
 import { compile } from '@modern-js/mdx-rs-binding';
 
 async function main() {
-  const mdx = `
+  const value = `
   # Hello World
 
   This is a demo of @modern-js/mdx-rs-binding
   `;
 
-  const result = await compile(mdx, {
+  const result = await compile({
     // The mdx content
-    value: content,
+    value,
     // File path of the mdx file, the compiler will determine the different syntax(md/mdx) based on the file extension
     filepath: "xxx.mdx",
     // Whether to enable development mode, default is false
@@ -70,15 +70,15 @@ Of course, you can also the `compileSync` function to compile mdx synchronously,
 import { compileSync } from '@modern-js/mdx-rs-binding';
 
 function main() {
-  const mdx = `
+  const value = `
   # Hello World
 
   This is a demo of @modern-js/mdx-rs-binding
   `;
 
-  const result = compileSync(mdx, {
+  const result = compileSync({
     // The mdx content
-    value: content,
+    value,
     // File path of the mdx file, can be empty string
     filepath: "",
     // Whether to enable development mode, default is false
