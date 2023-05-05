@@ -10,7 +10,7 @@ pub struct Slugger {
 }
 
 fn normalize_slug(value: &String) -> String {
-  value.replace(" ", "-").replace(".", "-")
+  value.replace(" ", "-").replace(".", "")
 }
 
 impl Slugger {
