@@ -1,3 +1,17 @@
+## [0.1.6](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.1.5...v0.1.6) (2023-05-09)
+
+
+### Bug Fixes
+
+* **container:** should render container type with space correctly ([690de1a](https://github.com/web-infra-dev/mdx-rs-binding/commit/690de1a19c1f6c442d0a63a01d7674bee4cb8eb0))
+
+
+### Features
+
+* remove copy button in code block ([9d44cac](https://github.com/web-infra-dev/mdx-rs-binding/commit/9d44cac28b57929d3fada999fb75dfc2b474dab1))
+
+
+
 ## [0.1.5](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.1.4...v0.1.5) (2023-05-05)
 
 
