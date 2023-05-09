@@ -32,6 +32,7 @@ pub fn parse_container_meta(meta: &str) -> (String, String) {
     .skip(1)
     .next()
     .unwrap_or("")
+    .trim_start()
     .splitn(2, |c| c == ' ' || c == '{');
   // Parse the type and title individually. Such as :::tip title="title" -> ("tip", "title="title"}")
   let container_type = type_and_title.next().unwrap_or("").trim();

@@ -14,7 +14,18 @@ describe("compile", () => {
       filepath: "xxx.mdx",
       development: true,
       root: "xxx",
-      defaultLang: "",
+    });
+
+    expect(formatHTML(html)).toMatchSnapshot();
+    expect(result).toMatchSnapshot();
+  });
+
+  test("should render container type with space correctly", async (t) => {
+    let { code: result, html } = await compile({
+      value: readFileSync(path.join(__dirname, "./container-type-with-space.md"), "utf8"),
+      filepath: "xxx.mdx",
+      development: true,
+      root: "xxx",
     });
 
     expect(formatHTML(html)).toMatchSnapshot();
@@ -30,7 +41,6 @@ describe("compile", () => {
       filepath: "xxx.mdx",
       development: true,
       root: "xxx",
-      defaultLang: "",
     });
 
     expect(formatHTML(html)).toMatchSnapshot();
@@ -43,7 +53,6 @@ describe("compile", () => {
       filepath: "xxx.mdx",
       development: true,
       root: "xxx",
-      defaultLang: "",
     });
 
     expect(formatHTML(html)).toMatchSnapshot();

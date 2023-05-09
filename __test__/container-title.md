@@ -2,6 +2,14 @@
 This is a `block` of `Custom Title`
 :::
 
+::: tip{title="Custom Title"}
+This is a `block` of `Custom Title`
+:::
+
 :::tip title="Custom Title"
+This is a `block` of `Custom Title`
+:::
+
+::: tip title="Custom Title"
 This is a `block` of `Custom Title`
 :::
