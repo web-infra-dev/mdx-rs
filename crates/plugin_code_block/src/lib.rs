@@ -67,26 +67,15 @@ fn transform_pre_code_element(node: &mut hast::Node) {
             "className".into(),
             hast::PropertyValue::SpaceSeparated(vec!["modern-code-content".into()]),
           )],
-          children: vec![
-            hast::Node::Element(hast::Element {
-              tag_name: "button".into(),
-              properties: vec![(
-                "className".into(),
-                hast::PropertyValue::SpaceSeparated(vec!["copy".into()]),
-              )],
-              children: vec![],
-              position: None,
-            }),
-            hast::Node::Element(hast::Element {
-              tag_name: "pre".into(),
-              properties: vec![(
-                "className".into(),
-                hast::PropertyValue::SpaceSeparated(vec!["code".into()]),
-              )],
-              children: vec![hast::Node::Element(code_node.clone())],
-              position: None,
-            }),
-          ],
+          children: vec![hast::Node::Element(hast::Element {
+            tag_name: "pre".into(),
+            properties: vec![(
+              "className".into(),
+              hast::PropertyValue::SpaceSeparated(vec!["code".into()]),
+            )],
+            children: vec![hast::Node::Element(code_node.clone())],
+            position: None,
+          })],
           position: None,
         });
 
@@ -134,7 +123,6 @@ pub fn mdx_plugin_code_block(root: &mut hast::Node) {
   // <div className="language-jsx">
   //   <div className="modern-code-title">title</div>
   //   <div className="modern-code-content">
-  //       <button className="copy"></button>
   //       <pre>
   //           <code className="language-jsx">
   //             <p>hello world</p>
@@ -202,37 +190,26 @@ mod tests {
               "className".into(),
               hast::PropertyValue::SpaceSeparated(vec!["modern-code-content".into()]),
             )],
-            children: vec![
-              hast::Node::Element(hast::Element {
-                tag_name: "button".into(),
+            children: vec![hast::Node::Element(hast::Element {
+              tag_name: "pre".into(),
+              properties: vec![(
+                "className".into(),
+                hast::PropertyValue::SpaceSeparated(vec!["code".into()]),
+              )],
+              children: vec![hast::Node::Element(hast::Element {
+                tag_name: "code".into(),
                 properties: vec![(
-                  "className".into(),
-                  hast::PropertyValue::SpaceSeparated(vec!["copy".into()]),
+                  "meta".into(),
+                  hast::PropertyValue::SpaceSeparated(vec!["title=\"My-Rust-Code\"".into()]),
                 )],
-                children: vec![],
-                position: None,
-              }),
-              hast::Node::Element(hast::Element {
-                tag_name: "pre".into(),
-                properties: vec![(
-                  "className".into(),
-                  hast::PropertyValue::SpaceSeparated(vec!["code".into()]),
-                )],
-                children: vec![hast::Node::Element(hast::Element {
-                  tag_name: "code".into(),
-                  properties: vec![(
-                    "meta".into(),
-                    hast::PropertyValue::SpaceSeparated(vec!["title=\"My-Rust-Code\"".into()]),
-                  )],
-                  children: vec![hast::Node::Text(hast::Text {
-                    value: "fn main() {\n   println!(\"Hello, world!\");\n}".into(),
-                    position: None,
-                  }),],
+                children: vec![hast::Node::Text(hast::Text {
+                  value: "fn main() {\n   println!(\"Hello, world!\");\n}".into(),
                   position: None,
                 }),],
                 position: None,
-              }),
-            ],
+              }),],
+              position: None,
+            }),],
             position: None,
           })
         ],
