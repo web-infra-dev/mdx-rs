@@ -69,14 +69,11 @@ fn normalize_link(url: &String, root: &String, filepath: &String) -> String {
     }
 
     // find the extname(before hash)
-    let extname = match url.rfind('.') {
-      Some(index) => {
-        if let Some(hash_index) = url.rfind('#') {
-          url[index..hash_index].to_string()
-        } else {
-          url[index..].to_string()
-        }
-      }
+    // first, find the hash
+    let hash_index = url.rfind('#').or_else(|| Some(url.len())).unwrap();
+    // then, find the extname
+    let extname = match url[..hash_index].rfind('.') {
+      Some(index) => url[index..hash_index].to_string(),
       None => "".to_string(),
     };
 
@@ -286,6 +283,14 @@ mod tests {
     assert_eq!(
       normalize_link(&"./guide/config.html#aaa".to_string(), &root, &filepath),
       "/zh/guide/guide/config#aaa".to_string()
+    );
+    assert_eq!(
+      normalize_link(
+        &"./guide/config.html#tools.aaa".to_string(),
+        &root,
+        &filepath
+      ),
+      "/zh/guide/guide/config#tools.aaa".to_string()
     );
   }
 
