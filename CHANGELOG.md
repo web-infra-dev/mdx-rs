@@ -1,4 +1,13 @@
-## [0.1.6](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.1.5...v0.1.6) (2023-05-09)
+## [0.1.7](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.1.6...v0.1.7) (2023-05-12)
+
+
+### Bug Fixes
+
+* hash missed in link ([30885b6](https://github.com/web-infra-dev/mdx-rs-binding/commit/30885b65f03713a18e46277a93fa9ec52fa59bdd))
+
+
+
+## [0.1.6](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.1.5...v0.1.6) (2023-05-10)
 
 
 ### Bug Fixes
