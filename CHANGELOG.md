@@ -1,3 +1,12 @@
+## [0.1.8](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.1.7...v0.1.8) (2023-05-12)
+
+
+### Bug Fixes
+
+* panic when hash include . ([e092412](https://github.com/web-infra-dev/mdx-rs-binding/commit/e092412401549a2d3b4dd183d3ca3c49855b55db))
+
+
+
 ## [0.1.7](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.1.6...v0.1.7) (2023-05-12)
 
 
