@@ -31,7 +31,6 @@ use crate::{
 };
 use hast;
 use markdown::{to_mdast, Constructs, Location, ParseOptions};
-use mdx_plugin_code_block::mdx_plugin_code_block;
 use mdx_plugin_container::mdx_plugin_container;
 use mdx_plugin_external_link::mdx_plugin_external_link;
 use mdx_plugin_frontmatter::mdx_plugin_frontmatter;

@@ -1,3 +1,12 @@
+# [0.2.0](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.1.8...v0.2.0) (2023-05-23)
+
+
+### Features
+
+* delete code_block plugin ([a72fdff](https://github.com/web-infra-dev/mdx-rs-binding/commit/a72fdff08bc7702520f7af624079a386f20bbb5e))
+
+
+
 ## [0.1.8](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.1.7...v0.1.8) (2023-05-12)
 
 
