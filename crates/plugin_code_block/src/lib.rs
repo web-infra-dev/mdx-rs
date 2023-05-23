@@ -1,5 +1,6 @@
 //! Author: sanyuan0704
 //!
+//! [Deprecated]
 //! This plugin is used to construct the code block in mdx.
 
 use hast;

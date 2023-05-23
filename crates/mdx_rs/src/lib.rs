@@ -101,7 +101,6 @@ pub fn compile(
   let mut hast = mdast_util_to_hast(&mdast);
   mdx_plugin_header_anchor(&mut hast);
   mdx_plugin_container(&mut hast);
-  mdx_plugin_code_block(&mut hast);
   mdx_plugin_external_link(&mut hast);
   let links = mdx_plugin_normalize_link(&mut hast, root, filepath);
   let html = mdx_plugin_html(&hast);
