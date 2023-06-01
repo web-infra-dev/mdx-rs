@@ -30,6 +30,7 @@ use crate::{
   swc_util_build_jsx::{swc_util_build_jsx, Options as BuildOptions},
 };
 use hast;
+use hast_util_to_swc::Program;
 use markdown::{to_mdast, Constructs, Location, ParseOptions};
 use mdx_plugin_container::mdx_plugin_container;
 use mdx_plugin_external_link::mdx_plugin_external_link;
@@ -104,7 +105,19 @@ pub fn compile(
   let links = mdx_plugin_normalize_link(&mut hast, root, filepath);
   let html = mdx_plugin_html(&hast);
   let mut program = hast_util_to_swc(&hast, Some(filepath.to_string()), Some(&location))
-    .expect(format!("file: {}", filepath).as_str());
+    .unwrap_or_else(|error| {
+      eprintln!("File: {:?}\nError: {:?}", filepath, error);
+      hast_util_to_swc(
+        &hast::Node::Root(hast::Root {
+          children: vec![],
+          position: None,
+        }),
+        Some(filepath.to_string()),
+        Some(&location),
+      )
+      .unwrap()
+    });
+
   mdx_plugin_recma_document(&mut program, &document_options, Some(&location))
     .expect(format!("file: {}", filepath,).as_str());
   mdx_plugin_recma_jsx_rewrite(&mut program, &rewrite_options, Some(&location));
