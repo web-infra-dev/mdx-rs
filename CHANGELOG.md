@@ -1,3 +1,12 @@
+## [0.2.1](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.2.0...v0.2.1) (2023-06-01)
+
+
+### Bug Fixes
+
+* avoid panic when swc parse error ([3c5f779](https://github.com/web-infra-dev/mdx-rs-binding/commit/3c5f7795d92bcff3e26744a962880396a4300de3))
+
+
+
 # [0.2.0](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.1.8...v0.2.0) (2023-05-23)
 
 
