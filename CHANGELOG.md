@@ -1,3 +1,12 @@
+## [0.2.2](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.2.1...v0.2.2) (2023-06-20)
+
+
+### Bug Fixes
+
+* delete export in mdx output ([386ebc1](https://github.com/web-infra-dev/mdx-rs-binding/commit/386ebc1345e208a102f4b152f44941ec50db4841))
+
+
+
 ## [0.2.1](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.2.0...v0.2.1) (2023-06-01)
 
 
