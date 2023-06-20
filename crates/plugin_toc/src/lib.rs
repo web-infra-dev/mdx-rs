@@ -55,29 +55,6 @@ pub fn mdx_plugin_toc(node: &mut mdast::Node) -> TocResult {
         });
       }
     }
-    // add toc exports in the module
-    // such as `export const toc = [{ title: 'title', level: 1 }]`
-    let title_exports = mdast::Node::MdxjsEsm(mdast::MdxjsEsm {
-      value: format!("export const title = '{}';", title),
-      position: None,
-      stops: vec![],
-    });
-    let toc_code = toc
-      .iter()
-      .map(|item| {
-        format!(
-          "{{ text: \"{}\", depth: {}, id: \"{}\" }}",
-          item.text, item.depth, item.id
-        )
-      })
-      .collect::<Vec<String>>()
-      .join(",");
-    let toc_exports = mdast::Node::MdxjsEsm(mdast::MdxjsEsm {
-      value: format!("export const toc = [{}];", toc_code),
-      position: None,
-      stops: vec![],
-    });
-    root.children.extend(vec![title_exports, toc_exports]);
   }
 
   TocResult { title, toc }
@@ -208,27 +185,9 @@ mod tests {
       position: None,
     });
 
-    mdx_plugin_toc(&mut root);
+    let result = mdx_plugin_toc(&mut root);
 
-    if let mdast::Node::Root(root) = root {
-      assert_eq!(root.children.len(), 8);
-      assert_eq!(
-        root.children[6],
-        mdast::Node::MdxjsEsm(mdast::MdxjsEsm {
-          value: "export const title = 'HelloWorld';".to_string(),
-          position: None,
-          stops: vec![],
-        })
-      );
-      assert_eq!(
-        root.children[7],
-        mdast::Node::MdxjsEsm(mdast::MdxjsEsm {
-          value: "export const toc = [{ text: \"HelloWorld\", depth: 2, id: \"helloworld-1\" },{ text: \"HelloWorld\", depth: 3, id: \"helloworld-2\" },{ text: \"HelloWorld\", depth: 4, id: \"helloworld-3\" }];"
-            .to_string(),
-          position: None,
-          stops: vec![],
-        })
-      );
-    }
+    assert_eq!(result.title, "HelloWorld");
+    assert_eq!(result.toc.len(), 3);
   }
 }

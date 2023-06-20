@@ -23,6 +23,7 @@ pub struct Output {
   pub html: String,
   pub title: String,
   pub toc: Vec<Toc>,
+  pub frontmatter: String,
 }
 
 #[napi(object)]
@@ -51,6 +52,7 @@ impl From<CompileResult> for Output {
       html: res.html,
       title: res.title,
       toc: res.toc.into_iter().map(|item| item.into()).collect(),
+      frontmatter: res.frontmatter,
     }
   }
 }
@@ -77,6 +79,7 @@ impl Task for Compiler {
         .map(|item| item.into())
         .collect::<Vec<Toc>>(),
     )?;
+    obj.set_named_property("frontmatter", output.frontmatter)?;
     Ok(obj)
   }
 }

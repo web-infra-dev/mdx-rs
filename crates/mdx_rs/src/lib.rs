@@ -49,6 +49,7 @@ pub struct CompileResult {
   pub html: String,
   pub title: String,
   pub toc: Vec<TocItem>,
+  pub frontmatter: String,
 }
 
 pub fn compile(
@@ -91,13 +92,11 @@ pub fn compile(
     development,
     provider_import_source: Some("@mdx-js/react".to_string()),
   };
-  let build_options = BuildOptions { development };
-
   let location = Location::new(value.as_bytes());
   let mut mdast =
     to_mdast(value.as_str(), &parse_options).expect(format!("value: {}", value).as_str());
   let toc_result = mdx_plugin_toc(&mut mdast);
-  mdx_plugin_frontmatter(&mut mdast);
+  let frontmatter = mdx_plugin_frontmatter(&mut mdast);
   let mut hast = mdast_util_to_hast(&mdast);
   mdx_plugin_header_anchor(&mut hast);
   mdx_plugin_container(&mut hast);
@@ -121,8 +120,8 @@ pub fn compile(
   mdx_plugin_recma_document(&mut program, &document_options, Some(&location))
     .expect(format!("file: {}", filepath,).as_str());
   mdx_plugin_recma_jsx_rewrite(&mut program, &rewrite_options, Some(&location));
-
-  swc_util_build_jsx(&mut program, &build_options, Some(&location)).unwrap();
+  // We keep the origin jsx here.
+  // swc_util_build_jsx(&mut program, &build_options, Some(&location)).unwrap();
   let code = serialize(&mut program.module, Some(&program.comments));
   CompileResult {
     code,
@@ -130,5 +129,6 @@ pub fn compile(
     html,
     title: toc_result.title,
     toc: toc_result.toc,
+    frontmatter,
   }
 }
