@@ -1,3 +1,12 @@
+## [0.2.3](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.2.2...v0.2.3) (2023-07-13)
+
+
+### Bug Fixes
+
+* slugger normalize ([73c43d8](https://github.com/web-infra-dev/mdx-rs-binding/commit/73c43d86bd4a34256c339ccde071d562fa4b67d2))
+
+
+
 ## [0.2.2](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.2.1...v0.2.2) (2023-06-20)
 
 
