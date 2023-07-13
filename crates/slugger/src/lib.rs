@@ -3,6 +3,7 @@
 //! Author: sanyuan0704
 //!
 //! Port of <https://github.com/Flet/github-slugger>
+use regex::Regex;
 use std::collections::HashMap;
 
 pub struct Slugger {
@@ -10,7 +11,18 @@ pub struct Slugger {
 }
 
 fn normalize_slug(value: &String) -> String {
-  value.replace(" ", "-").replace(".", "")
+  let remove_re: Regex = Regex::new(r"[\p{Other_Number}\p{Close_Punctuation}\p{Final_Punctuation}\p{Initial_Punctuation}\p{Open_Punctuation}\p{Other_Punctuation}\p{Dash_Punctuation}\p{Symbol}\p{Control}\p{Private_Use}\p{Format}\p{Unassigned}\p{Separator}]").unwrap();
+  let s = remove_re.replace_all(&value, |caps: &regex::Captures| {
+    let c = caps.get(0).unwrap().as_str();
+    if c == " " || c == "-" {
+      "-".to_string()
+    } else if c.chars().all(|a| a.is_alphabetic()) {
+      c.to_string()
+    } else {
+      "".to_string()
+    }
+  });
+  s.replace(|c: char| c.is_whitespace(), "-")
 }
 
 impl Slugger {
@@ -142,6 +154,9 @@ mod tests {
   fn test_slug() {
     assert_eq!(slug(&"Hello World".to_string(), false), "hello-world");
     assert_eq!(slug(&"Hello World".to_string(), false), "hello-world");
-    assert_eq!(slug(&"Hello World".to_string(), false), "hello-world");
+    assert_eq!(
+      slug(&"export 'function'".to_string(), false),
+      "export-function"
+    );
   }
 }
