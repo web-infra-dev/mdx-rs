@@ -8,9 +8,9 @@ members = ["crates/*"]
 serializable = ["serde"]
 
 [workspace.dependencies]
-markdown = "1.0.0-alpha.7"
+markdown = "1.0.0-alpha.10"
 serde = { version = "1.0.130" }
-swc_core = { version = "0.69.0", features = [
+swc_core = { version = "0.79.0", features = [
   "ecma_ast",
   "ecma_visit",
   "ecma_codegen",
