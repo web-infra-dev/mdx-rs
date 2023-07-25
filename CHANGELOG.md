@@ -1,3 +1,12 @@
+## [0.2.4](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.2.3...v0.2.4) (2023-07-25)
+
+
+### Bug Fixes
+
+* extract text when header including link node ([06063a3](https://github.com/web-infra-dev/mdx-rs-binding/commit/06063a3eaa312c5c98a3a13250f13f9ad6e13bbd))
+
+
+
 ## [0.2.3](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.2.2...v0.2.3) (2023-07-13)
 
 
