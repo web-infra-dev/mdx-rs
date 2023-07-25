@@ -17,6 +17,15 @@ pub struct TocResult {
   pub toc: Vec<TocItem>,
 }
 
+pub fn extract_text_from_link_node(node: &mdast::Node) -> String {
+  if let mdast::Node::Link(link) = node {
+    if let mdast::Node::Text(text) = &link.children[0] {
+      return text.value.clone();
+    }
+  }
+  String::new()
+}
+
 pub fn collect_title_in_mdast(node: &mdast::Node) -> String {
   let mut title = String::new();
   if let mdast::Node::Heading(heading) = node {
@@ -24,6 +33,7 @@ pub fn collect_title_in_mdast(node: &mdast::Node) -> String {
       match child {
         mdast::Node::Text(text) => title.push_str(&text.value),
         mdast::Node::InlineCode(code) => title.push_str(&code.value),
+        mdast::Node::Link(_) => title.push_str(&extract_text_from_link_node(child)),
         _ => continue, // Continue if node is not Text or Code
       }
     }
@@ -128,6 +138,15 @@ mod tests {
           value: "World".to_string(),
           position: None,
         }),
+        mdast::Node::Link(mdast::Link {
+          url: "https://github.com".to_string(),
+          title: None,
+          children: vec![mdast::Node::Text(mdast::Text {
+            value: "Github".to_string(),
+            position: None,
+          })],
+          position: None,
+        }),
       ],
       position: None,
     };
@@ -189,5 +208,6 @@ mod tests {
 
     assert_eq!(result.title, "HelloWorld");
     assert_eq!(result.toc.len(), 3);
+    assert_eq!(result.toc[1].text, "HelloWorldGithub");
   }
 }
