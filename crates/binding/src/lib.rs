@@ -1,3 +1,7 @@
+#[cfg(not(all(target_os = "linux", target_env = "musl", target_arch = "aarch64")))]
+#[global_allocator]
+static ALLOC: mimalloc_rust::GlobalMiMalloc = mimalloc_rust::GlobalMiMalloc;
+
 use mdx_plugin_toc::TocItem;
 use mdx_rs::{self, CompileResult};
 

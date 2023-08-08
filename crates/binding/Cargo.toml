@@ -8,6 +8,12 @@ edition = "2021"
 [lib]
 crate-type = ["cdylib"]
 
+[target.'cfg(not(target_os = "linux"))'.dependencies]
+mimalloc-rust = "0.2"
+
+[target.'cfg(all(target_os = "linux", not(all(target_env = "musl", target_arch = "aarch64"))))'.dependencies]
+mimalloc-rust = { version = "0.2", features = ["local-dynamic-tls"] }
+
 [dependencies]
 mdx_rs = { path = "../mdx_rs" }
 # Default enable napi4 feature, see https://nodejs.org/api/n-api.html#node-api-version-matrix
@@ -21,3 +27,4 @@ napi-build = "2.0.1"
 
 [profile.release]
 lto = true
+codegen-units = 1
