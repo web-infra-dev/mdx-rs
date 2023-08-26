@@ -3,12 +3,13 @@ import fs from "fs";
 import { compile as compileByMdxJs } from "@mdx-js/mdx";
 import Table from "cli-table";
 import path from "path";
+import { fileURLToPath } from "url";
 
 const table = new Table({
   head: ["Name", "Time Spend"],
 });
 
-const __dirname = path.dirname(new URL(import.meta.url).pathname);
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const examplePath = path.resolve(__dirname, "./fixtures/example.md");
 const content = fs.readFileSync(examplePath, "utf-8");
