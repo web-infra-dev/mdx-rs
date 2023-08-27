@@ -1,3 +1,13 @@
+## [0.2.5](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.2.4...v0.2.5) (2023-08-27)
+
+
+### Performance Improvements
+
+* lazy static optimization for regexp ([447289c](https://github.com/web-infra-dev/mdx-rs-binding/commit/447289c649887c48faadf01d4b0ac644d012dfd7))
+* use `mimalloc` ([984c0cc](https://github.com/web-infra-dev/mdx-rs-binding/commit/984c0cc91cddeb9ef4229d85a34c03527692afb9))
+
+
+
 ## [0.2.4](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.2.3...v0.2.4) (2023-07-25)
 
 

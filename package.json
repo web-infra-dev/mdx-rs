@@ -1,7 +1,7 @@
 {
   "name": "@modern-js/mdx-rs-binding",
   "description": "MDX compilation binding for Modern.js",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "main": "index.js",
   "types": "index.d.ts",
   "napi": {
