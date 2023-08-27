@@ -2,12 +2,12 @@
 
 This is a Node.js binding for MDX compliation of [Modern.js Doc](https://modernjs.dev/doc-tools) which is a modern documentation tool based on [Rspack](https://www.rspack.org/).
 
-It can be 5~10x faster than compiler in pure JavaScript version.The [benchmark](./benches/index.mjs) result of `@modern-js/mdx-rs-binding` vs `@mdx-js/mdx` is as follows:
+It can be 10x+ faster than compiler in pure JavaScript version.The [benchmark](./benches/index.mjs) result of `@modern-js/mdx-rs-binding` vs `@mdx-js/mdx` is as follows:
 
-| Tool | Time Spend |
-| --- | ---- |
-| @modern-js/mdx-rs-binding    | 537 ms |
-| @mdx-js/mdx  | 3268 ms |
+| Tool                      | Time Spend |
+| ------------------------- | ---------- |
+| @modern-js/mdx-rs-binding | 163 ms     |
+| @mdx-js/mdx               | 3288 ms    |
 
 We forked [mdxjs-rs](https://github.com/wooorm/mdxjs-rs), the Rust version of mdx compiler and customize it for Modern.js Doc, adding the following features:
 
@@ -23,7 +23,6 @@ We forked [mdxjs-rs](https://github.com/wooorm/mdxjs-rs), the Rust version of md
 | [mdx_plugin_html](./crates/plugin_html)                     | Serialize hast to html string                                                                                                                                       |
 | [slugger](./crates/slugger)                                 | Generate slug for header, port from [github-slugger](https://github.com/Flet/github-slugger).                                                                       |
 
-
 ## Install
 
 ```bash
@@ -38,7 +37,7 @@ pnpm install @modern-js/mdx-rs-binding
 ## Usage
 
 ```js
-import { compile } from '@modern-js/mdx-rs-binding';
+import { compile } from "@modern-js/mdx-rs-binding";
 
 async function main() {
   const value = `
@@ -64,9 +63,8 @@ async function main() {
 
 Of course, you can also the `compileSync` function to compile mdx synchronously, which is not recommended because it will block the event loop and slow down the compile process.
 
-
 ```js
-import { compileSync } from '@modern-js/mdx-rs-binding';
+import { compileSync } from "@modern-js/mdx-rs-binding";
 
 function main() {
   const value = `
@@ -89,8 +87,6 @@ function main() {
   console.log(result);
 }
 ```
-
-
 
 ## Credits
 

@@ -22,7 +22,10 @@ describe("compile", () => {
 
   test("should render container type with space correctly", async (t) => {
     let { code: result, html } = await compile({
-      value: readFileSync(path.join(__dirname, "./container-type-with-space.md"), "utf8"),
+      value: readFileSync(
+        path.join(__dirname, "./container-type-with-space.md"),
+        "utf8"
+      ),
       filepath: "xxx.mdx",
       development: true,
       root: "xxx",
