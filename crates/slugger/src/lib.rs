@@ -3,7 +3,6 @@
 //! Author: sanyuan0704
 //!
 //! Port of <https://github.com/Flet/github-slugger>
-use lazy_static::lazy_static;
 use regex::Regex;
 use std::collections::HashMap;
 
@@ -11,12 +10,9 @@ pub struct Slugger {
   occurrences: HashMap<String, i32>,
 }
 
-lazy_static! {
-    static ref REMOVE_RE: Regex = Regex::new(r"[\p{Other_Number}\p{Close_Punctuation}\p{Final_Punctuation}\p{Initial_Punctuation}\p{Open_Punctuation}\p{Other_Punctuation}\p{Dash_Punctuation}\p{Symbol}\p{Control}\p{Private_Use}\p{Format}\p{Unassigned}\p{Separator}]").unwrap();
-}
-
 fn normalize_slug(value: &String) -> String {
-  let s = REMOVE_RE.replace_all(&value, |caps: &regex::Captures| {
+  let remove_re: Regex = Regex::new(r"[\p{Other_Number}\p{Close_Punctuation}\p{Final_Punctuation}\p{Initial_Punctuation}\p{Open_Punctuation}\p{Other_Punctuation}\p{Dash_Punctuation}\p{Symbol}\p{Control}\p{Private_Use}\p{Format}\p{Unassigned}\p{Separator}]").unwrap();
+  let s = remove_re.replace_all(&value, |caps: &regex::Captures| {
     let c = caps.get(0).unwrap().as_str();
     if c == " " || c == "-" {
       "-".to_string()
@@ -62,7 +58,7 @@ impl Slugger {
 
     self.occurrences.insert(result.clone(), 0);
 
-    normalize_slug(&result).to_string()
+    normalize_slug(&result)
   }
 
   /**
@@ -95,7 +91,7 @@ pub fn slug(value: &String, maintain_case: bool) -> String {
   } else {
     value.to_lowercase()
   };
-  normalize_slug(&result).to_string()
+  normalize_slug(&result)
 }
 
 #[cfg(test)]
