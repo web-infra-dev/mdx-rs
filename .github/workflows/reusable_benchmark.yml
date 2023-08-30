@@ -28,20 +28,20 @@ jobs:
 
       - name: Compile
         shell: bash
-        run: cargo build --release -p oxc_benchmark
+        run: cargo build --release -p mdx_rs_benchmark
 
       - name: Fix Permission Loss
         if: runner.os == 'Windows'
         shell: bash
         run: |
-          mv ./target/release/oxc_benchmark.exe benchmark_${{ matrix.branch }}.exe
+          mv ./target/release/mdx_rs_benchmark.exe benchmark_${{ matrix.branch }}.exe
           tar czf benchmark_${{ matrix.branch }}.tar.gz benchmark_${{ matrix.branch }}.exe
 
       - name: Fix Permission Loss
         if: runner.os != 'Windows'
         shell: bash
         run: |
-          mv ./target/release/oxc_benchmark benchmark_${{ matrix.branch }}
+          mv ./target/release/mdx_rs_benchmark benchmark_${{ matrix.branch }}
           tar czf benchmark_${{ matrix.branch }}.tar.gz benchmark_${{ matrix.branch }}
 
       - name: Upload binary
