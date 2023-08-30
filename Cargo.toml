@@ -1,8 +1,7 @@
 cargo-features = ["strip"]
 
 [workspace]
-members = ["crates/*"]
-
+members = ["crates/*", "tasks/*"]
 
 [workspace.features]
 serializable = ["serde"]
