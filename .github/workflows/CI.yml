@@ -120,6 +120,9 @@ jobs:
         with:
           save-cache: ${{ github.ref_name == 'main' }}
 
+      - name: Add Rust Target
+        run: rustup target add ${{ matrix.settings.target }}
+
       - name: Cache cargo
         uses: Swatinem/rust-cache@v1
         with:

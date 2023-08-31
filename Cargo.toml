@@ -2,6 +2,7 @@ cargo-features = ["strip"]
 
 [workspace]
 members = ["crates/*", "tasks/*"]
+resolver = "2"
 
 [workspace.features]
 serializable = ["serde"]
