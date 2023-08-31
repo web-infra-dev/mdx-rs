@@ -38,10 +38,6 @@ pub fn main() {
       })
     },
   );
-  group.bench_function("mdx_rs", |_| {
-    compile(&contents, &"".to_string(), true, &"".to_string());
-  });
   group.finish();
-  criterion.final_summary();
   drop(criterion);
 }
