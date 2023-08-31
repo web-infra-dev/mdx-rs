@@ -115,12 +115,10 @@ jobs:
       - name: Install pnpm
         run: npm install -g pnpm@6
 
-      - name: Install
-        uses: actions-rs/toolchain@v1
+      - name: Install Rust Toolchain
+        uses: ./.github/actions/rustup
         with:
-          profile: default
-          override: true
-          target: ${{ matrix.settings.target }}
+          save-cache: ${{ github.ref_name == 'main' }}
 
       - name: Cache cargo
         uses: Swatinem/rust-cache@v1
