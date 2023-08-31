@@ -17,7 +17,7 @@ inputs:
     required: false
     type: boolean
   restore-cache:
-    default: true
+    default: false
     required: false
     type: boolean
   save-cache:
@@ -25,7 +25,7 @@ inputs:
     required: false
     type: boolean
   shared-key:
-    default: 'warm'
+    default: "warm"
     required: false
     type: string
 
