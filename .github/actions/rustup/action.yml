@@ -17,7 +17,7 @@ inputs:
     required: false
     type: boolean
   restore-cache:
-    default: true
+    default: false
     required: false
     type: boolean
   save-cache:
