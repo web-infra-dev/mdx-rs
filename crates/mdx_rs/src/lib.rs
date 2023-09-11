@@ -93,8 +93,12 @@ pub fn compile(
     provider_import_source: Some("@mdx-js/react".to_string()),
   };
   let location = Location::new(value.as_bytes());
-  let mut mdast =
-    to_mdast(value.as_str(), &parse_options).expect(format!("value: {}", value).as_str());
+  let mut mdast = to_mdast(value.as_str(), &parse_options).unwrap_or_else(|error| {
+    eprintln!("File: {:?}\nError: {:?}", filepath, error);
+    // Provide a default value or handle the error here
+    return to_mdast("", &parse_options).unwrap();
+  });
+
   let toc_result = mdx_plugin_toc(&mut mdast);
   let frontmatter = mdx_plugin_frontmatter(&mut mdast);
   let mut hast = mdast_util_to_hast(&mdast);
@@ -117,8 +121,11 @@ pub fn compile(
       .unwrap()
     });
 
-  mdx_plugin_recma_document(&mut program, &document_options, Some(&location))
-    .expect(format!("file: {}", filepath,).as_str());
+  mdx_plugin_recma_document(&mut program, &document_options, Some(&location)).unwrap_or_else(
+    |_| {
+      eprintln!("Failed to process file: {}", filepath);
+    },
+  );
   mdx_plugin_recma_jsx_rewrite(&mut program, &rewrite_options, Some(&location));
   // We keep the origin jsx here.
   // swc_util_build_jsx(&mut program, &build_options, Some(&location)).unwrap();
