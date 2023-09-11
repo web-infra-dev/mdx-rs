@@ -1,3 +1,21 @@
+## [0.2.6](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.2.5...v0.2.6) (2023-09-11)
+
+
+### Bug Fixes
+
+* avoid panic when parse ast error ([fd29af6](https://github.com/web-infra-dev/mdx-rs-binding/commit/fd29af619540ca3de353c6bbe55971de5824cb39))
+* bench file ([331a717](https://github.com/web-infra-dev/mdx-rs-binding/commit/331a7170dd33370c54c100a8509f089b41dc1486))
+* ci target ([91158d6](https://github.com/web-infra-dev/mdx-rs-binding/commit/91158d6b677f40dd7f598e575cb38e46188301ba))
+
+
+### Features
+
+* add action ([85bf1c5](https://github.com/web-infra-dev/mdx-rs-binding/commit/85bf1c5fc85903fe801f3eb244dd7b6faff18155))
+* add benchmark workflow ([f513e25](https://github.com/web-infra-dev/mdx-rs-binding/commit/f513e25db2f20468879d5490fbc0c2698592a49d))
+* rustup ci ([d3fa666](https://github.com/web-infra-dev/mdx-rs-binding/commit/d3fa666a06b92eab1d34dcf8711127ff834c8ee0))
+
+
+
 ## [0.2.5](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.2.4...v0.2.5) (2023-08-27)
 
 
