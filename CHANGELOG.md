@@ -1,3 +1,12 @@
+## [0.2.7](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.2.6...v0.2.7) (2023-09-11)
+
+
+### Bug Fixes
+
+* windows output ([32d7f24](https://github.com/web-infra-dev/mdx-rs-binding/commit/32d7f24d2b855a79910baf26f04a24de82491f47))
+
+
+
 ## [0.2.6](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.2.5...v0.2.6) (2023-09-11)
 
 
