@@ -1,7 +1,7 @@
 {
   "name": "@modern-js/mdx-rs-binding",
   "description": "MDX compilation binding for Modern.js",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "main": "index.js",
   "types": "index.d.ts",
   "napi": {
@@ -13,7 +13,6 @@
         "x86_64-unknown-linux-musl",
         "aarch64-unknown-linux-gnu",
         "x86_64-unknown-linux-gnu",
-        "armv7-unknown-linux-gnueabihf",
         "x86_64-pc-windows-msvc",
         "aarch64-pc-windows-msvc",
         "aarch64-apple-darwin",
