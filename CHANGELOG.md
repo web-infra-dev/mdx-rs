@@ -1,3 +1,12 @@
+# [0.3.0](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.2.8...v0.3.0) (2023-09-21)
+
+
+### Features
+
+* integrate rspress ([3884128](https://github.com/web-infra-dev/mdx-rs-binding/commit/3884128959018b005afd8fcf1c2926a265215ac7))
+
+
+
 ## [0.2.8](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.2.7...v0.2.8) (2023-09-21)
 
 
