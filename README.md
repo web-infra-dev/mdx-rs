@@ -6,8 +6,8 @@ It can be 10x+ faster than compiler in pure JavaScript version.The [benchmark](.
 
 | Tool            | Time Spend |
 | --------------- | ---------- |
-| @rspress/mdx-rs | 163 ms     |
-| @mdx-js/mdx     | 3288 ms    |
+| @rspress/mdx-rs | 977 ms     |
+| @mdx-js/mdx     | 21300 ms   |
 
 We forked [mdxjs-rs](https://github.com/wooorm/mdxjs-rs), the Rust version of mdx compiler and customize it for Modern.js Doc, adding the following features:
 

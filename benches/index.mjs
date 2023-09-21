@@ -16,7 +16,7 @@ const content = fs.readFileSync(examplePath, "utf-8");
 
 async function benchMdxjs() {
   await Promise.all(
-    new Array(800).fill(0).map(async (_, index) => {
+    new Array(5000).fill(0).map(async (_, index) => {
       await compileByMdxJs(content);
     })
   );
@@ -24,7 +24,7 @@ async function benchMdxjs() {
 
 async function benchMdxRs() {
   await Promise.all(
-    new Array(800).fill(0).map(async (_, index) => {
+    new Array(5000).fill(0).map(async (_, index) => {
       await compileByMdxRs({
         value: content,
         filepath: "",
