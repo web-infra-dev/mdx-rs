@@ -12,9 +12,6 @@ fn generate_ast_import(
   filepath: &String,
 ) -> hast::MdxjsEsm {
   let mut import_path = src.to_string();
-  if import_path.starts_with('/') {
-    import_path = format!("{}/{}{}", root, "public", import_path);
-  }
   if import_path.starts_with(".") {
     import_path = normalize_link(src, root, &filepath);
   }
@@ -127,7 +124,7 @@ fn mdx_plugin_normalize_link_impl(
         // Then we will generate a mdxjsEsm node to import the image and push it into images
         if let Some(src) = src {
           if let (_, hast::PropertyValue::String(src)) = src {
-            if PROTOCOLS.iter().any(|protocol| src.starts_with(protocol)) {
+            if PROTOCOLS.iter().any(|protocol| src.starts_with(protocol)) || src.starts_with('/') {
               return links;
             }
             let index = images.len();
@@ -187,7 +184,9 @@ fn mdx_plugin_normalize_link_impl(
         if let Some(src) = src {
           if let hast::AttributeContent::Property(property) = src {
             if let Some(hast::AttributeValue::Literal(value)) = &mut property.value {
-              if PROTOCOLS.iter().any(|protocol| value.starts_with(protocol)) {
+              if PROTOCOLS.iter().any(|protocol| value.starts_with(protocol))
+                || value.starts_with('/')
+              {
                 return links;
               }
               let index = images.len();
