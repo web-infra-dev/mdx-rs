@@ -22,7 +22,6 @@ export interface CompileOptions {
   development: boolean;
   root: string;
 }
-
 /** Turn MDX into JavaScript. */
 export function compile(options: CompileOptions): Promise<Output>;
 export function compileSync(options: CompileOptions): Output;
