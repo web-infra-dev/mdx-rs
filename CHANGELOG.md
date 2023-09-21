@@ -1,8 +1,23 @@
+## [0.2.8](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.2.7...v0.2.8) (2023-09-21)
+
+
+### Bug Fixes
+
+* filter absolute path in image ([a65b3b8](https://github.com/web-infra-dev/mdx-rs-binding/commit/a65b3b85a3aa8f22e5d492382caa3a7417e1e02e))
+
+
+### Features
+
+* add release workflow ([7548d29](https://github.com/web-infra-dev/mdx-rs-binding/commit/7548d2922955cfb658b9791b3079dfa699651b12))
+
+
+
 ## [0.2.7](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.2.6...v0.2.7) (2023-09-11)
 
 
 ### Bug Fixes
 
+* ci ([f7bf4ab](https://github.com/web-infra-dev/mdx-rs-binding/commit/f7bf4abc3fae624d1fa62b7a7cbd414aa1e25e54))
 * windows output ([32d7f24](https://github.com/web-infra-dev/mdx-rs-binding/commit/32d7f24d2b855a79910baf26f04a24de82491f47))
 
 
