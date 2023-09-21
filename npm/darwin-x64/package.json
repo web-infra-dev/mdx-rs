@@ -1,5 +1,5 @@
 {
-  "name": "@modern-js/mdx-rs-binding-darwin-x64",
+  "name": "@rspress/mdx-rs-binding-darwin-x64",
   "version": "0.0.0",
   "os": [
     "darwin"

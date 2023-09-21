@@ -1,5 +1,5 @@
 {
-  "name": "@modern-js/mdx-rs-binding-linux-arm-gnueabihf",
+  "name": "@rspress/mdx-rs-binding-linux-arm-gnueabihf",
   "version": "0.0.0",
   "os": [
     "linux"
