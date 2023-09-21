@@ -95,7 +95,7 @@ jobs:
             docker: |
               docker pull ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-alpine
               docker tag ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-alpine builder
-            build: docker run --rm -v ~/.cargo/git:/root/.cargo/git -v ~/.cargo/registry:/root/.cargo/registry -v $(pwd):/mdx-rs-binding -w /mdx-rs-binding builder sh -c "rustup target add aarch64-unknown-linux-musl && npx pnpm@6 install && npx pnpm@6 build -- --target=aarch64-unknown-linux-musl && /aarch64-linux-musl-cross/bin/aarch64-linux-musl-strip *.node"
+            build: docker run --rm -v ~/.cargo/git:/root/.cargo/git -v ~/.cargo/registry:/root/.cargo/registry -v $(pwd):/mdx-rs -w /mdx-rs builder sh -c "rustup target add aarch64-unknown-linux-musl && npx pnpm@6 install && npx pnpm@6 build -- --target=aarch64-unknown-linux-musl && /aarch64-linux-musl-cross/bin/aarch64-linux-musl-strip *.node"
           - host: windows-latest
             target: "aarch64-pc-windows-msvc"
             build: pnpm build -- --target aarch64-pc-windows-msvc

@@ -1,5 +1,5 @@
 {
-  "name": "@rspress/mdx-rs-binding-darwin-arm64",
+  "name": "@rspress/mdx-rs-darwin-arm64",
   "version": "0.0.0",
   "os": [
     "darwin"

@@ -1,3 +1,3 @@
-# `@rspress/mdx-rs-binding-win32-x64-msvc`
+# `@rspress/mdx-rs-win32-x64-msvc`
 
-This is the **x86_64-pc-windows-msvc** binary for `@rspress/mdx-rs-binding`
+This is the **x86_64-pc-windows-msvc** binary for `@rspress/mdx-rs`

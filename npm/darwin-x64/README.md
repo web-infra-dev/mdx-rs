@@ -1,3 +1,3 @@
-# `@rspress/mdx-rs-binding-darwin-x64`
+# `@rspress/mdx-rs-darwin-x64`
 
-This is the **x86_64-apple-darwin** binary for `@rspress/mdx-rs-binding`
+This is the **x86_64-apple-darwin** binary for `@rspress/mdx-rs`
