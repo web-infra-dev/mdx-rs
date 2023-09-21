@@ -1,5 +1,5 @@
 {
-  "name": "@rspress/mdx-rs-binding",
+  "name": "@rspress/mdx-rs",
   "description": "MDX compilation binding for Rspress",
   "version": "0.3.0",
   "main": "index.js",

@@ -1,13 +1,13 @@
-# @modern-js/mdx-rs-binding
+# @rspress/mdx-rs
 
 This is a Node.js binding for MDX compliation of [Modern.js Doc](https://modernjs.dev/doc-tools) which is a modern documentation tool based on [Rspack](https://www.rspack.org/).
 
-It can be 10x+ faster than compiler in pure JavaScript version.The [benchmark](./benches/index.mjs) result of `@modern-js/mdx-rs-binding` vs `@mdx-js/mdx` is as follows:
+It can be 10x+ faster than compiler in pure JavaScript version.The [benchmark](./benches/index.mjs) result of `@rspress/mdx-rs` vs `@mdx-js/mdx` is as follows:
 
-| Tool                      | Time Spend |
-| ------------------------- | ---------- |
-| @modern-js/mdx-rs-binding | 163 ms     |
-| @mdx-js/mdx               | 3288 ms    |
+| Tool            | Time Spend |
+| --------------- | ---------- |
+| @rspress/mdx-rs | 163 ms     |
+| @mdx-js/mdx     | 3288 ms    |
 
 We forked [mdxjs-rs](https://github.com/wooorm/mdxjs-rs), the Rust version of mdx compiler and customize it for Modern.js Doc, adding the following features:
 
@@ -27,23 +27,23 @@ We forked [mdxjs-rs](https://github.com/wooorm/mdxjs-rs), the Rust version of md
 
 ```bash
 # npm
-npm install @modern-js/mdx-rs-binding
+npm install @rspress/mdx-rs
 # yarn
-yarn add @modern-js/mdx-rs-binding
+yarn add @rspress/mdx-rs
 # pnpm
-pnpm install @modern-js/mdx-rs-binding
+pnpm install @rspress/mdx-rs
 ```
 
 ## Usage
 
 ```js
-import { compile } from "@modern-js/mdx-rs-binding";
+import { compile } from "@rspress/mdx-rs";
 
 async function main() {
   const value = `
   # Hello World
 
-  This is a demo of @modern-js/mdx-rs-binding
+  This is a demo of @rspress/mdx-rs
   `;
 
   const result = await compile({
@@ -64,13 +64,13 @@ async function main() {
 Of course, you can also the `compileSync` function to compile mdx synchronously, which is not recommended because it will block the event loop and slow down the compile process.
 
 ```js
-import { compileSync } from "@modern-js/mdx-rs-binding";
+import { compileSync } from "@rspress/mdx-rs";
 
 function main() {
   const value = `
   # Hello World
 
-  This is a demo of @modern-js/mdx-rs-binding
+  This is a demo of @rspress/mdx-rs
   `;
 
   const result = compileSync({
