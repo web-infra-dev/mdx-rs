@@ -64,7 +64,7 @@ fn create_new_container_node(
     tag_name: "div".into(),
     properties: vec![(
       "className".into(),
-      hast::PropertyValue::SpaceSeparated(vec!["modern-directive-title".into()]),
+      hast::PropertyValue::SpaceSeparated(vec!["rspress-directive-title".into()]),
     )],
     children: vec![hast::Node::Text(hast::Text {
       value: title,
@@ -76,7 +76,7 @@ fn create_new_container_node(
     tag_name: "div".into(),
     properties: vec![(
       "className".into(),
-      hast::PropertyValue::SpaceSeparated(vec!["modern-directive-content".into()]),
+      hast::PropertyValue::SpaceSeparated(vec!["rspress-directive-content".into()]),
     )],
     children: container_content.clone(),
     position: None,
@@ -85,7 +85,7 @@ fn create_new_container_node(
     tag_name: "div".into(),
     properties: vec![(
       "className".into(),
-      hast::PropertyValue::SpaceSeparated(vec!["modern-directive".into(), container_type.into()]),
+      hast::PropertyValue::SpaceSeparated(vec!["rspress-directive".into(), container_type.into()]),
     )],
     children: vec![
       hast::Node::Element(container_title_node),
@@ -250,15 +250,15 @@ fn traverse_children(root: &mut hast::Root) {
 pub fn mdx_plugin_container(root: &mut hast::Node) {
   // Traverse children, get all p tags, check if they start with :::
   // If it is, it is regarded as container syntax, and the content from the beginning of ::: to the end of a certain ::: is regarded as a container
-  // The element of this container is a div element, className is "modern-container"
+  // The element of this container is a div element, className is "rspress-container"
   // for example:
   // :::tip
   // this is a tip
   // :::
   // Will be transformed to:
-  // <div class="modern-container">
-  //   <div class="modern-container-title">tip</div>
-  //   <div class="modern-container-content">
+  // <div class="rspress-container">
+  //   <div class="rspress-container-title">tip</div>
+  //   <div class="rspress-container-content">
   //     <p>This is a tip</p>
   //   </div>
   // </div>
@@ -405,14 +405,14 @@ mod tests {
           tag_name: "div".into(),
           properties: vec![(
             "className".into(),
-            hast::PropertyValue::SpaceSeparated(vec!["modern-directive".into(), "tip".into()])
+            hast::PropertyValue::SpaceSeparated(vec!["rspress-directive".into(), "tip".into()])
           ),],
           children: vec![
             hast::Node::Element(hast::Element {
               tag_name: "div".into(),
               properties: vec![(
                 "className".into(),
-                hast::PropertyValue::SpaceSeparated(vec!["modern-directive-title".into()])
+                hast::PropertyValue::SpaceSeparated(vec!["rspress-directive-title".into()])
               )],
               children: vec![hast::Node::Text(hast::Text {
                 value: "Note".into(),
@@ -424,7 +424,7 @@ mod tests {
               tag_name: "div".into(),
               properties: vec![(
                 "className".into(),
-                hast::PropertyValue::SpaceSeparated(vec!["modern-directive-content".into()])
+                hast::PropertyValue::SpaceSeparated(vec!["rspress-directive-content".into()])
               )],
               children: vec![hast::Node::Element(hast::Element {
                 tag_name: "p".into(),
@@ -489,14 +489,14 @@ mod tests {
           tag_name: "div".into(),
           properties: vec![(
             "className".into(),
-            hast::PropertyValue::SpaceSeparated(vec!["modern-directive".into(), "tip".into()])
+            hast::PropertyValue::SpaceSeparated(vec!["rspress-directive".into(), "tip".into()])
           ),],
           children: vec![
             hast::Node::Element(hast::Element {
               tag_name: "div".into(),
               properties: vec![(
                 "className".into(),
-                hast::PropertyValue::SpaceSeparated(vec!["modern-directive-title".into()])
+                hast::PropertyValue::SpaceSeparated(vec!["rspress-directive-title".into()])
               )],
               children: vec![hast::Node::Text(hast::Text {
                 value: "TIP".into(),
@@ -508,7 +508,7 @@ mod tests {
               tag_name: "div".into(),
               properties: vec![(
                 "className".into(),
-                hast::PropertyValue::SpaceSeparated(vec!["modern-directive-content".into()])
+                hast::PropertyValue::SpaceSeparated(vec!["rspress-directive-content".into()])
               )],
               children: vec![hast::Node::Element(hast::Element {
                 tag_name: "p".into(),
@@ -573,14 +573,14 @@ mod tests {
           tag_name: "div".into(),
           properties: vec![(
             "className".into(),
-            hast::PropertyValue::SpaceSeparated(vec!["modern-directive".into(), "tip".into()])
+            hast::PropertyValue::SpaceSeparated(vec!["rspress-directive".into(), "tip".into()])
           ),],
           children: vec![
             hast::Node::Element(hast::Element {
               tag_name: "div".into(),
               properties: vec![(
                 "className".into(),
-                hast::PropertyValue::SpaceSeparated(vec!["modern-directive-title".into()])
+                hast::PropertyValue::SpaceSeparated(vec!["rspress-directive-title".into()])
               )],
               children: vec![hast::Node::Text(hast::Text {
                 value: "Note".into(),
@@ -592,7 +592,7 @@ mod tests {
               tag_name: "div".into(),
               properties: vec![(
                 "className".into(),
-                hast::PropertyValue::SpaceSeparated(vec!["modern-directive-content".into()])
+                hast::PropertyValue::SpaceSeparated(vec!["rspress-directive-content".into()])
               )],
               children: vec![hast::Node::Element(hast::Element {
                 tag_name: "p".into(),
@@ -654,14 +654,14 @@ mod tests {
           tag_name: "div".into(),
           properties: vec![(
             "className".into(),
-            hast::PropertyValue::SpaceSeparated(vec!["modern-directive".into(), "tip".into()])
+            hast::PropertyValue::SpaceSeparated(vec!["rspress-directive".into(), "tip".into()])
           ),],
           children: vec![
             hast::Node::Element(hast::Element {
               tag_name: "div".into(),
               properties: vec![(
                 "className".into(),
-                hast::PropertyValue::SpaceSeparated(vec!["modern-directive-title".into()])
+                hast::PropertyValue::SpaceSeparated(vec!["rspress-directive-title".into()])
               )],
               children: vec![hast::Node::Text(hast::Text {
                 value: "TIP".into(),
@@ -673,7 +673,7 @@ mod tests {
               tag_name: "div".into(),
               properties: vec![(
                 "className".into(),
-                hast::PropertyValue::SpaceSeparated(vec!["modern-directive-content".into()])
+                hast::PropertyValue::SpaceSeparated(vec!["rspress-directive-content".into()])
               )],
               children: vec![hast::Node::MdxJsxElement(hast::MdxJsxElement {
                 name: Some("Rspack".into()),

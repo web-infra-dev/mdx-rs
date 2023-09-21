@@ -50,7 +50,7 @@ fn transform_pre_code_element(node: &mut hast::Node) {
             tag_name: "div".into(),
             properties: vec![(
               "className".into(),
-              hast::PropertyValue::SpaceSeparated(vec!["modern-code-title".into()]),
+              hast::PropertyValue::SpaceSeparated(vec!["rspress-code-title".into()]),
             )],
             children: vec![hast::Node::Text(hast::Text {
               value: title.to_string(),
@@ -66,7 +66,7 @@ fn transform_pre_code_element(node: &mut hast::Node) {
           tag_name: "div".into(),
           properties: vec![(
             "className".into(),
-            hast::PropertyValue::SpaceSeparated(vec!["modern-code-content".into()]),
+            hast::PropertyValue::SpaceSeparated(vec!["rspress-code-content".into()]),
           )],
           children: vec![hast::Node::Element(hast::Element {
             tag_name: "pre".into(),
@@ -122,8 +122,8 @@ pub fn mdx_plugin_code_block(root: &mut hast::Node) {
   // </pre>
   // Will be transformed to:
   // <div className="language-jsx">
-  //   <div className="modern-code-title">title</div>
-  //   <div className="modern-code-content">
+  //   <div className="rspress-code-title">title</div>
+  //   <div className="rspress-code-content">
   //       <pre>
   //           <code className="language-jsx">
   //             <p>hello world</p>
@@ -178,7 +178,7 @@ mod tests {
             tag_name: "div".into(),
             properties: vec![(
               "className".into(),
-              hast::PropertyValue::SpaceSeparated(vec!["modern-code-title".into()]),
+              hast::PropertyValue::SpaceSeparated(vec!["rspress-code-title".into()]),
             )],
             children: vec![hast::Node::Text(hast::Text {
               value: "My-Rust-Code".into(),
@@ -190,7 +190,7 @@ mod tests {
             tag_name: "div".into(),
             properties: vec![(
               "className".into(),
-              hast::PropertyValue::SpaceSeparated(vec!["modern-code-content".into()]),
+              hast::PropertyValue::SpaceSeparated(vec!["rspress-code-content".into()]),
             )],
             children: vec![hast::Node::Element(hast::Element {
               tag_name: "pre".into(),
