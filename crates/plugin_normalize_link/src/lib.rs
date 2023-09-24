@@ -80,7 +80,8 @@ fn normalize_link(url: &String, root: &String, filepath: &String) -> String {
     }
   }
 
-  url
+  // Replace all the \\ to / in windows
+  url.replace("\\", "/")
 }
 
 fn mdx_plugin_normalize_link_impl(
