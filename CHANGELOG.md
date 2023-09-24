@@ -1,3 +1,12 @@
+## [0.3.2](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.3.1...v0.3.2) (2023-09-24)
+
+
+### Bug Fixes
+
+* windows path in normalize_link ([f021d49](https://github.com/web-infra-dev/mdx-rs-binding/commit/f021d493af9be5892eb873bc21aa57820b337a6e))
+
+
+
 ## [0.3.1](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.3.0...v0.3.1) (2023-09-21)
 
 
