@@ -37,9 +37,23 @@ fn normalize_link(url: &String, root: &String, filepath: &String) -> String {
   let mut url = url.to_string();
   let root_path = Path::new(root);
   let file_path = Path::new(filepath);
+  // find the extname(before hash)
+  // first, find the hash
+  let hash_index = url.rfind('#').or_else(|| Some(url.len())).unwrap();
+  // then, find the extname
+  let extname = match url[..hash_index].rfind('.') {
+    Some(index) => url[index..hash_index].to_string(),
+    None => "".to_string(),
+  };
+
+  let is_image = IMAGE_EXTNAMES.contains(&extname.as_str());
 
   if let Ok(relative_path) = file_path.strip_prefix(root_path) {
     if url.starts_with(".") {
+      // If the url is a image and relative path, return directly
+      if is_image {
+        return url;
+      }
       let mut base_dir = relative_path.parent().unwrap();
 
       if url.starts_with("./") {
@@ -65,17 +79,8 @@ fn normalize_link(url: &String, root: &String, filepath: &String) -> String {
       url = format!("/{}", url);
     }
 
-    // find the extname(before hash)
-    // first, find the hash
-    let hash_index = url.rfind('#').or_else(|| Some(url.len())).unwrap();
-    // then, find the extname
-    let extname = match url[..hash_index].rfind('.') {
-      Some(index) => url[index..hash_index].to_string(),
-      None => "".to_string(),
-    };
-
     // remove extname if it is not an image
-    if !extname.is_empty() && !IMAGE_EXTNAMES.contains(&extname.as_str()) {
+    if !extname.is_empty() && !is_image {
       url = url.replace(&extname, "");
     }
   }
@@ -333,7 +338,7 @@ mod tests {
       if let hast::Node::MdxjsEsm(esm) = &root.children[0] {
         assert_eq!(
           esm.value,
-          "import image_0 from \"/assets/a.png\";".to_string()
+          "import image_0 from \"../../assets/a.png\";".to_string()
         );
       }
       if let hast::Node::MdxJsxElement(element) = &root.children[1] {
