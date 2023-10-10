@@ -1,3 +1,12 @@
+## [0.3.3](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.3.2...v0.3.3) (2023-10-10)
+
+
+### Bug Fixes
+
+* preserve image relative link ([10b188a](https://github.com/web-infra-dev/mdx-rs-binding/commit/10b188adf1920c0f7c901e5f8716313f159abb4b))
+
+
+
 ## [0.3.2](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.3.1...v0.3.2) (2023-09-24)
 
 
