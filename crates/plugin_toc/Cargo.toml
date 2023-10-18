@@ -8,3 +8,4 @@ edition = "2021"
 [dependencies]
 markdown = { workspace = true }
 slugger = { path = "../slugger" }
+utils = { path = "../utils" }
