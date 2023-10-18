@@ -1,3 +1,12 @@
+# [0.4.0](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.3.3...v0.4.0) (2023-10-18)
+
+
+### Features
+
+* support custom header id ([f773f37](https://github.com/web-infra-dev/mdx-rs-binding/commit/f773f37d907f7b7d91d30d9c384b17f4f0708a46))
+
+
+
 ## [0.3.3](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.3.2...v0.3.3) (2023-10-10)
 
 
