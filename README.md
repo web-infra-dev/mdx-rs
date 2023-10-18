@@ -9,7 +9,7 @@ It can be 10x+ faster than compiler in pure JavaScript version.The [benchmark](.
 | @rspress/mdx-rs | 977 ms     |
 | @mdx-js/mdx     | 21300 ms   |
 
-We forked [mdxjs-rs](https://github.com/wooorm/mdxjs-rs), the Rust version of mdx compiler and customize it for Modern.js Doc, adding the following features:
+We forked [mdxjs-rs](https://github.com/wooorm/mdxjs-rs), the Rust version of mdx compiler and customize it for Rspress, adding the following features:
 
 | Crate                                                       | Description                                                                                                                                                                               |
 | ----------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
