@@ -101,7 +101,9 @@ pub fn compile(
 
   let toc_result = mdx_plugin_toc(&mut mdast);
   let frontmatter = mdx_plugin_frontmatter(&mut mdast);
+
   let mut hast = mdast_util_to_hast(&mdast);
+
   mdx_plugin_header_anchor(&mut hast);
   mdx_plugin_container(&mut hast);
   mdx_plugin_external_link(&mut hast);
@@ -137,5 +139,19 @@ pub fn compile(
     title: toc_result.title,
     toc: toc_result.toc,
     frontmatter,
+  }
+}
+
+#[cfg(test)]
+mod tests {
+  use super::*;
+  #[test]
+  fn test_collect_title_in_mdast() {
+    compile(
+      &"## Container Title {#custom-title}".to_string(),
+      &"".to_string(),
+      true,
+      &"".to_string(),
+    );
   }
 }

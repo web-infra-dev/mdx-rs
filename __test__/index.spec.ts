@@ -50,10 +50,25 @@ describe("compile", () => {
     expect(result).toMatchSnapshot();
   });
 
-  test("should render container title correctly", async (t) => {
+  test("should render container title in mdx correctly", async (t) => {
+    let { code: result, html } = await compile({
+      value: readFileSync(
+        path.join(__dirname, "./container-title.mdx"),
+        "utf8"
+      ),
+      filepath: "xxx.mdx",
+      development: true,
+      root: "xxx",
+    });
+
+    expect(formatHTML(html)).toMatchSnapshot();
+    expect(result).toMatchSnapshot();
+  });
+
+  test("should render container title in md correctly", async (t) => {
     let { code: result, html } = await compile({
       value: readFileSync(path.join(__dirname, "./container-title.md"), "utf8"),
-      filepath: "xxx.mdx",
+      filepath: "xxx.md",
       development: true,
       root: "xxx",
     });

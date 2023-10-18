@@ -2,13 +2,32 @@
 //!
 //! This plugin is used to add anchor to the header in link element.
 
+use utils::extract_title_and_id;
 use {hast, slugger::Slugger};
 
-fn collect_title_in_hast(node: &mut hast::Element) -> String {
+fn collect_title_in_hast(node: &mut hast::Element) -> (String, String) {
   let mut title = String::new();
-  for child in &node.children {
+  let mut id = String::new();
+  let mut custom_id_expression_index = None;
+  for (index, child) in &mut node.children.iter_mut().enumerate() {
     match child {
-      hast::Node::Text(text) => title.push_str(&text.value),
+      // example: hello world {#custom-id}
+      // Then we extract the `hello world` as title and `custom-id` as id
+      // .md case:
+      hast::Node::Text(text) => {
+        let (title_part, id_part) = extract_title_and_id(&text.value);
+        let title_str = title_part.trim_end();
+        title.push_str(title_str);
+        text.value = title_str.to_string();
+        id = id_part;
+      }
+      // .mdx case:
+      hast::Node::MdxExpression(expression) => {
+        if expression.value.starts_with("#") {
+          id.push_str(&expression.value[1..]);
+          custom_id_expression_index = Some(index);
+        }
+      }
       hast::Node::Element(element) => {
         if element.tag_name == "code" {
           for child in &element.children {
@@ -18,11 +37,15 @@ fn collect_title_in_hast(node: &mut hast::Element) -> String {
           }
         }
       }
+
       _ => continue, // Continue if node is not Text or Code
     }
   }
+  if let Some(index) = custom_id_expression_index {
+    node.children.remove(index);
+  }
 
-  title.replace("\"", "\\\"").replace("'", "\\\'")
+  (title, id)
 }
 
 fn create_anchor_element(id: &str) -> hast::Element {
@@ -60,7 +83,7 @@ fn create_anchor_element(id: &str) -> hast::Element {
 // 1. add header anchor for every header element
 // 2. add target="_blank" and rel="noopener noreferrer" for every external link element
 pub fn mdx_plugin_header_anchor(node: &mut hast::Node) {
-  let mut slugger = Slugger::new();
+  let mut slugger: Slugger = Slugger::new();
   if let hast::Node::Root(root) = node {
     for child in &mut root.children {
       if let hast::Node::Element(element) = child {
@@ -68,8 +91,10 @@ pub fn mdx_plugin_header_anchor(node: &mut hast::Node) {
           // h1 ~ h6
           if h_tag >= 1 && h_tag <= 6 {
             // get the text of the header element
-            let header_text = collect_title_in_hast(element);
-            let id = slugger.slug(&header_text, false);
+            let (header_text, mut id) = collect_title_in_hast(element);
+            if id.is_empty() {
+              id = slugger.slug(&header_text, false);
+            }
             let id_property = ("id".to_string(), hast::PropertyValue::String(id.clone()));
             // add the id attribute to the header element
             element.properties.push(id_property);
@@ -113,7 +138,10 @@ mod tests {
       position: None,
     };
 
-    assert_eq!(collect_title_in_hast(&mut element), "HelloWorld");
+    assert_eq!(
+      collect_title_in_hast(&mut element),
+      ("HelloWorld".to_string(), "".to_string())
+    );
   }
 
   #[test]
