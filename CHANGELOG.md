@@ -1,3 +1,12 @@
+## [0.4.1](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.4.0...v0.4.1) (2023-10-23)
+
+
+### Bug Fixes
+
+* anchor missed when link exsited in header ([6504df2](https://github.com/web-infra-dev/mdx-rs-binding/commit/6504df27555565aba8262326d5947b3427915fb2))
+
+
+
 # [0.4.0](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.3.3...v0.4.0) (2023-10-18)
 
 
