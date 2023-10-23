@@ -29,7 +29,7 @@ fn collect_title_in_hast(node: &mut hast::Element) -> (String, String) {
         }
       }
       hast::Node::Element(element) => {
-        if element.tag_name == "code" {
+        if element.tag_name == "code" || element.tag_name == "a" {
           for child in &element.children {
             if let hast::Node::Text(text) = child {
               title.push_str(&text.value);
@@ -134,13 +134,25 @@ mod tests {
           })],
           position: None,
         }),
+        Node::Element(hast::Element {
+          tag_name: "a".to_string(),
+          properties: vec![(
+            "href".to_string(),
+            hast::PropertyValue::String("https://example.com".to_string()),
+          )],
+          children: vec![Node::Text(hast::Text {
+            value: "World".to_string(),
+            position: None,
+          })],
+          position: None,
+        }),
       ],
       position: None,
     };
 
     assert_eq!(
       collect_title_in_hast(&mut element),
-      ("HelloWorld".to_string(), "".to_string())
+      ("HelloWorldWorld".to_string(), "".to_string())
     );
   }
 
