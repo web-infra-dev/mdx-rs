@@ -48,7 +48,6 @@ pub fn collect_title_in_mdast(heading: &mut Heading) -> (String, String) {
       _ => continue, // Continue if node is not Text or Code
     }
   }
-  title = title.replace("\"", "\\\"").replace("'", "\\\'");
   (title, custom_id)
 }
 
