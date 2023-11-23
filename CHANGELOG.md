@@ -1,3 +1,13 @@
+## [0.4.2](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.4.1...v0.4.2) (2023-11-23)
+
+
+### Bug Fixes
+
+* image extension support uppercase ([fef43d0](https://github.com/web-infra-dev/mdx-rs-binding/commit/fef43d06c08a8a265c4d361df1427b0fdb41ccf5))
+* **plugin_toc:** remove extra escape char ([581cded](https://github.com/web-infra-dev/mdx-rs-binding/commit/581cded395100cc6a0c5e7c19c8727b6ea1a99e3))
+
+
+
 ## [0.4.1](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.4.0...v0.4.1) (2023-10-23)
 
 
