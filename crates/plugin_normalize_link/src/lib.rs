@@ -42,7 +42,7 @@ fn normalize_link(url: &String, root: &String, filepath: &String) -> String {
   let hash_index = url.rfind('#').or_else(|| Some(url.len())).unwrap();
   // then, find the extname
   let extname = match url[..hash_index].rfind('.') {
-    Some(index) => url[index..hash_index].to_string(),
+    Some(index) => url[index..hash_index].to_string().to_lowercase(),
     None => "".to_string(),
   };
 
