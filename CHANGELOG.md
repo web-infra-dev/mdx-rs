@@ -1,3 +1,12 @@
+## [0.4.3](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.4.2...v0.4.3) (2023-12-04)
+
+
+### Bug Fixes
+
+* header anchor and toc id is inconsistent ([cd949a9](https://github.com/web-infra-dev/mdx-rs-binding/commit/cd949a9e926969359a4dac85b90e1974af96c954))
+
+
+
 ## [0.4.2](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.4.1...v0.4.2) (2023-11-23)
 
 
