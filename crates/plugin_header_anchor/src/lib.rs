@@ -16,7 +16,7 @@ fn collect_title_in_hast(node: &mut hast::Element) -> (String, String) {
       // .md case:
       hast::Node::Text(text) => {
         let (title_part, id_part) = extract_title_and_id(&text.value);
-        let title_str = title_part.trim_end();
+        let title_str: &String = &title_part;
         title.push_str(title_str);
         text.value = title_str.to_string();
         id = id_part;
