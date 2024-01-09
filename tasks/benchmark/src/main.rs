@@ -3,7 +3,7 @@ extern crate mdx_rs;
 extern crate pico_args;
 
 use criterion::{BenchmarkId, Criterion, Throughput};
-use mdx_rs::compile;
+use mdx_rs::{compile, CompileOptions};
 use pico_args::Arguments;
 use std::fs::File;
 use std::io::prelude::*;
@@ -34,7 +34,11 @@ pub fn main() {
     &contents,
     |b, source_text| {
       b.iter_with_large_drop(|| {
-        compile(&source_text, &"".to_string(), false, &"".to_string());
+        compile(CompileOptions {
+          value: source_text.to_string(),
+          development: false,
+          ..Default::default()
+        });
       })
     },
   );

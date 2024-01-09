@@ -21,6 +21,7 @@ export interface CompileOptions {
   filepath: string
   development: boolean
   root: string
+  jsx?: boolean
 }
 /** Turn MDX into JavaScript. */
 export function compile(options: CompileOptions): Promise<Output>
