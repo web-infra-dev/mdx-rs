@@ -15,7 +15,6 @@ pub fn extract_title_and_id(text_value: &str) -> (String, String) {
   } else {
     title.push_str(&text_value);
   }
-  title = title.replace("\"", "\\\"").replace("'", "\\\'");
   (title, custom_id)
 }
 
@@ -40,7 +39,7 @@ mod tests {
   #[test]
   fn test_extract_title_and_id_with_quotes() {
     let (title, custom_id) = extract_title_and_id("\"Hello' World\" {#id123}");
-    assert_eq!(title, "\\\"Hello\\' World\\\"");
+    assert_eq!(title, "\"Hello\' World\"");
     assert_eq!(custom_id, "id123");
   }
 }

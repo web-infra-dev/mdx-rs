@@ -1,3 +1,7 @@
 [toolchain]
 channel = "1.74"
+<<<<<<< HEAD
 profile = "default"
+=======
+profile = "default"
+>>>>>>> 0f9f10b (fix: delete useless quote)
