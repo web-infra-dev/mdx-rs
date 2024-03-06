@@ -7,7 +7,7 @@
 
 use markdown::mdast::{self, Heading};
 use slugger::Slugger;
-use std::vec;
+use std::{fmt::format, vec};
 use utils::extract_title_and_id;
 
 #[derive(Debug, Clone)]
@@ -22,15 +22,30 @@ pub struct TocResult {
   pub toc: Vec<TocItem>,
 }
 
-pub fn extract_text_from_link_node(node: &mdast::Node) -> String {
-  if let mdast::Node::Link(link) = node {
-    if let mdast::Node::Text(text) = &link.children[0] {
-      return text.value.clone();
+pub enum NodeType {
+  Link,
+  Strong,
+}
+
+pub fn extract_text_from_node(node: &mdast::Node, node_type: NodeType) -> String {
+  match node_type {
+    NodeType::Link => {
+      if let mdast::Node::Link(link) = node {
+        if let mdast::Node::Text(text) = &link.children[0] {
+          return text.value.clone();
+        }
+      }
+    }
+    NodeType::Strong => {
+      if let mdast::Node::Strong(strong) = node {
+        if let mdast::Node::Text(text) = &strong.children[0] {
+          return text.value.clone();
+        }
+      }
     }
   }
   String::new()
 }
-
 pub fn collect_title_in_mdast(heading: &mut Heading) -> (String, String) {
   let mut title = String::new();
   let mut custom_id = String::new();
@@ -43,8 +58,13 @@ pub fn collect_title_in_mdast(heading: &mut Heading) -> (String, String) {
         title.push_str(&title_part);
         custom_id = id_part;
       }
-      mdast::Node::InlineCode(code) => title.push_str(&code.value),
-      mdast::Node::Link(_) => title.push_str(&extract_text_from_link_node(child)),
+      mdast::Node::Strong(_) => {
+        title.push_str(format!("**{}**", extract_text_from_node(child, NodeType::Strong)).as_str())
+      }
+      mdast::Node::InlineCode(code) => title.push_str(format!("`{}`", code.value).as_str()),
+      mdast::Node::Link(_) => {
+        title.push_str(extract_text_from_node(child, NodeType::Link).as_str())
+      }
       _ => continue, // Continue if node is not Text or Code
     }
   }
@@ -107,7 +127,7 @@ mod tests {
     };
     assert_eq!(
       collect_title_in_mdast(&mut heading),
-      ("HelloWorld".to_string(), "".to_string())
+      ("Hello`World`".to_string(), "".to_string())
     );
   }
 
@@ -133,7 +153,7 @@ mod tests {
     };
     assert_eq!(
       collect_title_in_mdast(&mut heading),
-      ("HelloWorld 123".to_string(), "custom-id".to_string())
+      ("Hello`World` 123".to_string(), "custom-id".to_string())
     );
 
     assert_eq!(
@@ -240,6 +260,27 @@ mod tests {
       ],
       position: None,
     };
+    let heading7: Heading = mdast::Heading {
+      depth: 4,
+      children: vec![
+        mdast::Node::Text(mdast::Text {
+          value: "Hello".to_string(),
+          position: None,
+        }),
+        mdast::Node::Strong(mdast::Strong {
+          children: vec![mdast::Node::Text(mdast::Text {
+            value: "abc".to_string(),
+            position: None,
+          })],
+          position: None,
+        }),
+        mdast::Node::InlineCode(mdast::InlineCode {
+          value: "World".to_string(),
+          position: None,
+        }),
+      ],
+      position: None,
+    };
     let mut root = mdast::Node::Root(mdast::Root {
       children: vec![
         mdast::Node::Heading(heading),
@@ -248,14 +289,16 @@ mod tests {
         mdast::Node::Heading(heading4),
         mdast::Node::Heading(heading5),
         mdast::Node::Heading(heading6),
+        mdast::Node::Heading(heading7),
       ],
       position: None,
     });
 
     let result = mdx_plugin_toc(&mut root);
 
-    assert_eq!(result.title, "HelloWorld");
-    assert_eq!(result.toc.len(), 3);
-    assert_eq!(result.toc[1].text, "HelloWorldGithub");
+    assert_eq!(result.title, "Hello`World`");
+    assert_eq!(result.toc.len(), 4);
+    assert_eq!(result.toc[1].text, "Hello`World`Github");
+    assert_eq!(result.toc[3].text, "Hello**abc**`World`");
   }
 }
