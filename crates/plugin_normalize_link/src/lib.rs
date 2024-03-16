@@ -32,7 +32,7 @@ fn normalize_link(url: &String, root: &String, filepath: &String) -> String {
   if PROTOCOLS.iter().any(|protocol| url.starts_with(protocol)) {
     return url.to_owned();
   }
-
+  let raw_url = url.to_string();
   // parse extname and remove it
   let mut url = url.to_string();
   let root_path = Path::new(root);
@@ -63,7 +63,16 @@ fn normalize_link(url: &String, root: &String, filepath: &String) -> String {
       while url.starts_with("../") {
         // only replace the first ../
         url.replace_range(0..3, "");
-        base_dir = base_dir.parent().unwrap();
+        match base_dir.parent() {
+          Some(parent) => base_dir = parent,
+          None => {
+            println!(
+              "Warning: The link is invalid: {} because the target path is out of the root dir: {}",
+              raw_url, root
+            );
+            break;
+          }
+        }
       }
 
       url = base_dir.join(Path::new(&url)).to_str().unwrap().to_string();
