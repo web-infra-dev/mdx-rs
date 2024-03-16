@@ -158,6 +158,7 @@ mod tests {
   fn test_slug() {
     assert_eq!(slug(&"Hello World".to_string(), false), "hello-world");
     assert_eq!(slug(&"Hello World".to_string(), false), "hello-world");
+    assert_eq!(slug(&"`Hello` **World**".to_string(), false), "hello-world");
     assert_eq!(
       slug(&"export 'function'".to_string(), false),
       "export-function"
