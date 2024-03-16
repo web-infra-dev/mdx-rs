@@ -1,3 +1,12 @@
+## [0.5.1](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.5.0...v0.5.1) (2024-03-16)
+
+
+### Bug Fixes
+
+* avoid panic in normalize link plugin ([b6f6974](https://github.com/web-infra-dev/mdx-rs-binding/commit/b6f697408a6e458dcf0034f5157a90c9d4cc2467))
+
+
+
 # [0.5.0](https://github.com/web-infra-dev/mdx-rs-binding/compare/v0.4.4...v0.5.0) (2024-03-06)
 
 
