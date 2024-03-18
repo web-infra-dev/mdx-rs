@@ -76,4 +76,17 @@ describe("compile", () => {
     expect(formatHTML(html)).toMatchSnapshot();
     expect(result).toMatchSnapshot();
   });
+
+  test("should compile jsx", async (t) => {
+    let { code: result, html } = await compile({
+      value: readFileSync(path.join(__dirname, "./compile-jsx.mdx"), "utf8"),
+      filepath: "xxx.mdx",
+      development: true,
+      root: "xxx",
+      jsx: false
+    });
+
+    expect(formatHTML(html)).toMatchSnapshot();
+    expect(result).toMatchSnapshot();
+  });
 });
