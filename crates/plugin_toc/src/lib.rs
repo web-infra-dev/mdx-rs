@@ -25,6 +25,7 @@ pub struct TocResult {
 pub enum NodeType {
   Link,
   Strong,
+  Emphasis
 }
 
 pub fn extract_text_from_node(node: &mdast::Node, node_type: NodeType) -> String {
@@ -39,6 +40,13 @@ pub fn extract_text_from_node(node: &mdast::Node, node_type: NodeType) -> String
     NodeType::Strong => {
       if let mdast::Node::Strong(strong) = node {
         if let mdast::Node::Text(text) = &strong.children[0] {
+          return text.value.clone();
+        }
+      }
+    }
+    NodeType::Emphasis => {
+      if let mdast::Node::Emphasis(emphasis) = node {
+        if let mdast::Node::Text(text) = &emphasis.children[0] {
           return text.value.clone();
         }
       }
@@ -60,6 +68,9 @@ pub fn collect_title_in_mdast(heading: &mut Heading) -> (String, String) {
       }
       mdast::Node::Strong(_) => {
         title.push_str(format!("**{}**", extract_text_from_node(child, NodeType::Strong)).as_str())
+      }
+      mdast::Node::Emphasis(_) => {
+        title.push_str(format!("*{}*", extract_text_from_node(child, NodeType::Emphasis)).as_str())
       }
       mdast::Node::InlineCode(code) => title.push_str(format!("`{}`", code.value).as_str()),
       mdast::Node::Link(_) => {
@@ -125,9 +136,38 @@ mod tests {
       ],
       position: None,
     };
+    let mut heading2 = mdast::Heading {
+      depth: 1,
+      children: vec![
+        mdast::Node::Text(mdast::Text {
+          value: "Hello".to_string(),
+          position: None,
+        }),
+        mdast::Node::Strong(mdast::Strong {
+          children: vec![mdast::Node::Text(mdast::Text {
+            value: "World".to_string(),
+            position: None,
+          })],
+          position: None,
+        }),
+        mdast::Node::Emphasis(mdast::Emphasis {
+          children: vec![mdast::Node::Text(mdast::Text {
+            value: "!!!".to_string(),
+            position: None,
+          })],
+          position: None,
+        }),
+      ],
+      position: None,
+    };
+
     assert_eq!(
       collect_title_in_mdast(&mut heading),
       ("Hello`World`".to_string(), "".to_string())
+    );
+    assert_eq!(
+      collect_title_in_mdast(&mut heading2),
+      ("Hello**World***!!!*".to_string(), "".to_string())
     );
   }
 
@@ -298,6 +338,7 @@ mod tests {
 
     assert_eq!(result.title, "Hello`World`");
     assert_eq!(result.toc.len(), 4);
+    print!("{:?}", result.toc);
     assert_eq!(result.toc[1].text, "Hello`World`Github");
     assert_eq!(result.toc[3].text, "Hello**abc**`World`");
   }
