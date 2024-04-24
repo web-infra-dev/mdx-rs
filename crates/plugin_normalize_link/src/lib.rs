@@ -4,6 +4,7 @@ use std::path::Path;
 const PROTOCOLS: &[&str] = &["http://", "https://", "mailto:", "tel:", "javascript:", "#"];
 const TEMP_VARIBLE: &str = "image_";
 const IMAGE_EXTNAMES: &[&str] = &[".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp"];
+const MD_EXTNAMES: &[&str] = &[".md", ".mdx"];
 
 fn generate_ast_import(
   index: usize,
@@ -47,6 +48,7 @@ fn normalize_link(url: &String, root: &String, filepath: &String) -> String {
   };
 
   let is_image = IMAGE_EXTNAMES.contains(&extname.as_str());
+  let is_md = MD_EXTNAMES.contains(&extname.as_str());
 
   if let Ok(relative_path) = file_path.strip_prefix(root_path) {
     if url.starts_with(".") {
@@ -88,8 +90,8 @@ fn normalize_link(url: &String, root: &String, filepath: &String) -> String {
       url = format!("/{}", url);
     }
 
-    // remove extname if it is not an image
-    if !extname.is_empty() && !is_image {
+    // remove md and mdx extname
+    if !extname.is_empty() && is_md {
       url = url.replace(&extname, "");
     }
   }
@@ -296,7 +298,7 @@ mod tests {
     let filepath = "/Users/xxx/xxx/xxx/docs/zh/guide/config.md".to_string();
     assert_eq!(
       normalize_link(&"./guide/config.html#aaa".to_string(), &root, &filepath),
-      "/zh/guide/guide/config#aaa".to_string()
+      "/zh/guide/guide/config.html#aaa".to_string()
     );
     assert_eq!(
       normalize_link(
@@ -304,7 +306,7 @@ mod tests {
         &root,
         &filepath
       ),
-      "/zh/guide/guide/config#tools.aaa".to_string()
+      "/zh/guide/guide/config.html#tools.aaa".to_string()
     );
   }
 
@@ -360,5 +362,27 @@ mod tests {
         }
       }
     }
+  }
+
+  #[test]
+  fn test_remove_extname() {
+    let root = "/Users/xxx/xxx/xxx/docs".to_string();
+    let filepath = "/Users/xxx/xxx/xxx/docs/zh/guide/config.md".to_string();
+    assert_eq!(
+      normalize_link(&"./guide/config.md".to_string(), &root, &filepath),
+      "/zh/guide/guide/config".to_string()
+    );
+    assert_eq!(
+      normalize_link(&"./guide/config.mdx".to_string(), &root, &filepath),
+      "/zh/guide/guide/config".to_string()
+    );
+    assert_eq!(
+      normalize_link(
+        &"./guide/config/webpack.resolve.alias".to_string(),
+        &root,
+        &filepath
+      ),
+      "/zh/guide/guide/config/webpack.resolve.alias".to_string()
+    );
   }
 }
