@@ -1,7 +1,7 @@
 {
   "name": "@rspress/mdx-rs",
   "description": "MDX compilation binding for Rspress",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "main": "index.js",
   "types": "index.d.ts",
   "napi": {
