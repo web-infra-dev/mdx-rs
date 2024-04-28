@@ -1,6 +1,11 @@
 ## [0.5.3](https://github.com/web-infra-dev/mdx-rs/compare/v0.5.2...v0.5.3) (2024-04-28)
 
 
+### Bug Fixes
+
+* publish darwin-x86 ci ([#31](https://github.com/web-infra-dev/mdx-rs/issues/31)) ([e15800b](https://github.com/web-infra-dev/mdx-rs/commit/e15800ba03aea4019cafc4b1068481d610c76061))
+
+
 
 ## [0.5.2](https://github.com/web-infra-dev/mdx-rs/compare/v0.5.1...v0.5.2) (2024-04-25)
 
