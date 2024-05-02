@@ -27,18 +27,17 @@ use crate::{
   mdx_plugin_recma_document::{mdx_plugin_recma_document, Options as DocumentOptions},
   mdx_plugin_recma_jsx_rewrite::{mdx_plugin_recma_jsx_rewrite, Options as RewriteOptions},
   swc::{parse_esm, serialize},
-  swc_util_build_jsx::{swc_util_build_jsx, Options as BuildOptions},
 };
 use hast;
-use hast_util_to_swc::Program;
 use markdown::{to_mdast, Constructs, Location, ParseOptions};
 use mdx_plugin_container::mdx_plugin_container;
 use mdx_plugin_external_link::mdx_plugin_external_link;
 use mdx_plugin_frontmatter::mdx_plugin_frontmatter;
 use mdx_plugin_header_anchor::mdx_plugin_header_anchor;
+use mdx_plugin_highlighter::mdx_plugin_highlighter;
 use mdx_plugin_html::mdx_plugin_html;
 use mdx_plugin_normalize_link::mdx_plugin_normalize_link;
-use mdx_plugin_toc::{mdx_plugin_toc, TocItem};
+use mdx_plugin_toc::{mdx_plugin_toc, TocItem, TocResult};
 
 pub use crate::configuration::{MdxConstructs, MdxParseOptions, Options};
 pub use crate::mdx_plugin_recma_document::JsxRuntime;
@@ -49,6 +48,7 @@ pub struct CompileResult {
   pub html: String,
   pub title: String,
   pub toc: Vec<TocItem>,
+  pub languages: Vec<String>,
   pub frontmatter: String,
 }
 
@@ -99,8 +99,9 @@ pub fn compile(
     return to_mdast("", &parse_options).unwrap();
   });
 
-  let toc_result = mdx_plugin_toc(&mut mdast);
+  let TocResult { toc, title } = mdx_plugin_toc(&mut mdast);
   let frontmatter = mdx_plugin_frontmatter(&mut mdast);
+  let languages = mdx_plugin_highlighter(&mdast);
 
   let mut hast = mdast_util_to_hast(&mdast);
 
@@ -133,11 +134,12 @@ pub fn compile(
   // swc_util_build_jsx(&mut program, &build_options, Some(&location)).unwrap();
   let code = serialize(&mut program.module, Some(&program.comments));
   CompileResult {
+    toc,
     code,
-    links,
     html,
-    title: toc_result.title,
-    toc: toc_result.toc,
+    links,
+    title,
+    languages,
     frontmatter,
   }
 }

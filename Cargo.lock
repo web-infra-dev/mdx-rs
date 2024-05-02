@@ -526,6 +526,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "mdx_plugin_highlighter"
+version = "0.1.0"
+dependencies = [
+ "markdown",
+]
+
+[[package]]
 name = "mdx_plugin_html"
 version = "0.1.0"
 dependencies = [
@@ -560,6 +567,7 @@ dependencies = [
  "mdx_plugin_external_link",
  "mdx_plugin_frontmatter",
  "mdx_plugin_header_anchor",
+ "mdx_plugin_highlighter",
  "mdx_plugin_html",
  "mdx_plugin_normalize_link",
  "mdx_plugin_toc",

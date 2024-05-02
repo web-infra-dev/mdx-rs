@@ -27,6 +27,7 @@ pub struct Output {
   pub html: String,
   pub title: String,
   pub toc: Vec<Toc>,
+  pub languages: Vec<String>,
   pub frontmatter: String,
 }
 
@@ -56,6 +57,7 @@ impl From<CompileResult> for Output {
       html: res.html,
       title: res.title,
       toc: res.toc.into_iter().map(|item| item.into()).collect(),
+      languages: res.languages,
       frontmatter: res.frontmatter,
     }
   }
@@ -83,6 +85,7 @@ impl Task for Compiler {
         .map(|item| item.into())
         .collect::<Vec<Toc>>(),
     )?;
+    obj.set_named_property("languages", output.languages)?;
     obj.set_named_property("frontmatter", output.frontmatter)?;
     Ok(obj)
   }
