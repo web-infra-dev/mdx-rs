@@ -7,6 +7,7 @@ edition = "2021"
 
 [dependencies]
 mdx_plugin_code_block = { path = "../plugin_code_block" }
+mdx_plugin_highlighter = { path = "../plugin_highlighter" }
 mdx_plugin_container = { path = "../plugin_container" }
 mdx_plugin_external_link = { path = "../plugin_external_link" }
 mdx_plugin_frontmatter = { path = "../plugin_frontmatter" }

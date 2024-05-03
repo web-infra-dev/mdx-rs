@@ -14,6 +14,7 @@ export interface Output {
   html: string
   title: string
   toc: Array<Toc>
+  languages: Array<string>
   frontmatter: string
 }
 export interface CompileOptions {

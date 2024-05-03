@@ -51,9 +51,9 @@ pub fn mdx_plugin_html(node: &Node) -> String {
   mdx_plugin_html_impl(node)
 }
 
+#[cfg(test)]
 mod tests {
   use super::*;
-  use hast::Node;
 
   #[test]
   fn test_serialize_hast_to_html() {

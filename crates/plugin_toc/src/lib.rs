@@ -7,7 +7,7 @@
 
 use markdown::mdast::{self, Heading};
 use slugger::Slugger;
-use std::{fmt::format, vec};
+use std::vec;
 use utils::extract_title_and_id;
 
 #[derive(Debug, Clone)]
