@@ -28,7 +28,7 @@ mod tests {
 
   #[test]
   fn test_mdx_plugin_highlighter() {
-    let mut code = mdast::Node::Root(mdast::Root {
+    let code = mdast::Node::Root(mdast::Root {
       children: vec![mdast::Node::Code(mdast::Code {
         lang: Some("markdown".into()),
         meta: None,
@@ -39,7 +39,7 @@ mod tests {
     });
 
     assert_eq!(
-      mdx_plugin_highlighter(&mut code),
+      mdx_plugin_highlighter(&code),
       vec!["markdown".to_string()]
     );
   }
