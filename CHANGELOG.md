@@ -1,3 +1,12 @@
+## [0.5.5](https://github.com/web-infra-dev/mdx-rs/compare/v0.5.4...v0.5.5) (2024-05-04)
+
+
+### Features
+
+* add auto highlighter plugin and follow some advice from the rust-analyzer ([#38](https://github.com/web-infra-dev/mdx-rs/issues/38)) ([cb40d47](https://github.com/web-infra-dev/mdx-rs/commit/cb40d47a8e3efe27af1b76ac4a4dfdbd9fb6f2d3))
+
+
+
 ## [0.5.4](https://github.com/web-infra-dev/mdx-rs/compare/v0.5.3...v0.5.4) (2024-04-28)
 
 
