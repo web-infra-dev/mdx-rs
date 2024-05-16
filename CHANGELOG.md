@@ -1,3 +1,12 @@
+## [0.5.6](https://github.com/web-infra-dev/mdx-rs/compare/v0.5.5...v0.5.6) (2024-05-16)
+
+
+### Bug Fixes
+
+* trim_end when collect title in mdast ([#42](https://github.com/web-infra-dev/mdx-rs/issues/42)) ([3c366f7](https://github.com/web-infra-dev/mdx-rs/commit/3c366f74bbc0a9be8b3796834d8a2b0dd5635a4f))
+
+
+
 ## [0.5.5](https://github.com/web-infra-dev/mdx-rs/compare/v0.5.4...v0.5.5) (2024-05-04)
 
 
