@@ -25,7 +25,7 @@ pub struct TocResult {
 pub enum NodeType {
   Link,
   Strong,
-  Emphasis
+  Emphasis,
 }
 
 pub fn extract_text_from_node(node: &mdast::Node, node_type: NodeType) -> String {
@@ -48,7 +48,10 @@ pub fn extract_text_from_node(node: &mdast::Node, node_type: NodeType) -> String
       if let mdast::Node::Emphasis(emphasis) = node {
         // Emphasis&Strong: ***hello***
         if let mdast::Node::Strong(_) = &emphasis.children[0] {
-          return format!("**{}**", extract_text_from_node(&emphasis.children[0], NodeType::Strong));
+          return format!(
+            "**{}**",
+            extract_text_from_node(&emphasis.children[0], NodeType::Strong)
+          );
         }
         if let mdast::Node::Text(text) = &emphasis.children[0] {
           return text.value.clone();
@@ -83,6 +86,7 @@ pub fn collect_title_in_mdast(heading: &mut Heading) -> (String, String) {
       _ => continue, // Continue if node is not Text or Code
     }
   }
+  title = title.trim_end().to_string();
   (title, custom_id)
 }
 
@@ -174,6 +178,29 @@ mod tests {
       })],
       position: None,
     };
+    let mut heading4 = mdast::Heading {
+      depth: 1,
+      children: vec![
+        mdast::Node::Text(mdast::Text {
+          value: "Hello World ".to_string(),
+          position: None,
+        }),
+        mdast::Node::MdxJsxFlowElement(mdast::MdxJsxFlowElement {
+          name: Some("foo".to_string()),
+          attributes: vec![],
+          children: vec![mdast::Node::Text(mdast::Text {
+            value: "bar".to_string(),
+            position: None,
+          })],
+          position: None,
+        }),
+        mdast::Node::Text(mdast::Text {
+          value: " ".to_string(),
+          position: None,
+        }),
+      ],
+      position: None,
+    };
 
     assert_eq!(
       collect_title_in_mdast(&mut heading),
@@ -186,6 +213,10 @@ mod tests {
     assert_eq!(
       collect_title_in_mdast(&mut heading3),
       ("***Hello World***".to_string(), "".to_string())
+    );
+    assert_eq!(
+      collect_title_in_mdast(&mut heading4),
+      ("Hello World".to_string(), "".to_string())
     );
   }
 
