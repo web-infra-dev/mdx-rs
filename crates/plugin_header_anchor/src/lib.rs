@@ -45,6 +45,7 @@ fn collect_title_in_hast(node: &mut hast::Element) -> (String, String) {
     node.children.remove(index);
   }
 
+  title = title.trim_end().to_string();
   (title, id)
 }
 
@@ -117,7 +118,7 @@ mod tests {
 
   #[test]
   fn test_collect_title_in_hast() {
-    let mut element = hast::Element {
+    let mut element1 = hast::Element {
       tag_name: "h1".to_string(),
       properties: vec![],
       children: vec![
@@ -150,9 +151,38 @@ mod tests {
       position: None,
     };
 
+    let mut element2 = hast::Element {
+      tag_name: "h2".to_string(),
+      properties: vec![],
+      children: vec![
+        Node::Text(hast::Text {
+          value: "Hello World ".to_string(),
+          position: None,
+        }),
+        Node::MdxJsxElement(hast::MdxJsxElement {
+          name: Some("foo".to_string()),
+          attributes: vec![],
+          children: vec![Node::Text(hast::Text {
+            value: "bar".to_string(),
+            position: None,
+          })],
+          position: None,
+        }),
+        Node::Text(hast::Text {
+          value: " ".to_string(),
+          position: None,
+        }),
+      ],
+      position: None,
+    };
+
     assert_eq!(
-      collect_title_in_hast(&mut element),
+      collect_title_in_hast(&mut element1),
       ("HelloWorldWorld".to_string(), "".to_string())
+    );
+    assert_eq!(
+      collect_title_in_hast(&mut element2),
+      ("Hello World".to_string(), "".to_string())
     );
   }
 
