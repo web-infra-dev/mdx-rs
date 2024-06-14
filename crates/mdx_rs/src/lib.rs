@@ -39,8 +39,31 @@ use mdx_plugin_html::mdx_plugin_html;
 use mdx_plugin_normalize_link::mdx_plugin_normalize_link;
 use mdx_plugin_toc::{mdx_plugin_toc, TocItem, TocResult};
 
-pub use crate::configuration::{MdxConstructs, MdxParseOptions, Options};
 pub use crate::mdx_plugin_recma_document::JsxRuntime;
+
+pub struct CompileOptions {
+  pub value: String,
+  /// The root directory of the project.
+  pub root: String,
+  /// File path to the source file.
+  pub filepath: String,
+  /// Whether to add extra information to error messages in generated code
+  pub development: bool,
+  /// Whether to keep JSX (default: `true`).
+  pub jsx: bool,
+}
+
+impl Default for CompileOptions {
+  fn default() -> Self {
+    Self {
+      value: "".to_string(),
+      root: "".to_string(),
+      filepath: "".to_string(),
+      development: true,
+      jsx: true,
+    }
+  }
+}
 
 pub struct CompileResult {
   pub code: String,
@@ -52,12 +75,15 @@ pub struct CompileResult {
   pub frontmatter: String,
 }
 
-pub fn compile(
-  value: &String,
-  filepath: &String,
-  development: bool,
-  root: &String,
-) -> CompileResult {
+pub fn compile(options: CompileOptions) -> CompileResult {
+  let CompileOptions {
+    value,
+    filepath,
+    development,
+    root,
+    jsx,
+  } = options;
+
   let is_mdx = filepath.ends_with(".mdx");
   let parse_options = ParseOptions {
     constructs: Constructs {
@@ -92,6 +118,7 @@ pub fn compile(
     development,
     provider_import_source: Some("@mdx-js/react".to_string()),
   };
+  let build_options: BuildOptions = BuildOptions { development };
   let location = Location::new(value.as_bytes());
   let mut mdast = to_mdast(value.as_str(), &parse_options).unwrap_or_else(|error| {
     eprintln!("File: {:?}\nError: {:?}", filepath, error);
@@ -108,7 +135,7 @@ pub fn compile(
   mdx_plugin_header_anchor(&mut hast);
   mdx_plugin_container(&mut hast);
   mdx_plugin_external_link(&mut hast);
-  let links = mdx_plugin_normalize_link(&mut hast, root, filepath);
+  let links = mdx_plugin_normalize_link(&mut hast, &root, &filepath);
   let html = mdx_plugin_html(&hast);
   let mut program = hast_util_to_swc(&hast, Some(filepath.to_string()), Some(&location))
     .unwrap_or_else(|error| {
@@ -130,8 +157,11 @@ pub fn compile(
     },
   );
   mdx_plugin_recma_jsx_rewrite(&mut program, &rewrite_options, Some(&location));
-  // We keep the origin jsx here.
-  // swc_util_build_jsx(&mut program, &build_options, Some(&location)).unwrap();
+
+  if !jsx {
+    swc_util_build_jsx(&mut program, &build_options, Some(&location)).unwrap();
+  }
+
   let code = serialize(&mut program.module, Some(&program.comments));
   CompileResult {
     toc,
@@ -149,11 +179,9 @@ mod tests {
   use super::*;
   #[test]
   fn test_collect_title_in_mdast() {
-    compile(
-      &"## Container Title {#custom-title}".to_string(),
-      &"".to_string(),
-      true,
-      &"".to_string(),
-    );
+    compile(CompileOptions {
+      value: "## Container Title {#custom-title}".to_string(),
+      ..Default::default()
+    });
   }
 }

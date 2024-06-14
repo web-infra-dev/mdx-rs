@@ -37,6 +37,7 @@ pub struct CompileOptions {
   pub filepath: String,
   pub development: bool,
   pub root: String,
+  pub jsx: Option<bool>,
 }
 
 impl From<TocItem> for Toc {
@@ -92,47 +93,33 @@ impl Task for Compiler {
 }
 
 pub struct Compiler {
-  value: String,
-  filepath: String,
-  development: bool,
-  root: String,
+  options: CompileOptions,
 }
 
 impl Compiler {
-  pub fn new(value: String, filepath: String, development: bool, root: String) -> Self {
-    Self {
-      value,
-      filepath,
-      development,
-      root,
-    }
+  pub fn new(options: CompileOptions) -> Self {
+    Self { options }
   }
 
   fn compile(&mut self) -> CompileResult {
-    mdx_rs::compile(&self.value, &self.filepath, self.development, &self.root)
+    mdx_rs::compile(mdx_rs::CompileOptions {
+      value: self.options.value.clone(),
+      filepath: self.options.filepath.clone(),
+      development: self.options.development,
+      root: self.options.root.clone(),
+      jsx: self.options.jsx.unwrap_or(true),
+    })
   }
 }
 
 /// Turn MDX into JavaScript.
 #[napi(ts_return_type = "Promise<Output>")]
 pub fn compile(options: CompileOptions) -> AsyncTask<Compiler> {
-  let CompileOptions {
-    value,
-    filepath,
-    development,
-    root,
-  } = options;
-  AsyncTask::new(Compiler::new(value, filepath, development, root))
+  AsyncTask::new(Compiler::new(options))
 }
 
 #[napi]
 pub fn compile_sync(options: CompileOptions) -> Output {
-  let CompileOptions {
-    value,
-    filepath,
-    development,
-    root,
-  } = options;
-  let mut compiler = Compiler::new(value, filepath, development, root);
+  let mut compiler = Compiler::new(options);
   compiler.compile().into()
 }

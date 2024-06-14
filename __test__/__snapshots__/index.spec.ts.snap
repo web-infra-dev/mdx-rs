@@ -1,5 +1,53 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`compile > should compile jsx 1`] = `
+"<h1 id=\\"compile-jsx\\">
+  Compile JSX<a aria-hidden=\\"true\\" href=\\"#compile-jsx\\">#</a>
+</h1>
+"
+`;
+
+exports[`compile > should compile jsx 2`] = `
+"import { jsxDEV as _jsxDEV } from \\"react/jsx-dev-runtime\\";
+import { useMDXComponents as _provideComponents } from \\"@mdx-js/react\\";
+function _createMdxContent(props) {
+    const _components = Object.assign({
+        h1: \\"h1\\",
+        a: \\"a\\"
+    }, _provideComponents(), props.components);
+    return _jsxDEV(_components.h1, {
+        id: \\"compile-jsx\\",
+        children: [
+            \\"Compile JSX\\",
+            _jsxDEV(_components.a, {
+                className: \\"header-anchor\\",
+                \\"aria-hidden\\": \\"true\\",
+                href: \\"#compile-jsx\\",
+                children: \\"#\\"
+            }, undefined, false, {
+                fileName: \\"xxx.mdx\\"
+            }, this)
+        ]
+    }, undefined, true, {
+        fileName: \\"xxx.mdx\\",
+        lineNumber: 1,
+        columnNumber: 1
+    }, this);
+}
+function MDXContent(props = {}) {
+    const { wrapper: MDXLayout } = Object.assign({}, _provideComponents(), props.components);
+    return MDXLayout ? _jsxDEV(MDXLayout, Object.assign({}, props, {
+        children: _jsxDEV(_createMdxContent, props, undefined, false, {
+            fileName: \\"xxx.mdx\\"
+        }, this)
+    }), undefined, false, {
+        fileName: \\"xxx.mdx\\"
+    }, this) : _createMdxContent(props);
+}
+export default MDXContent;
+"
+`;
+
 exports[`compile > should render container content correctly 1`] = `
 "<div>
   <div>TIP</div>
@@ -102,7 +150,7 @@ export default MDXContent;
 
 exports[`compile > should render container title in mdx correctly 1`] = `
 "<h2 id=\\"custom-title\\">
-  Container Title<a aria-hidden=\\"true\\" href=\\"#custom-title\\">#</a>
+  Container Title <a aria-hidden=\\"true\\" href=\\"#custom-title\\">#</a>
 </h2>
 <div>
   <div>Custom Title</div>
@@ -141,7 +189,7 @@ function _createMdxContent(props) {
         p: \\"p\\",
         code: \\"code\\"
     }, _provideComponents(), props.components);
-    return <><_components.h2 id=\\"custom-title\\">{\\"Container Title\\"}<_components.a className=\\"header-anchor\\" aria-hidden=\\"true\\" href=\\"#custom-title\\">{\\"#\\"}</_components.a></_components.h2>{\\"\\\\n\\"}<_components.div className=\\"rspress-directive tip\\"><_components.div className=\\"rspress-directive-title\\">{\\"Custom Title\\"}</_components.div><_components.div className=\\"rspress-directive-content\\"><_components.p>{\\"\\\\nThis is a \\"}<_components.code>{\\"block\\"}</_components.code>{\\" of \\"}<_components.code>{\\"Custom Title\\"}</_components.code>{\\"\\\\n\\"}</_components.p></_components.div></_components.div>{\\"\\\\n\\"}<_components.div className=\\"rspress-directive tip\\"><_components.div className=\\"rspress-directive-title\\">{\\"Custom Title\\"}</_components.div><_components.div className=\\"rspress-directive-content\\"><_components.p>{\\"\\\\nThis is a \\"}<_components.code>{\\"block\\"}</_components.code>{\\" of \\"}<_components.code>{\\"Custom Title\\"}</_components.code>{\\"\\\\n\\"}</_components.p></_components.div></_components.div>{\\"\\\\n\\"}<_components.div className=\\"rspress-directive tip\\"><_components.div className=\\"rspress-directive-title\\">{\\"Custom Title\\"}</_components.div><_components.div className=\\"rspress-directive-content\\"><_components.p>{\\"This is a \\"}<_components.code>{\\"block\\"}</_components.code>{\\" of \\"}<_components.code>{\\"Custom Title\\"}</_components.code>{\\"\\\\n\\"}</_components.p></_components.div></_components.div>{\\"\\\\n\\"}<_components.div className=\\"rspress-directive tip\\"><_components.div className=\\"rspress-directive-title\\">{\\"Custom Title\\"}</_components.div><_components.div className=\\"rspress-directive-content\\"><_components.p>{\\"This is a \\"}<_components.code>{\\"block\\"}</_components.code>{\\" of \\"}<_components.code>{\\"Custom Title\\"}</_components.code>{\\"\\\\n\\"}</_components.p></_components.div></_components.div></>;
+    return <><_components.h2 id=\\"custom-title\\">{\\"Container Title \\"}<_components.a className=\\"header-anchor\\" aria-hidden=\\"true\\" href=\\"#custom-title\\">{\\"#\\"}</_components.a></_components.h2>{\\"\\\\n\\"}<_components.div className=\\"rspress-directive tip\\"><_components.div className=\\"rspress-directive-title\\">{\\"Custom Title\\"}</_components.div><_components.div className=\\"rspress-directive-content\\"><_components.p>{\\"\\\\nThis is a \\"}<_components.code>{\\"block\\"}</_components.code>{\\" of \\"}<_components.code>{\\"Custom Title\\"}</_components.code>{\\"\\\\n\\"}</_components.p></_components.div></_components.div>{\\"\\\\n\\"}<_components.div className=\\"rspress-directive tip\\"><_components.div className=\\"rspress-directive-title\\">{\\"Custom Title\\"}</_components.div><_components.div className=\\"rspress-directive-content\\"><_components.p>{\\"\\\\nThis is a \\"}<_components.code>{\\"block\\"}</_components.code>{\\" of \\"}<_components.code>{\\"Custom Title\\"}</_components.code>{\\"\\\\n\\"}</_components.p></_components.div></_components.div>{\\"\\\\n\\"}<_components.div className=\\"rspress-directive tip\\"><_components.div className=\\"rspress-directive-title\\">{\\"Custom Title\\"}</_components.div><_components.div className=\\"rspress-directive-content\\"><_components.p>{\\"This is a \\"}<_components.code>{\\"block\\"}</_components.code>{\\" of \\"}<_components.code>{\\"Custom Title\\"}</_components.code>{\\"\\\\n\\"}</_components.p></_components.div></_components.div>{\\"\\\\n\\"}<_components.div className=\\"rspress-directive tip\\"><_components.div className=\\"rspress-directive-title\\">{\\"Custom Title\\"}</_components.div><_components.div className=\\"rspress-directive-content\\"><_components.p>{\\"This is a \\"}<_components.code>{\\"block\\"}</_components.code>{\\" of \\"}<_components.code>{\\"Custom Title\\"}</_components.code>{\\"\\\\n\\"}</_components.p></_components.div></_components.div></>;
 }
 function MDXContent(props = {}) {
     const { wrapper: MDXLayout } = Object.assign({}, _provideComponents(), props.components);
