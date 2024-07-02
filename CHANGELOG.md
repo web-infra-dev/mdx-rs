@@ -106,7 +106,7 @@
 
 ### Bug Fixes
 
-* anchor missed when link exsited in header ([6504df2](https://github.com/web-infra-dev/mdx-rs/commit/6504df27555565aba8262326d5947b3427915fb2))
+* anchor missed when link existed in header ([6504df2](https://github.com/web-infra-dev/mdx-rs/commit/6504df27555565aba8262326d5947b3427915fb2))
 
 
 

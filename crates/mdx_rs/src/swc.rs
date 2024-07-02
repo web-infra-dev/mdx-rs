@@ -279,7 +279,7 @@ fn swc_error_to_string(error: &SwcError) -> String {
 ///
 /// This is needed because for expressions, we use an API that parses up to
 /// a valid expression, but there may be more expressions after it, which we
-/// don’t alow.
+/// don’t allow.
 fn whitespace_and_comments(mut index: usize, value: &str) -> Result<(), (Span, String)> {
     let bytes = value.as_bytes();
     let len = bytes.len();
