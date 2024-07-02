@@ -4,8 +4,6 @@
 //!
 //! If the link is external, we will add the `target="_blank"` and `rel="noopener noreferrer"` attribute to the link element.
 
-use hast;
-
 fn is_external_url(url: &str) -> bool {
   if url.starts_with("http://") || url.starts_with("https://") {
     return true;

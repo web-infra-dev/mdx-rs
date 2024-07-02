@@ -15,8 +15,8 @@ lazy_static! {
     static ref REMOVE_RE: Regex = Regex::new(r"[\p{Other_Number}\p{Close_Punctuation}\p{Final_Punctuation}\p{Initial_Punctuation}\p{Open_Punctuation}\p{Other_Punctuation}\p{Dash_Punctuation}\p{Symbol}\p{Control}\p{Private_Use}\p{Format}\p{Unassigned}\p{Separator}]").unwrap();
 }
 
-fn normalize_slug(value: &String) -> String {
-  let s = REMOVE_RE.replace_all(&value, |caps: &regex::Captures| {
+fn normalize_slug(value: &str) -> String {
+  let s = REMOVE_RE.replace_all(value, |caps: &regex::Captures| {
     let c = caps.get(0).unwrap().as_str();
     if c == " " || c == "-" {
       "-".to_string()
@@ -27,6 +27,12 @@ fn normalize_slug(value: &String) -> String {
     }
   });
   s.replace(|c: char| c.is_whitespace(), "-")
+}
+
+impl Default for Slugger {
+  fn default() -> Self {
+    Self::new()
+  }
 }
 
 impl Slugger {
@@ -46,9 +52,9 @@ impl Slugger {
    * will result in different slugs.
    * Use the `slug` function to get same slugs.
    */
-  pub fn slug(&mut self, value: &String, maintain_case: bool) -> String {
+  pub fn slug(&mut self, value: &str, maintain_case: bool) -> String {
     let mut result = if maintain_case {
-      value.clone()
+      value.to_owned()
     } else {
       value.to_lowercase()
     };
@@ -89,9 +95,9 @@ impl Slugger {
  * @return {String}
  *   A unique slug string
  */
-pub fn slug(value: &String, maintain_case: bool) -> String {
+pub fn slug(value: &str, maintain_case: bool) -> String {
   let result = if maintain_case {
-    value.clone()
+    value.to_owned()
   } else {
     value.to_lowercase()
   };
@@ -105,63 +111,33 @@ mod tests {
   #[test]
   fn test_slugger() {
     let mut slugger = Slugger::new();
-    assert_eq!(
-      slugger.slug(&"Hello World".to_string(), false),
-      "hello-world"
-    );
-    assert_eq!(
-      slugger.slug(&"Hello World".to_string(), false),
-      "hello-world-1"
-    );
-    assert_eq!(
-      slugger.slug(&"Hello World".to_string(), false),
-      "hello-world-2"
-    );
+    assert_eq!(slugger.slug("Hello World", false), "hello-world");
+    assert_eq!(slugger.slug("Hello World", false), "hello-world-1");
+    assert_eq!(slugger.slug("Hello World", false), "hello-world-2");
   }
 
   #[test]
   fn test_slugger_maintain_case() {
     let mut slugger = Slugger::new();
-    assert_eq!(
-      slugger.slug(&"Hello World".to_string(), true),
-      "Hello-World"
-    );
-    assert_eq!(
-      slugger.slug(&"Hello World".to_string(), true),
-      "Hello-World-1"
-    );
-    assert_eq!(
-      slugger.slug(&"Hello World".to_string(), true),
-      "Hello-World-2"
-    );
+    assert_eq!(slugger.slug("Hello World", true), "Hello-World");
+    assert_eq!(slugger.slug("Hello World", true), "Hello-World-1");
+    assert_eq!(slugger.slug("Hello World", true), "Hello-World-2");
   }
 
   #[test]
   fn test_slugger_reset() {
     let mut slugger = Slugger::new();
-    assert_eq!(
-      slugger.slug(&"Hello World".to_string(), false),
-      "hello-world"
-    );
-    assert_eq!(
-      slugger.slug(&"Hello World".to_string(), false),
-      "hello-world-1"
-    );
+    assert_eq!(slugger.slug("Hello World", false), "hello-world");
+    assert_eq!(slugger.slug("Hello World", false), "hello-world-1");
     slugger.reset();
-    assert_eq!(
-      slugger.slug(&"Hello World".to_string(), false),
-      "hello-world"
-    );
+    assert_eq!(slugger.slug("Hello World", false), "hello-world");
   }
 
   #[test]
   fn test_slug() {
-    assert_eq!(slug(&"Hello World".to_string(), false), "hello-world");
-    assert_eq!(slug(&"Hello World".to_string(), false), "hello-world");
-    assert_eq!(slug(&"`Hello` **World**".to_string(), false), "hello-world");
-    assert_eq!(
-      slug(&"export 'function'".to_string(), false),
-      "export-function"
-    );
+    assert_eq!(slug("Hello World", false), "hello-world");
+    assert_eq!(slug("Hello World", false), "hello-world");
+    assert_eq!(slug("`Hello` **World**", false), "hello-world");
+    assert_eq!(slug("export 'function'", false), "export-function");
   }
 }

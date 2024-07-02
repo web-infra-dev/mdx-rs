@@ -38,9 +38,6 @@ mod tests {
       position: None,
     });
 
-    assert_eq!(
-      mdx_plugin_highlighter(&code),
-      vec!["markdown".to_string()]
-    );
+    assert_eq!(mdx_plugin_highlighter(&code), vec!["markdown".to_string()]);
   }
 }

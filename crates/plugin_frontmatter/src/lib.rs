@@ -4,14 +4,12 @@
 use markdown::mdast;
 use serde_yaml::Value;
 
-use serde_json;
-
 fn yaml_to_json(yaml_str: &str) -> String {
   if yaml_str.is_empty() {
     return "{}".into();
   }
-  let parsed_value: Value =
-    serde_yaml::from_str(yaml_str).expect(format!("Failed to parse yaml: {}。", yaml_str).as_str());
+  let parsed_value: Value = serde_yaml::from_str(yaml_str)
+    .unwrap_or_else(|_| panic!("Failed to parse yaml: {}。", yaml_str));
   serde_json::to_string(&parsed_value).unwrap()
 }
 

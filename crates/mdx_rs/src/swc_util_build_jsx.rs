@@ -31,6 +31,7 @@ pub struct Options {
 }
 
 /// Compile JSX away to function calls.
+#[allow(unused)]
 pub fn swc_util_build_jsx(
   program: &mut Program,
   options: &Options,
@@ -607,6 +608,7 @@ impl<'a> VisitMut for State<'a> {
 /// with `@jsx`.
 /// Then it looks for key/value pairs (each words split by whitespace).
 /// Known keys are used for directives.
+#[allow(unused)]
 fn find_directives(
   comments: &Vec<Comment>,
   location: Option<&Location>,

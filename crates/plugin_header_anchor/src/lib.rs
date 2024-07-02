@@ -2,8 +2,8 @@
 //!
 //! This plugin is used to add anchor to the header in link element.
 
+use slugger::Slugger;
 use utils::extract_title_and_id;
-use {hast, slugger::Slugger};
 
 fn collect_title_in_hast(node: &mut hast::Element) -> (String, String) {
   let mut title = String::new();
@@ -23,7 +23,7 @@ fn collect_title_in_hast(node: &mut hast::Element) -> (String, String) {
       }
       // .mdx case:
       hast::Node::MdxExpression(expression) => {
-        if expression.value.starts_with("#") {
+        if expression.value.starts_with('#') {
           id.push_str(&expression.value[1..]);
           custom_id_expression_index = Some(index);
         }
@@ -90,7 +90,7 @@ pub fn mdx_plugin_header_anchor(node: &mut hast::Node) {
       if let hast::Node::Element(element) = child {
         if let Some(h_tag) = element.tag_name.chars().nth(1).and_then(|c| c.to_digit(10)) {
           // h1 ~ h6
-          if h_tag >= 1 && h_tag <= 6 {
+          if (1..=6).contains(&h_tag) {
             // get the text of the header element
             let (header_text, mut id) = collect_title_in_hast(element);
             if id.is_empty() {

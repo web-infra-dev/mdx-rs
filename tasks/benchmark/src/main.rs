@@ -18,7 +18,7 @@ pub fn main() {
   // Define the path to the file
   let path: &str = "benches/fixtures/example.md";
   // Open the file in read-only mode
-  let mut file = File::open(&path).expect("Could not open file");
+  let mut file = File::open(path).expect("Could not open file");
 
   // Create a new String to hold the file contents
   let mut contents = String::new();
@@ -34,7 +34,7 @@ pub fn main() {
     &contents,
     |b, source_text| {
       b.iter_with_large_drop(|| {
-        compile(&source_text, &"".to_string(), false, &"".to_string());
+        compile(source_text, "", false, "");
       })
     },
   );
