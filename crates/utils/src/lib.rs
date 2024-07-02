@@ -8,12 +8,12 @@ pub fn extract_title_and_id(text_value: &str) -> (String, String) {
     title_part = title_part.trim_end();
     title.push_str(title_part);
     let id_part = id_part[2..].to_string();
-    if let Some(index) = id_part.find("}") {
+    if let Some(index) = id_part.find('}') {
       let (id_part, _) = id_part.split_at(index);
       custom_id.push_str(id_part);
     }
   } else {
-    title.push_str(&text_value);
+    title.push_str(text_value);
   }
   (title, custom_id)
 }

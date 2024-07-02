@@ -169,6 +169,7 @@ fn parse_expression_core(
 }
 
 /// Lex expressions in MDX with SWC.
+#[allow(unused)]
 pub fn parse_expression(value: &str, kind: &MdxExpressionKind) -> MdxSignal {
   let result = parse_expression_core(value, kind);
 

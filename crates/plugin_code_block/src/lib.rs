@@ -3,8 +3,6 @@
 //! [Deprecated]
 //! This plugin is used to construct the code block in mdx.
 
-use hast;
-
 fn transform_pre_code_element(node: &mut hast::Node) {
   // find the  <pre><code className="language-jsx">
   // and then transform it
@@ -41,12 +39,12 @@ fn transform_pre_code_element(node: &mut hast::Node) {
         }
         for part in meta.split(' ') {
           let part = part.trim();
-          if part.starts_with("title=") {
-            title = Some(part[6..].trim_matches('"'));
+          if let Some(stripped) = part.strip_prefix("title=") {
+            title = Some(stripped.trim_matches('"'));
           }
         }
-        let title_node = if let Some(title) = title {
-          Some(hast::Node::Element(hast::Element {
+        let title_node = title.map(|title| {
+          hast::Node::Element(hast::Element {
             tag_name: "div".into(),
             properties: vec![(
               "className".into(),
@@ -57,10 +55,8 @@ fn transform_pre_code_element(node: &mut hast::Node) {
               position: None,
             })],
             position: None,
-          }))
-        } else {
-          None
-        };
+          })
+        });
 
         let content_node = hast::Node::Element(hast::Element {
           tag_name: "div".into(),

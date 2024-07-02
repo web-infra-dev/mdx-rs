@@ -24,7 +24,3 @@ mdx_plugin_toc    = { path = "../plugin_toc" }
 
 [build-dependencies]
 napi-build = "2.0.1"
-
-[profile.release]
-lto           = true
-codegen-units = 1

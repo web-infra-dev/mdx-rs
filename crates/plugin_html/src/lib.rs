@@ -27,7 +27,7 @@ pub fn mdx_plugin_html_impl(node: &Node) -> String {
         }
         html.push_str(&format!(" {}=\"{}\"", key, display_property_value(value)));
       }
-      html.push_str(">");
+      html.push('>');
       for child in &element.children {
         html.push_str(&mdx_plugin_html_impl(child));
       }

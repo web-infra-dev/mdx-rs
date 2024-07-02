@@ -432,6 +432,7 @@ fn transform_text(
 /// Create an element.
 ///
 /// Creates a void one if there are no children.
+#[allow(clippy::unnecessary_box_returns)]
 fn create_element(
   name: &str,
   attrs: Vec<JSXAttrOrSpread>,

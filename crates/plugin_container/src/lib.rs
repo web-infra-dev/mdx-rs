@@ -1,7 +1,7 @@
 //! Author: sanyuan0704
 //!
 //! This plugin is used to parse the container in markdown.
-use hast;
+#![allow(clippy::ptr_arg)]
 
 // parse title from `title="xxx"` or `title=xxx` or `title='xxx'`
 pub fn parse_title_from_meta(title_meta: &str) -> String {
@@ -9,7 +9,7 @@ pub fn parse_title_from_meta(title_meta: &str) -> String {
   let quote = title_meta.chars().nth(6).unwrap();
   if quote != '"' && quote != '\'' {
     // ignore the last char, because it is "}"
-    let last_index = title.rfind("}").unwrap_or(title.len());
+    let last_index = title.rfind('}').unwrap_or(title.len());
     title = &title[6..last_index];
   } else {
     title = &title[7..];
@@ -28,9 +28,8 @@ pub fn parse_container_meta(meta: &str) -> (String, String) {
 
   let first_line = lines.next().unwrap_or("");
   let mut type_and_title = first_line
-    .splitn(2, ":::")
-    .skip(1)
-    .next()
+    .split_once(":::")
+    .map(|x| x.1)
     .unwrap_or("")
     .trim_start()
     .splitn(2, |c| c == ' ' || c == '{');
@@ -145,7 +144,7 @@ fn traverse_children(root: &mut hast::Root) {
 
               container_content.push(wrap_node_with_paragraph(
                 &element.properties.clone(),
-                &vec![hast::Node::Text(hast::Text {
+                &[hast::Node::Text(hast::Text {
                   value: line.into(),
                   position: None,
                 })],
@@ -156,7 +155,7 @@ fn traverse_children(root: &mut hast::Root) {
       }
 
       // Collect the container content in current p tag
-      if container_content_start && !container_content_end && element.children.len() > 0 {
+      if container_content_start && !container_content_end && !element.children.is_empty() {
         if element.tag_name == "p" {
           let mut fragments = vec![];
           for (i, child) in element.children.iter().enumerate() {
@@ -189,12 +188,12 @@ fn traverse_children(root: &mut hast::Root) {
             }
             fragments.push(child.clone());
           }
-          if fragments.len() > 0 {
+          if !fragments.is_empty() {
             if index == container_content_start_index && !container_content.is_empty() {
               let first_node = container_content.first_mut().unwrap();
               let mut children = first_node.children().unwrap().to_vec();
               children.extend(fragments);
-              *first_node.children_mut().unwrap() = children.into();
+              *first_node.children_mut().unwrap() = children;
             } else {
               container_content.push(wrap_node_with_paragraph(
                 &element.properties.clone(),

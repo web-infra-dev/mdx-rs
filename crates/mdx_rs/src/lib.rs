@@ -5,6 +5,8 @@
 //! *   [`compile()`][]
 //!     — turn MDX into JavaScript
 #![deny(clippy::pedantic)]
+#![allow(clippy::uninlined_format_args)]
+#![allow(clippy::missing_panics_doc)]
 #![allow(clippy::must_use_candidate)]
 #![allow(clippy::too_many_lines)]
 #![allow(clippy::struct_excessive_bools)]
@@ -28,6 +30,8 @@ use crate::{
   mdx_plugin_recma_jsx_rewrite::{mdx_plugin_recma_jsx_rewrite, Options as RewriteOptions},
   swc::{parse_esm, serialize},
 };
+
+#[allow(clippy::single_component_path_imports)]
 use hast;
 use markdown::{to_mdast, Constructs, Location, ParseOptions};
 use mdx_plugin_container::mdx_plugin_container;
@@ -52,12 +56,8 @@ pub struct CompileResult {
   pub frontmatter: String,
 }
 
-pub fn compile(
-  value: &String,
-  filepath: &String,
-  development: bool,
-  root: &String,
-) -> CompileResult {
+#[allow(clippy::case_sensitive_file_extension_comparisons)]
+pub fn compile(value: &str, filepath: &str, development: bool, root: &str) -> CompileResult {
   let is_mdx = filepath.ends_with(".mdx");
   let parse_options = ParseOptions {
     constructs: Constructs {
@@ -93,10 +93,10 @@ pub fn compile(
     provider_import_source: Some("@mdx-js/react".to_string()),
   };
   let location = Location::new(value.as_bytes());
-  let mut mdast = to_mdast(value.as_str(), &parse_options).unwrap_or_else(|error| {
+  let mut mdast = to_mdast(value, &parse_options).unwrap_or_else(|error| {
     eprintln!("File: {:?}\nError: {:?}", filepath, error);
     // Provide a default value or handle the error here
-    return to_mdast("", &parse_options).unwrap();
+    to_mdast("", &parse_options).unwrap()
   });
 
   let TocResult { toc, title } = mdx_plugin_toc(&mut mdast);
@@ -134,11 +134,11 @@ pub fn compile(
   // swc_util_build_jsx(&mut program, &build_options, Some(&location)).unwrap();
   let code = serialize(&mut program.module, Some(&program.comments));
   CompileResult {
-    toc,
     code,
-    html,
     links,
+    html,
     title,
+    toc,
     languages,
     frontmatter,
   }
@@ -149,11 +149,6 @@ mod tests {
   use super::*;
   #[test]
   fn test_collect_title_in_mdast() {
-    compile(
-      &"## Container Title {#custom-title}".to_string(),
-      &"".to_string(),
-      true,
-      &"".to_string(),
-    );
+    compile("## Container Title {#custom-title}", "", true, "");
   }
 }

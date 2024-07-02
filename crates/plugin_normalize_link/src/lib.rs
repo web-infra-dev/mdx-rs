@@ -1,4 +1,4 @@
-use hast;
+#![allow(clippy::format_in_format_args)]
 use std::path::Path;
 
 const PROTOCOLS: &[&str] = &["http://", "https://", "mailto:", "tel:", "javascript:", "#"];
@@ -6,15 +6,10 @@ const TEMP_VARIABLE: &str = "image_";
 const IMAGE_EXTNAMES: &[&str] = &[".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp"];
 const MD_EXTNAMES: &[&str] = &[".md", ".mdx"];
 
-fn generate_ast_import(
-  index: usize,
-  root: &String,
-  src: &String,
-  filepath: &String,
-) -> hast::MdxjsEsm {
+fn generate_ast_import(index: usize, root: &str, src: &str, filepath: &str) -> hast::MdxjsEsm {
   let mut import_path = src.to_string();
-  if import_path.starts_with(".") {
-    import_path = normalize_link(src, root, &filepath);
+  if import_path.starts_with('.') {
+    import_path = normalize_link(src, root, filepath);
   }
   hast::MdxjsEsm {
     value: format!(
@@ -27,7 +22,7 @@ fn generate_ast_import(
   }
 }
 
-fn normalize_link(url: &String, root: &String, filepath: &String) -> String {
+fn normalize_link(url: &str, root: &str, filepath: &str) -> String {
   // If url includes following case, return directly
   // http/https、mailto、tel、javascript、#
   if PROTOCOLS.iter().any(|protocol| url.starts_with(protocol)) {
@@ -40,7 +35,7 @@ fn normalize_link(url: &String, root: &String, filepath: &String) -> String {
   let file_path = Path::new(filepath);
   // find the extname(before hash)
   // first, find the hash
-  let hash_index = url.rfind('#').or_else(|| Some(url.len())).unwrap();
+  let hash_index = url.rfind('#').unwrap_or(url.len());
   // then, find the extname
   let extname = match url[..hash_index].rfind('.') {
     Some(index) => url[index..hash_index].to_string().to_lowercase(),
@@ -51,7 +46,7 @@ fn normalize_link(url: &String, root: &String, filepath: &String) -> String {
   let is_md = MD_EXTNAMES.contains(&extname.as_str());
 
   if let Ok(relative_path) = file_path.strip_prefix(root_path) {
-    if url.starts_with(".") {
+    if url.starts_with('.') {
       // If the url is a image and relative path, return directly
       if is_image {
         return url;
@@ -97,13 +92,13 @@ fn normalize_link(url: &String, root: &String, filepath: &String) -> String {
   }
 
   // Replace all the \\ to / in windows
-  url.replace("\\", "/")
+  url.replace('\\', "/")
 }
 
 fn mdx_plugin_normalize_link_impl(
   node: &mut hast::Node,
-  root: &String,
-  filepath: &String,
+  root: &str,
+  filepath: &str,
   images: &mut Vec<hast::MdxjsEsm>,
 ) -> Vec<String> {
   let mut links = vec![];
@@ -119,18 +114,16 @@ fn mdx_plugin_normalize_link_impl(
       if element.tag_name == "a" {
         // Get the href property
         let href = element.properties.iter().find(|(key, _)| key == "href");
-        if let Some(href) = href {
-          if let (_, hast::PropertyValue::String(href)) = href {
-            let normalized_link = normalize_link(href, root, filepath);
-            links.push(normalized_link.clone());
-            // replace the href property
-            element
-              .properties
-              .iter_mut()
-              .find(|(key, _)| key == "href")
-              .unwrap()
-              .1 = hast::PropertyValue::String(normalized_link);
-          }
+        if let Some((_, hast::PropertyValue::String(href))) = href {
+          let normalized_link = normalize_link(href, root, filepath);
+          links.push(normalized_link.clone());
+          // replace the href property
+          element
+            .properties
+            .iter_mut()
+            .find(|(key, _)| key == "href")
+            .unwrap()
+            .1 = hast::PropertyValue::String(normalized_link);
         }
       }
 
@@ -139,42 +132,40 @@ fn mdx_plugin_normalize_link_impl(
         let src = element.properties.iter().find(|(key, _)| key == "src");
         let alt = element.properties.iter().find(|(key, _)| key == "alt");
         // Then we will generate a mdxjsEsm node to import the image and push it into images
-        if let Some(src) = src {
-          if let (_, hast::PropertyValue::String(src)) = src {
-            if PROTOCOLS.iter().any(|protocol| src.starts_with(protocol)) || src.starts_with('/') {
-              return links;
-            }
-            let index = images.len();
-            images.push(generate_ast_import(index, root, src, filepath));
-            // Here we have to transform the element type to MdxJsxElement instead of replace src property
-            // because the hast parser will parse the src property as hast::PropertyValue::String
-            // and we can't get the original value
-            let new_node = hast::Node::MdxJsxElement(hast::MdxJsxElement {
-              name: Some("img".to_string()),
-              attributes: vec![
-                hast::AttributeContent::Property(hast::MdxJsxAttribute {
-                  name: "src".to_string(),
-                  value: Some(hast::AttributeValue::Expression(
-                    markdown::mdast::AttributeValueExpression {
-                      value: format!("{}{}", TEMP_VARIABLE, index),
-                      stops: vec![],
-                    },
-                  )),
-                }),
-                hast::AttributeContent::Property(hast::MdxJsxAttribute {
-                  name: "alt".to_string(),
-                  value: alt.map(|(_, value)| match value {
-                    hast::PropertyValue::String(v) => hast::AttributeValue::Literal(v.to_string()),
-                    _ => hast::AttributeValue::Literal("".to_string()),
-                  }),
-                }),
-              ],
-              children: element.children.clone(),
-              position: None,
-            });
-
-            *node = new_node;
+        if let Some((_, hast::PropertyValue::String(src))) = src {
+          if PROTOCOLS.iter().any(|protocol| src.starts_with(protocol)) || src.starts_with('/') {
+            return links;
           }
+          let index = images.len();
+          images.push(generate_ast_import(index, root, src, filepath));
+          // Here we have to transform the element type to MdxJsxElement instead of replace src property
+          // because the hast parser will parse the src property as hast::PropertyValue::String
+          // and we can't get the original value
+          let new_node = hast::Node::MdxJsxElement(hast::MdxJsxElement {
+            name: Some("img".to_string()),
+            attributes: vec![
+              hast::AttributeContent::Property(hast::MdxJsxAttribute {
+                name: "src".to_string(),
+                value: Some(hast::AttributeValue::Expression(
+                  markdown::mdast::AttributeValueExpression {
+                    value: format!("{}{}", TEMP_VARIABLE, index),
+                    stops: vec![],
+                  },
+                )),
+              }),
+              hast::AttributeContent::Property(hast::MdxJsxAttribute {
+                name: "alt".to_string(),
+                value: alt.map(|(_, value)| match value {
+                  hast::PropertyValue::String(v) => hast::AttributeValue::Literal(v.to_string()),
+                  _ => hast::AttributeValue::Literal("".to_string()),
+                }),
+              }),
+            ],
+            children: element.children.clone(),
+            position: None,
+          });
+
+          *node = new_node;
         }
       }
 
@@ -198,23 +189,21 @@ fn mdx_plugin_normalize_link_impl(
             _ => false,
           });
         // Add import statement and replace the src property
-        if let Some(src) = src {
-          if let hast::AttributeContent::Property(property) = src {
-            if let Some(hast::AttributeValue::Literal(value)) = &mut property.value {
-              if PROTOCOLS.iter().any(|protocol| value.starts_with(protocol))
-                || value.starts_with('/')
-              {
-                return links;
-              }
-              let index = images.len();
-              images.push(generate_ast_import(index, root, value, filepath));
-              property.value = Some(hast::AttributeValue::Expression(
-                markdown::mdast::AttributeValueExpression {
-                  value: format!("{}{}", TEMP_VARIABLE, index),
-                  stops: vec![],
-                },
-              ));
+        if let Some(hast::AttributeContent::Property(property)) = src {
+          if let Some(hast::AttributeValue::Literal(value)) = &mut property.value {
+            if PROTOCOLS.iter().any(|protocol| value.starts_with(protocol))
+              || value.starts_with('/')
+            {
+              return links;
             }
+            let index = images.len();
+            images.push(generate_ast_import(index, root, value, filepath));
+            property.value = Some(hast::AttributeValue::Expression(
+              markdown::mdast::AttributeValueExpression {
+                value: format!("{}{}", TEMP_VARIABLE, index),
+                stops: vec![],
+              },
+            ));
           }
         }
       }
@@ -224,11 +213,7 @@ fn mdx_plugin_normalize_link_impl(
   links
 }
 
-pub fn mdx_plugin_normalize_link(
-  node: &mut hast::Node,
-  root: &String,
-  filepath: &String,
-) -> Vec<String> {
+pub fn mdx_plugin_normalize_link(node: &mut hast::Node, root: &str, filepath: &str) -> Vec<String> {
   let mut images: Vec<hast::MdxjsEsm> = vec![];
   let links = mdx_plugin_normalize_link_impl(node, root, filepath, &mut images);
   if let hast::Node::Root(root) = node {
@@ -249,29 +234,26 @@ mod tests {
     let root = "/Users/xxx/xxx/xxx/docs".to_string();
     let filepath = "/Users/xxx/xxx/xxx/docs/zh/guide/config.md".to_string();
     assert_eq!(
-      normalize_link(&"http://example.com".to_string(), &root, &filepath),
+      normalize_link("http://example.com", &root, &filepath),
       "http://example.com".to_string()
     );
     assert_eq!(
-      normalize_link(&"https://example.com".to_string(), &root, &filepath),
+      normalize_link("https://example.com", &root, &filepath),
       "https://example.com".to_string()
     );
     assert_eq!(
-      normalize_link(&"mailto:xxx.com".to_string(), &root, &filepath),
+      normalize_link("mailto:xxx.com", &root, &filepath),
       "mailto:xxx.com".to_string()
     );
     assert_eq!(
-      normalize_link(&"tel:xxx.com".to_string(), &root, &filepath),
+      normalize_link("tel:xxx.com", &root, &filepath),
       "tel:xxx.com".to_string()
     );
     assert_eq!(
-      normalize_link(&"javascript:void(0)".to_string(), &root, &filepath,),
+      normalize_link("javascript:void(0)", &root, &filepath,),
       "javascript:void(0)".to_string()
     );
-    assert_eq!(
-      normalize_link(&"#aaa".to_string(), &root, &filepath),
-      "#aaa".to_string()
-    );
+    assert_eq!(normalize_link("#aaa", &root, &filepath), "#aaa".to_string());
   }
 
   #[test]
@@ -279,15 +261,15 @@ mod tests {
     let root = "/Users/xxx/xxx/xxx/docs".to_string();
     let filepath = "/Users/xxx/xxx/xxx/docs/zh/guide/config.md".to_string();
     assert_eq!(
-      normalize_link(&"./guide/config.md".to_string(), &root, &filepath),
+      normalize_link("./guide/config.md", &root, &filepath),
       "/zh/guide/guide/config".to_string()
     );
     assert_eq!(
-      normalize_link(&"../guide/config.md".to_string(), &root, &filepath),
+      normalize_link("../guide/config.md", &root, &filepath),
       "/zh/guide/config".to_string()
     );
     assert_eq!(
-      normalize_link(&"../../guide/config.md".to_string(), &root, &filepath),
+      normalize_link("../../guide/config.md", &root, &filepath),
       "/guide/config".to_string()
     );
   }
@@ -297,15 +279,11 @@ mod tests {
     let root = "/Users/xxx/xxx/xxx/docs".to_string();
     let filepath = "/Users/xxx/xxx/xxx/docs/zh/guide/config.md".to_string();
     assert_eq!(
-      normalize_link(&"./guide/config.html#aaa".to_string(), &root, &filepath),
+      normalize_link("./guide/config.html#aaa", &root, &filepath),
       "/zh/guide/guide/config.html#aaa".to_string()
     );
     assert_eq!(
-      normalize_link(
-        &"./guide/config.html#tools.aaa".to_string(),
-        &root,
-        &filepath
-      ),
+      normalize_link("./guide/config.html#tools.aaa", &root, &filepath),
       "/zh/guide/guide/config.html#tools.aaa".to_string()
     );
   }
@@ -315,11 +293,11 @@ mod tests {
     let root = "/Users/xxx/xxx/xxx/docs".to_string();
     let filepath = "/Users/xxx/xxx/xxx/docs/zh/guide/config.md".to_string();
     assert_eq!(
-      normalize_link(&"/zh/guide/config.md".to_string(), &root, &filepath),
+      normalize_link("/zh/guide/config.md", &root, &filepath),
       "/zh/guide/config".to_string()
     );
     assert_eq!(
-      normalize_link(&"/zh/guide/config".to_string(), &root, &filepath),
+      normalize_link("/zh/guide/config", &root, &filepath),
       "/zh/guide/config".to_string()
     );
   }
@@ -369,19 +347,15 @@ mod tests {
     let root = "/Users/xxx/xxx/xxx/docs".to_string();
     let filepath = "/Users/xxx/xxx/xxx/docs/zh/guide/config.md".to_string();
     assert_eq!(
-      normalize_link(&"./guide/config.md".to_string(), &root, &filepath),
+      normalize_link("./guide/config.md", &root, &filepath),
       "/zh/guide/guide/config".to_string()
     );
     assert_eq!(
-      normalize_link(&"./guide/config.mdx".to_string(), &root, &filepath),
+      normalize_link("./guide/config.mdx", &root, &filepath),
       "/zh/guide/guide/config".to_string()
     );
     assert_eq!(
-      normalize_link(
-        &"./guide/config/webpack.resolve.alias".to_string(),
-        &root,
-        &filepath
-      ),
+      normalize_link("./guide/config/webpack.resolve.alias", &root, &filepath),
       "/zh/guide/guide/config/webpack.resolve.alias".to_string()
     );
   }

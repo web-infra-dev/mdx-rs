@@ -18,7 +18,7 @@ init:
 # When ready, run the same CI commands
 ready:
   typos
-  cargo fmt
+  just fmt
   just check
   just test
   just lint
