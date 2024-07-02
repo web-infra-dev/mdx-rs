@@ -35,12 +35,12 @@
     "prettier": "^2.8.7",
     "typescript": "^5.0.2",
     "vite": "^4.4.11",
-    "vitest": "^0.29.7"
+    "vitest": "1.6.0"
   },
   "engines": {
     "node": ">= 10"
   },
-  "packageManager": "pnpm@8.7.0",
+  "packageManager": "pnpm@9.4.0",
   "scripts": {
     "artifacts": "napi artifacts",
     "build": "napi build --cargo-cwd crates/binding --platform --release",
