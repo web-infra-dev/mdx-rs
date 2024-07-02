@@ -901,7 +901,7 @@ fn create_error_helper(development: bool, path: Option<String>) -> ModuleItem {
     },
   ];
 
-  // Accept a source location (which might be undefiend).
+  // Accept a source location (which might be undefined).
   if development {
     parameters.push(Param {
       pat: Pat::Ident(BindingIdent {

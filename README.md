@@ -1,6 +1,6 @@
 # @rspress/mdx-rs
 
-This is a Node.js binding for MDX compliation of [Rspress](https://rspress.dev) which is a modern documentation tool based on [Rspack](https://www.rspack.org/).
+This is a Node.js binding for MDX compilation of [Rspress](https://rspress.dev) which is a modern documentation tool based on [Rspack](https://www.rspack.org/).
 
 It can be 10x+ faster than compiler in pure JavaScript version.The [benchmark](./benches/index.mjs) result of `@rspress/mdx-rs` vs `@mdx-js/mdx` is as follows:
 

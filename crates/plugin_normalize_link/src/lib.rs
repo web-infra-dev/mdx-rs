@@ -2,7 +2,7 @@ use hast;
 use std::path::Path;
 
 const PROTOCOLS: &[&str] = &["http://", "https://", "mailto:", "tel:", "javascript:", "#"];
-const TEMP_VARIBLE: &str = "image_";
+const TEMP_VARIABLE: &str = "image_";
 const IMAGE_EXTNAMES: &[&str] = &[".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp"];
 const MD_EXTNAMES: &[&str] = &[".md", ".mdx"];
 
@@ -19,7 +19,7 @@ fn generate_ast_import(
   hast::MdxjsEsm {
     value: format!(
       "import {} from \"{}\";",
-      format!("{}{}", TEMP_VARIBLE, index),
+      format!("{}{}", TEMP_VARIABLE, index),
       import_path
     ),
     position: None,
@@ -156,7 +156,7 @@ fn mdx_plugin_normalize_link_impl(
                   name: "src".to_string(),
                   value: Some(hast::AttributeValue::Expression(
                     markdown::mdast::AttributeValueExpression {
-                      value: format!("{}{}", TEMP_VARIBLE, index),
+                      value: format!("{}{}", TEMP_VARIABLE, index),
                       stops: vec![],
                     },
                   )),
@@ -210,7 +210,7 @@ fn mdx_plugin_normalize_link_impl(
               images.push(generate_ast_import(index, root, value, filepath));
               property.value = Some(hast::AttributeValue::Expression(
                 markdown::mdast::AttributeValueExpression {
-                  value: format!("{}{}", TEMP_VARIBLE, index),
+                  value: format!("{}{}", TEMP_VARIABLE, index),
                   stops: vec![],
                 },
               ));

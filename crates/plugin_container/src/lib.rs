@@ -8,7 +8,7 @@ pub fn parse_title_from_meta(title_meta: &str) -> String {
   let mut title = title_meta;
   let quote = title_meta.chars().nth(6).unwrap();
   if quote != '"' && quote != '\'' {
-    // ignore the last char, bacause it is "}"
+    // ignore the last char, because it is "}"
     let last_index = title.rfind("}").unwrap_or(title.len());
     title = &title[6..last_index];
   } else {

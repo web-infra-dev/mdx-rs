@@ -62,7 +62,7 @@ pub fn compile(
   let parse_options = ParseOptions {
     constructs: Constructs {
       frontmatter: true,
-      // Enable GFM Grammer
+      // Enable GFM Grammar
       gfm_autolink_literal: true,
       gfm_label_start_footnote: true,
       gfm_footnote_definition: true,
