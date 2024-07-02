@@ -200,6 +200,22 @@ jobs:
       - name: Run Clippy
         run: cargo lint -- -D warnings
 
+  rust-test:
+    name: Rust Test
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+          - os: ubuntu-latest
+          - os: macos-latest
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Rust
+        uses: ./.github/actions/rustup
+      - run: cargo test --quiet
+
   test-macOS-windows-binding:
     name: Test bindings on ${{ matrix.settings.target }} - node@${{ matrix.node }}
     needs:
