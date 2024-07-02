@@ -5,22 +5,22 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  DEBUG: "napi:*"
-  APP_NAME: "mdx-binding-core"
-  MACOSX_DEPLOYMENT_TARGET: "10.13"
+  DEBUG: 'napi:*'
+  APP_NAME: 'mdx-binding-core'
+  MACOSX_DEPLOYMENT_TARGET: '10.13'
   # https://github.com/SchrodingerZhu/snmalloc-rs
   CACHE_FRIENDLY_OFFSET: 64
 
-"on":
+'on':
   push:
     branches:
       - main
     tags-ignore:
-      - "**"
+      - '**'
     paths-ignore:
-      - "**/*.md"
+      - '**/*.md'
       - LICENSE
-      - "**/*.gitignore"
+      - '**/*.gitignore'
       - .editorconfig
       - docs/**
   pull_request: null
@@ -149,7 +149,7 @@ jobs:
         if: ${{ matrix.settings.docker }}
         with:
           image: ${{ matrix.settings.docker }}
-          options: "--user 0:0 -v ${{ github.workspace }}/.cargo-cache/git/db:/usr/local/cargo/git/db -v ${{ github.workspace }}/.cargo/registry/cache:/usr/local/cargo/registry/cache -v ${{ github.workspace }}/.cargo/registry/index:/usr/local/cargo/registry/index -v ${{ github.workspace }}:/build -w /build"
+          options: '--user 0:0 -v ${{ github.workspace }}/.cargo-cache/git/db:/usr/local/cargo/git/db -v ${{ github.workspace }}/.cargo/registry/cache:/usr/local/cargo/registry/cache -v ${{ github.workspace }}/.cargo/registry/index:/usr/local/cargo/registry/index -v ${{ github.workspace }}:/build -w /build'
           run: ${{ matrix.settings.build }}
       - name: Build
         run: ${{ matrix.settings.build }}
@@ -161,6 +161,45 @@ jobs:
           name: bindings-${{ matrix.settings.target }}
           path: ${{ env.APP_NAME }}.*.node
           if-no-files-found: error
+
+  typos:
+    name: Spell Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: crate-ci/typos@master
+        with:
+          files: .
+
+  format:
+    name: Format
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust
+        uses: ./.github/actions/rustup
+        with:
+          fmt: true
+          restore-cache: false
+
+      - run: cargo fmt --all -- --check
+
+  lint:
+    name: Clippy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust
+        uses: ./.github/actions/rustup
+        with:
+          clippy: true
+
+      - name: Run Clippy
+        run: cargo lint -- -D warnings
+
   test-macOS-windows-binding:
     name: Test bindings on ${{ matrix.settings.target }} - node@${{ matrix.node }}
     needs:
@@ -170,12 +209,11 @@ jobs:
       matrix:
         settings:
           - host: macos-latest
-            target: "x86_64-apple-darwin"
+            target: 'x86_64-apple-darwin'
           - host: windows-latest
-            target: "x86_64-pc-windows-msvc"
-        node: ["16", "18"]
+            target: 'x86_64-pc-windows-msvc'
+        node: ['16', '18']
     runs-on: ${{ matrix.settings.host }}
-
     steps:
       - uses: actions/checkout@v2
 
@@ -194,7 +232,7 @@ jobs:
           path: ~/.pnpm-store
           key: npm-cache-test-${{ matrix.settings.target }}-${{ matrix.node }}-${{ hashFiles('pnpm-lock.yaml') }}
 
-      - name: "Install dependencies"
+      - name: 'Install dependencies'
         run: pnpm install --no-frozen-lockfile
 
       - name: Download artifacts
@@ -216,7 +254,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node: ["16", "18"]
+        node: ['16', '18']
     runs-on: ubuntu-latest
 
     steps:
@@ -247,7 +285,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node: ["16", "18"]
+        node: ['16', '18']
     runs-on: ubuntu-latest
 
     steps:
@@ -278,7 +316,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node: ["16", "18"]
+        node: ['16', '18']
     runs-on: ubuntu-latest
 
     steps:
@@ -314,7 +352,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node: ["16", "18"]
+        node: ['16', '18']
     runs-on: ubuntu-latest
 
     steps:
@@ -357,8 +395,8 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v3
         with:
-          node-version: "18.x"
-          registry-url: "https://registry.npmjs.org"
+          node-version: '18.x'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install pnpm
         run: npm install -g pnpm@8.7.0
@@ -369,7 +407,7 @@ jobs:
           path: ~/.pnpm-store
           key: npm-cache-ubuntu-latest-${{ hashFiles('pnpm-lock.yaml') }}
 
-      - name: "Install dependencies"
+      - name: 'Install dependencies'
         run: pnpm install --no-frozen-lockfile
 
       - name: Download all artifacts
