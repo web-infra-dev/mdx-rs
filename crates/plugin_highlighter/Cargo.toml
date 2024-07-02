@@ -1,5 +1,5 @@
 [package]
-name = "mdx_plugin_highlighter"
+name    = "mdx_plugin_highlighter"
 version = "0.1.0"
 edition = "2021"
 

@@ -1,5 +1,5 @@
 [package]
-name = "mdx_plugin_html"
+name    = "mdx_plugin_html"
 version = "0.1.0"
 edition = "2021"
 

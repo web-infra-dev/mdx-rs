@@ -1,5 +1,5 @@
 [package]
-name = "mdx_plugin_external_link"
+name    = "mdx_plugin_external_link"
 version = "0.1.0"
 edition = "2021"
 
