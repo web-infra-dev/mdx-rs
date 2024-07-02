@@ -1,5 +1,5 @@
 [package]
-name = "mdx_rs_binding"
+name    = "mdx_rs_binding"
 version = "0.1.0"
 edition = "2021"
 
@@ -17,14 +17,14 @@ mimalloc-rust = { version = "0.2", features = ["local-dynamic-tls"] }
 [dependencies]
 mdx_rs = { path = "../mdx_rs" }
 # Default enable napi4 feature, see https://nodejs.org/api/n-api.html#node-api-version-matrix
-napi = { version = "2.9.1", default-features = false, features = ["napi7"] }
-napi-derive = "2.9.1"
+napi              = { version = "2.9.1", default-features = false, features = ["napi7"] }
+napi-derive       = "2.9.1"
 crossbeam-channel = "0.5.6"
-mdx_plugin_toc = { path = "../plugin_toc" }
+mdx_plugin_toc    = { path = "../plugin_toc" }
 
 [build-dependencies]
 napi-build = "2.0.1"
 
 [profile.release]
-lto = true
+lto           = true
 codegen-units = 1

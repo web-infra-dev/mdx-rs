@@ -1,11 +1,11 @@
 [package]
-name = "mdx_plugin_header_anchor"
+name    = "mdx_plugin_header_anchor"
 version = "0.1.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-hast = { path = "../hast" }
+hast    = { path = "../hast" }
 slugger = { path = "../slugger" }
-utils = { path = "../utils" }
+utils   = { path = "../utils" }

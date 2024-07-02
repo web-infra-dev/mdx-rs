@@ -1,5 +1,5 @@
 [package]
-name = "mdx_plugin_toc"
+name    = "mdx_plugin_toc"
 version = "0.1.0"
 edition = "2021"
 
@@ -7,5 +7,5 @@ edition = "2021"
 
 [dependencies]
 markdown = { workspace = true }
-slugger = { path = "../slugger" }
-utils = { path = "../utils" }
+slugger  = { path = "../slugger" }
+utils    = { path = "../utils" }
