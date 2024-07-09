@@ -12,9 +12,9 @@ const formatHTML = (html: string) => {
 };
 
 const formatResult = async (result: string): Promise<string> => {
-  // TODO: add prettier for tsx
   // For win ci
-  return result.replaceAll('\\r\\n', '<LF>').replaceAll('\\n', '<LF>');
+  const replacedResult = result.replaceAll('\\r\\n', '<LF>').replaceAll('\\n', '<LF>');
+  return prettier.format(replacedResult, { parser: "babel-ts" })
 };
 
 const testCompile = async (options: CompileOptions) => {
@@ -42,7 +42,7 @@ describe("compile", () => {
       root: "xxx",
     });
 
-    expect((html)).toMatchSnapshot();
+    expect(html).toMatchSnapshot();
     expect(result).toMatchSnapshot();
   });
 
@@ -57,7 +57,7 @@ describe("compile", () => {
       root: "xxx",
     });
 
-    expect((html)).toMatchSnapshot();
+    expect(html).toMatchSnapshot();
     expect(result).toMatchSnapshot();
   });
 
@@ -72,7 +72,7 @@ describe("compile", () => {
       root: "xxx",
     });
 
-    expect((html)).toMatchSnapshot();
+    expect(html).toMatchSnapshot();
     expect(result).toMatchSnapshot();
   });
 
@@ -87,7 +87,7 @@ describe("compile", () => {
       root: "xxx",
     });
 
-    expect((html)).toMatchSnapshot();
+    expect(html).toMatchSnapshot();
     expect(result).toMatchSnapshot();
   });
 
@@ -99,7 +99,7 @@ describe("compile", () => {
       root: "xxx",
     });
 
-    expect((html)).toMatchSnapshot();
+    expect(html).toMatchSnapshot();
     expect(result).toMatchSnapshot();
   });
 });
