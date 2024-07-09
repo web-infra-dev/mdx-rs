@@ -35,7 +35,8 @@
     "prettier": "^2.8.7",
     "typescript": "^5.0.2",
     "vite": "^4.4.11",
-    "vitest": "^0.29.7"
+    "vitest": "^0.29.7",
+    "@types/node": "16.18.101"
   },
   "engines": {
     "node": ">= 10"
