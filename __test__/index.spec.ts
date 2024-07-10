@@ -8,12 +8,12 @@ import { compile, type CompileOptions } from "../index.js";
 
 
 const formatHTML = (html: string) => {
-  return prettier.format(html.toString(), { parser: "html" })
+  return prettier.format(html, { parser: "html" })
 };
 
 const formatResult = async (result: string): Promise<string> => {
   // For win ci
-  const replacedResult = result.toString().replaceAll('\\r\\n', '<LF>').replaceAll('\\n', '<LF>');
+  const replacedResult = result.replace(/\\r\\n/g, '<LF>').replace(/\\n/g, '<LF>');
   return prettier.format(replacedResult, { parser: "babel-ts" })
 };
 
