@@ -35,7 +35,8 @@
     "prettier": "^2.8.7",
     "typescript": "^5.0.2",
     "vite": "^4.4.11",
-    "vitest": "^0.29.7"
+    "vitest": "^0.29.7",
+    "@types/node": "16.18.101"
   },
   "engines": {
     "node": ">= 10"
@@ -46,7 +47,7 @@
     "build": "napi build --cargo-cwd crates/binding --platform --release",
     "build:debug": "napi build --cargo-cwd crates/binding --platform",
     "prepublishOnly": "napi prepublish -t npm",
-    "test": "echo Enable test when fix CI, GLIB3.22 not found",
+    "test": "vitest run",
     "test:local": "vitest run",
     "test:watch": "vitest dev",
     "universal": "napi universal",
