@@ -215,8 +215,9 @@ jobs:
           name: bindings-${{ matrix.settings.target }}
           path: ${{ env.APP_NAME }}.*.node
           if-no-files-found: error
+
   test-macOS-windows-binding:
-    name: Test bindings on ${{ matrix.settings.target }} - node@${{ matrix.node }}
+    name: Test bindings on "${{ matrix.settings.target }}" - node@${{ matrix.node }}
     needs:
       - build
     strategy:
