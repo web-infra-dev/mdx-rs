@@ -1,11 +1,11 @@
-import { readFileSync } from 'fs';
-import { describe, test, expect } from 'vitest';
-import path from 'path';
+import { readFileSync } from "node:fs";
+import path from "node:path";
+import { createSnapshotSerializer } from "path-serializer";
 // @ts-ignore TODO: add types for pretter
-import prettier from 'prettier';
-import { createSnapshotSerializer } from 'path-serializer';
+import prettier from "prettier";
+import { describe, expect, test } from "vitest";
 
-import { compile, type CompileOptions } from '../index.js';
+import { type CompileOptions, compile } from "../index.js";
 
 expect.addSnapshotSerializer(
   createSnapshotSerializer({
@@ -16,16 +16,16 @@ expect.addSnapshotSerializer(
 );
 
 const formatHTML = (html: string) => {
-  return prettier.format(html, { parser: 'html' });
+  return prettier.format(html, { parser: "html" });
 };
 
 const formatResult = async (result: string): Promise<string> => {
   // For win ci
-  return prettier.format(result, { parser: 'babel-ts' });
+  return prettier.format(result, { parser: "babel-ts" });
 };
 
 const testCompile = async (options: CompileOptions) => {
-  let { code: result, html } = await compile(options);
+  const { code: result, html } = await compile(options);
 
   const [formattedResult, formattedHtml] = await Promise.all([
     formatResult(result),
@@ -38,70 +38,70 @@ const testCompile = async (options: CompileOptions) => {
   };
 };
 
-describe('compile', () => {
-  test('should render container type correctly', async t => {
-    let { code: result, html } = await testCompile({
-      value: readFileSync(path.join(__dirname, './container-type.md'), 'utf8'),
-      filepath: 'xxx.mdx',
+describe("compile", () => {
+  test("should render container type correctly", async () => {
+    const { code: result, html } = await testCompile({
+      value: readFileSync(path.join(__dirname, "./container-type.md"), "utf8"),
+      filepath: "xxx.mdx",
       development: true,
-      root: 'xxx',
+      root: "xxx",
     });
 
     expect(html).toMatchSnapshot();
     expect(result).toMatchSnapshot();
   });
 
-  test('should render container type with space correctly', async t => {
-    let { code: result, html } = await testCompile({
+  test("should render container type with space correctly", async () => {
+    const { code: result, html } = await testCompile({
       value: readFileSync(
-        path.join(__dirname, './container-type-with-space.md'),
-        'utf8',
+        path.join(__dirname, "./container-type-with-space.md"),
+        "utf8",
       ),
-      filepath: 'xxx.mdx',
+      filepath: "xxx.mdx",
       development: true,
-      root: 'xxx',
+      root: "xxx",
     });
 
     expect(html).toMatchSnapshot();
     expect(result).toMatchSnapshot();
   });
 
-  test('should render container content correctly', async t => {
-    let { code: result, html } = await testCompile({
+  test("should render container content correctly", async () => {
+    const { code: result, html } = await testCompile({
       value: readFileSync(
-        path.join(__dirname, './container-content.md'),
-        'utf8',
+        path.join(__dirname, "./container-content.md"),
+        "utf8",
       ),
-      filepath: 'xxx.mdx',
+      filepath: "xxx.mdx",
       development: true,
-      root: 'xxx',
+      root: "xxx",
     });
 
     expect(html).toMatchSnapshot();
     expect(result).toMatchSnapshot();
   });
 
-  test('should render container title in mdx correctly', async t => {
-    let { code: result, html } = await testCompile({
+  test("should render container title in mdx correctly", async () => {
+    const { code: result, html } = await testCompile({
       value: readFileSync(
-        path.join(__dirname, './container-title.mdx'),
-        'utf8',
+        path.join(__dirname, "./container-title.mdx"),
+        "utf8",
       ),
-      filepath: 'xxx.mdx',
+      filepath: "xxx.mdx",
       development: true,
-      root: 'xxx',
+      root: "xxx",
     });
 
     expect(html).toMatchSnapshot();
     expect(result).toMatchSnapshot();
   });
 
-  test('should render container title in md correctly', async t => {
-    let { code: result, html } = await testCompile({
-      value: readFileSync(path.join(__dirname, './container-title.md'), 'utf8'),
-      filepath: 'xxx.md',
+  test("should render container title in md correctly", async () => {
+    const { code: result, html } = await testCompile({
+      value: readFileSync(path.join(__dirname, "./container-title.md"), "utf8"),
+      filepath: "xxx.md",
       development: true,
-      root: 'xxx',
+      root: "xxx",
     });
 
     expect(html).toMatchSnapshot();
