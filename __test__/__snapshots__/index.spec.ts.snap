@@ -29,79 +29,79 @@ exports[`compile > should render container content correctly 1`] = `
 `;
 
 exports[`compile > should render container content correctly 2`] = `
-"import { useMDXComponents as _provideComponents } from \\"@mdx-js/react\\";
+"import { useMDXComponents as _provideComponents } from "@mdx-js/react";
 function _createMdxContent(props) {
   const _components = Object.assign(
     {
-      div: \\"div\\",
-      p: \\"p\\",
-      code: \\"code\\",
-      ul: \\"ul\\",
-      li: \\"li\\",
-      pre: \\"pre\\",
+      div: "div",
+      p: "p",
+      code: "code",
+      ul: "ul",
+      li: "li",
+      pre: "pre",
     },
     _provideComponents(),
     props.components
   );
   return (
     <>
-      <_components.div className=\\"rspress-directive tip\\">
-        <_components.div className=\\"rspress-directive-title\\">
-          {\\"TIP\\"}
+      <_components.div className="rspress-directive tip">
+        <_components.div className="rspress-directive-title">
+          {"TIP"}
         </_components.div>
-        <_components.div className=\\"rspress-directive-content\\">
+        <_components.div className="rspress-directive-content">
           <_components.p>
-            {\\"First line \\"}
-            <_components.code>{\\"block\\"}</_components.code>
+            {"First line "}
+            <_components.code>{"block"}</_components.code>
           </_components.p>
-          {\\"<LF>\\"}
+          {"\\n"}
           <_components.p>
-            {\\"Second line \\"}
-            <_components.code>{\\"block2\\"}</_components.code>
-            {\\"<LF>\\"}
+            {"Second line "}
+            <_components.code>{"block2"}</_components.code>
+            {"\\n"}
           </_components.p>
         </_components.div>
       </_components.div>
-      {\\"<LF>\\"}
-      <_components.div className=\\"rspress-directive tip\\">
-        <_components.div className=\\"rspress-directive-title\\">
-          {\\"TIP\\"}
+      {"\\n"}
+      <_components.div className="rspress-directive tip">
+        <_components.div className="rspress-directive-title">
+          {"TIP"}
         </_components.div>
-        <_components.div className=\\"rspress-directive-content\\">
-          {\\"<LF>\\"}
+        <_components.div className="rspress-directive-content">
+          {"\\n"}
           <_components.ul>
-            {\\"<LF>\\"}
+            {"\\n"}
             <_components.li>
-              {\\"List item 1 \\"}
-              <_components.code>{\\"block\\"}</_components.code>
-              {\\"。\\"}
+              {"List item 1 "}
+              <_components.code>{"block"}</_components.code>
+              {"。"}
             </_components.li>
-            {\\"<LF>\\"}
+            {"\\n"}
             <_components.li>
-              {\\"List item 2 \\"}
-              <_components.code>{\\"block2\\"}</_components.code>
-              {\\"。\\"}
+              {"List item 2 "}
+              <_components.code>{"block2"}</_components.code>
+              {"。"}
             </_components.li>
-            {\\"<LF>\\"}
+            {"\\n"}
           </_components.ul>
-          {\\"<LF>\\"}
+          {"\\n"}
         </_components.div>
       </_components.div>
-      {\\"<LF>\\"}
-      <_components.div className=\\"rspress-directive tip\\">
-        <_components.div className=\\"rspress-directive-title\\">
-          {\\"TIP\\"}
+      {"\\n"}
+      <_components.div className="rspress-directive tip">
+        <_components.div className="rspress-directive-title">
+          {"TIP"}
         </_components.div>
-        <_components.div className=\\"rspress-directive-content\\">
-          {\\"<LF>\\"}
-          <_components.p>{\\"Some code:\\"}</_components.p>
-          {\\"<LF>\\"}
+        <_components.div className="rspress-directive-content">
+          {"\\n"}
+          <_components.p>{"Some code:"}</_components.p>
+          {"\\n"}
           <_components.pre>
-            <_components.code className=\\"language-ts\\">
-              {\\"console.log('hello world');<LF>\\"}
+            <_components.code className="language-ts">
+              {"console.log('hello world');\\n"}
             </_components.code>
           </_components.pre>
-          {\\"<LF>\\"}
+          {"\\n"}
         </_components.div>
       </_components.div>
     </>
@@ -126,8 +126,8 @@ export default MDXContent;
 `;
 
 exports[`compile > should render container title in md correctly 1`] = `
-"<h2 id=\\"custom-title\\">
-  Container Title<a aria-hidden=\\"true\\" href=\\"#custom-title\\">#</a>
+"<h2 id="custom-title">
+  Container Title<a aria-hidden="true" href="#custom-title">#</a>
 </h2>
 <div>
   <div>Custom Title</div>
@@ -157,88 +157,88 @@ exports[`compile > should render container title in md correctly 1`] = `
 `;
 
 exports[`compile > should render container title in md correctly 2`] = `
-"import { useMDXComponents as _provideComponents } from \\"@mdx-js/react\\";
+"import { useMDXComponents as _provideComponents } from "@mdx-js/react";
 function _createMdxContent(props) {
   const _components = Object.assign(
     {
-      h2: \\"h2\\",
-      a: \\"a\\",
-      div: \\"div\\",
-      p: \\"p\\",
-      code: \\"code\\",
+      h2: "h2",
+      a: "a",
+      div: "div",
+      p: "p",
+      code: "code",
     },
     _provideComponents(),
     props.components
   );
   return (
     <>
-      <_components.h2 id=\\"custom-title\\">
-        {\\"Container Title\\"}
+      <_components.h2 id="custom-title">
+        {"Container Title"}
         <_components.a
-          className=\\"header-anchor\\"
-          aria-hidden=\\"true\\"
-          href=\\"#custom-title\\"
+          className="header-anchor"
+          aria-hidden="true"
+          href="#custom-title"
         >
-          {\\"#\\"}
+          {"#"}
         </_components.a>
       </_components.h2>
-      {\\"<LF>\\"}
-      <_components.div className=\\"rspress-directive tip\\">
-        <_components.div className=\\"rspress-directive-title\\">
-          {\\"Custom Title\\"}
+      {"\\n"}
+      <_components.div className="rspress-directive tip">
+        <_components.div className="rspress-directive-title">
+          {"Custom Title"}
         </_components.div>
-        <_components.div className=\\"rspress-directive-content\\">
+        <_components.div className="rspress-directive-content">
           <_components.p>
-            {\\"This is a \\"}
-            <_components.code>{\\"block\\"}</_components.code>
-            {\\" of \\"}
-            <_components.code>{\\"Custom Title\\"}</_components.code>
-            {\\"<LF>\\"}
+            {"This is a "}
+            <_components.code>{"block"}</_components.code>
+            {" of "}
+            <_components.code>{"Custom Title"}</_components.code>
+            {"\\n"}
           </_components.p>
         </_components.div>
       </_components.div>
-      {\\"<LF>\\"}
-      <_components.div className=\\"rspress-directive tip\\">
-        <_components.div className=\\"rspress-directive-title\\">
-          {\\"Custom Title\\"}
+      {"\\n"}
+      <_components.div className="rspress-directive tip">
+        <_components.div className="rspress-directive-title">
+          {"Custom Title"}
         </_components.div>
-        <_components.div className=\\"rspress-directive-content\\">
+        <_components.div className="rspress-directive-content">
           <_components.p>
-            {\\"This is a \\"}
-            <_components.code>{\\"block\\"}</_components.code>
-            {\\" of \\"}
-            <_components.code>{\\"Custom Title\\"}</_components.code>
-            {\\"<LF>\\"}
+            {"This is a "}
+            <_components.code>{"block"}</_components.code>
+            {" of "}
+            <_components.code>{"Custom Title"}</_components.code>
+            {"\\n"}
           </_components.p>
         </_components.div>
       </_components.div>
-      {\\"<LF>\\"}
-      <_components.div className=\\"rspress-directive tip\\">
-        <_components.div className=\\"rspress-directive-title\\">
-          {\\"Custom Title\\"}
+      {"\\n"}
+      <_components.div className="rspress-directive tip">
+        <_components.div className="rspress-directive-title">
+          {"Custom Title"}
         </_components.div>
-        <_components.div className=\\"rspress-directive-content\\">
+        <_components.div className="rspress-directive-content">
           <_components.p>
-            {\\"This is a \\"}
-            <_components.code>{\\"block\\"}</_components.code>
-            {\\" of \\"}
-            <_components.code>{\\"Custom Title\\"}</_components.code>
-            {\\"<LF>\\"}
+            {"This is a "}
+            <_components.code>{"block"}</_components.code>
+            {" of "}
+            <_components.code>{"Custom Title"}</_components.code>
+            {"\\n"}
           </_components.p>
         </_components.div>
       </_components.div>
-      {\\"<LF>\\"}
-      <_components.div className=\\"rspress-directive tip\\">
-        <_components.div className=\\"rspress-directive-title\\">
-          {\\"Custom Title\\"}
+      {"\\n"}
+      <_components.div className="rspress-directive tip">
+        <_components.div className="rspress-directive-title">
+          {"Custom Title"}
         </_components.div>
-        <_components.div className=\\"rspress-directive-content\\">
+        <_components.div className="rspress-directive-content">
           <_components.p>
-            {\\"This is a \\"}
-            <_components.code>{\\"block\\"}</_components.code>
-            {\\" of \\"}
-            <_components.code>{\\"Custom Title\\"}</_components.code>
-            {\\"<LF>\\"}
+            {"This is a "}
+            <_components.code>{"block"}</_components.code>
+            {" of "}
+            <_components.code>{"Custom Title"}</_components.code>
+            {"\\n"}
           </_components.p>
         </_components.div>
       </_components.div>
@@ -264,8 +264,8 @@ export default MDXContent;
 `;
 
 exports[`compile > should render container title in mdx correctly 1`] = `
-"<h2 id=\\"custom-title\\">
-  Container Title <a aria-hidden=\\"true\\" href=\\"#custom-title\\">#</a>
+"<h2 id="custom-title">
+  Container Title <a aria-hidden="true" href="#custom-title">#</a>
 </h2>
 <div>
   <div>Custom Title</div>
@@ -295,88 +295,88 @@ exports[`compile > should render container title in mdx correctly 1`] = `
 `;
 
 exports[`compile > should render container title in mdx correctly 2`] = `
-"import { useMDXComponents as _provideComponents } from \\"@mdx-js/react\\";
+"import { useMDXComponents as _provideComponents } from "@mdx-js/react";
 function _createMdxContent(props) {
   const _components = Object.assign(
     {
-      h2: \\"h2\\",
-      a: \\"a\\",
-      div: \\"div\\",
-      p: \\"p\\",
-      code: \\"code\\",
+      h2: "h2",
+      a: "a",
+      div: "div",
+      p: "p",
+      code: "code",
     },
     _provideComponents(),
     props.components
   );
   return (
     <>
-      <_components.h2 id=\\"custom-title\\">
-        {\\"Container Title \\"}
+      <_components.h2 id="custom-title">
+        {"Container Title "}
         <_components.a
-          className=\\"header-anchor\\"
-          aria-hidden=\\"true\\"
-          href=\\"#custom-title\\"
+          className="header-anchor"
+          aria-hidden="true"
+          href="#custom-title"
         >
-          {\\"#\\"}
+          {"#"}
         </_components.a>
       </_components.h2>
-      {\\"<LF>\\"}
-      <_components.div className=\\"rspress-directive tip\\">
-        <_components.div className=\\"rspress-directive-title\\">
-          {\\"Custom Title\\"}
+      {"\\n"}
+      <_components.div className="rspress-directive tip">
+        <_components.div className="rspress-directive-title">
+          {"Custom Title"}
         </_components.div>
-        <_components.div className=\\"rspress-directive-content\\">
+        <_components.div className="rspress-directive-content">
           <_components.p>
-            {\\"<LF>This is a \\"}
-            <_components.code>{\\"block\\"}</_components.code>
-            {\\" of \\"}
-            <_components.code>{\\"Custom Title\\"}</_components.code>
-            {\\"<LF>\\"}
+            {"\\nThis is a "}
+            <_components.code>{"block"}</_components.code>
+            {" of "}
+            <_components.code>{"Custom Title"}</_components.code>
+            {"\\n"}
           </_components.p>
         </_components.div>
       </_components.div>
-      {\\"<LF>\\"}
-      <_components.div className=\\"rspress-directive tip\\">
-        <_components.div className=\\"rspress-directive-title\\">
-          {\\"Custom Title\\"}
+      {"\\n"}
+      <_components.div className="rspress-directive tip">
+        <_components.div className="rspress-directive-title">
+          {"Custom Title"}
         </_components.div>
-        <_components.div className=\\"rspress-directive-content\\">
+        <_components.div className="rspress-directive-content">
           <_components.p>
-            {\\"<LF>This is a \\"}
-            <_components.code>{\\"block\\"}</_components.code>
-            {\\" of \\"}
-            <_components.code>{\\"Custom Title\\"}</_components.code>
-            {\\"<LF>\\"}
+            {"\\nThis is a "}
+            <_components.code>{"block"}</_components.code>
+            {" of "}
+            <_components.code>{"Custom Title"}</_components.code>
+            {"\\n"}
           </_components.p>
         </_components.div>
       </_components.div>
-      {\\"<LF>\\"}
-      <_components.div className=\\"rspress-directive tip\\">
-        <_components.div className=\\"rspress-directive-title\\">
-          {\\"Custom Title\\"}
+      {"\\n"}
+      <_components.div className="rspress-directive tip">
+        <_components.div className="rspress-directive-title">
+          {"Custom Title"}
         </_components.div>
-        <_components.div className=\\"rspress-directive-content\\">
+        <_components.div className="rspress-directive-content">
           <_components.p>
-            {\\"This is a \\"}
-            <_components.code>{\\"block\\"}</_components.code>
-            {\\" of \\"}
-            <_components.code>{\\"Custom Title\\"}</_components.code>
-            {\\"<LF>\\"}
+            {"This is a "}
+            <_components.code>{"block"}</_components.code>
+            {" of "}
+            <_components.code>{"Custom Title"}</_components.code>
+            {"\\n"}
           </_components.p>
         </_components.div>
       </_components.div>
-      {\\"<LF>\\"}
-      <_components.div className=\\"rspress-directive tip\\">
-        <_components.div className=\\"rspress-directive-title\\">
-          {\\"Custom Title\\"}
+      {"\\n"}
+      <_components.div className="rspress-directive tip">
+        <_components.div className="rspress-directive-title">
+          {"Custom Title"}
         </_components.div>
-        <_components.div className=\\"rspress-directive-content\\">
+        <_components.div className="rspress-directive-content">
           <_components.p>
-            {\\"This is a \\"}
-            <_components.code>{\\"block\\"}</_components.code>
-            {\\" of \\"}
-            <_components.code>{\\"Custom Title\\"}</_components.code>
-            {\\"<LF>\\"}
+            {"This is a "}
+            <_components.code>{"block"}</_components.code>
+            {" of "}
+            <_components.code>{"Custom Title"}</_components.code>
+            {"\\n"}
           </_components.p>
         </_components.div>
       </_components.div>
@@ -442,105 +442,105 @@ exports[`compile > should render container type correctly 1`] = `
 `;
 
 exports[`compile > should render container type correctly 2`] = `
-"import { useMDXComponents as _provideComponents } from \\"@mdx-js/react\\";
+"import { useMDXComponents as _provideComponents } from "@mdx-js/react";
 function _createMdxContent(props) {
   const _components = Object.assign(
     {
-      div: \\"div\\",
-      p: \\"p\\",
-      code: \\"code\\",
+      div: "div",
+      p: "p",
+      code: "code",
     },
     _provideComponents(),
     props.components
   );
   return (
     <>
-      <_components.div className=\\"rspress-directive tip\\">
-        <_components.div className=\\"rspress-directive-title\\">
-          {\\"TIP\\"}
+      <_components.div className="rspress-directive tip">
+        <_components.div className="rspress-directive-title">
+          {"TIP"}
         </_components.div>
-        <_components.div className=\\"rspress-directive-content\\">
+        <_components.div className="rspress-directive-content">
           <_components.p>
-            {\\"This is a \\"}
-            <_components.code>{\\"block\\"}</_components.code>
-            {\\" of type \\"}
-            <_components.code>{\\"tip\\"}</_components.code>
-            {\\"<LF>\\"}
+            {"This is a "}
+            <_components.code>{"block"}</_components.code>
+            {" of type "}
+            <_components.code>{"tip"}</_components.code>
+            {"\\n"}
           </_components.p>
         </_components.div>
       </_components.div>
-      {\\"<LF>\\"}
-      <_components.div className=\\"rspress-directive info\\">
-        <_components.div className=\\"rspress-directive-title\\">
-          {\\"INFO\\"}
+      {"\\n"}
+      <_components.div className="rspress-directive info">
+        <_components.div className="rspress-directive-title">
+          {"INFO"}
         </_components.div>
-        <_components.div className=\\"rspress-directive-content\\">
+        <_components.div className="rspress-directive-content">
           <_components.p>
-            {\\"This is a \\"}
-            <_components.code>{\\"block\\"}</_components.code>
-            {\\" of type \\"}
-            <_components.code>{\\"info\\"}</_components.code>
-            {\\"<LF>\\"}
+            {"This is a "}
+            <_components.code>{"block"}</_components.code>
+            {" of type "}
+            <_components.code>{"info"}</_components.code>
+            {"\\n"}
           </_components.p>
         </_components.div>
       </_components.div>
-      {\\"<LF>\\"}
-      <_components.div className=\\"rspress-directive note\\">
-        <_components.div className=\\"rspress-directive-title\\">
-          {\\"NOTE\\"}
+      {"\\n"}
+      <_components.div className="rspress-directive note">
+        <_components.div className="rspress-directive-title">
+          {"NOTE"}
         </_components.div>
-        <_components.div className=\\"rspress-directive-content\\">
+        <_components.div className="rspress-directive-content">
           <_components.p>
-            {\\"This is a \\"}
-            <_components.code>{\\"block\\"}</_components.code>
-            {\\" of type \\"}
-            <_components.code>{\\"info\\"}</_components.code>
-            {\\"<LF>\\"}
+            {"This is a "}
+            <_components.code>{"block"}</_components.code>
+            {" of type "}
+            <_components.code>{"info"}</_components.code>
+            {"\\n"}
           </_components.p>
         </_components.div>
       </_components.div>
-      {\\"<LF>\\"}
-      <_components.div className=\\"rspress-directive warning\\">
-        <_components.div className=\\"rspress-directive-title\\">
-          {\\"WARNING\\"}
+      {"\\n"}
+      <_components.div className="rspress-directive warning">
+        <_components.div className="rspress-directive-title">
+          {"WARNING"}
         </_components.div>
-        <_components.div className=\\"rspress-directive-content\\">
+        <_components.div className="rspress-directive-content">
           <_components.p>
-            {\\"This is a \\"}
-            <_components.code>{\\"block\\"}</_components.code>
-            {\\" of type \\"}
-            <_components.code>{\\"warning\\"}</_components.code>
-            {\\"<LF>\\"}
+            {"This is a "}
+            <_components.code>{"block"}</_components.code>
+            {" of type "}
+            <_components.code>{"warning"}</_components.code>
+            {"\\n"}
           </_components.p>
         </_components.div>
       </_components.div>
-      {\\"<LF>\\"}
-      <_components.div className=\\"rspress-directive danger\\">
-        <_components.div className=\\"rspress-directive-title\\">
-          {\\"DANGER\\"}
+      {"\\n"}
+      <_components.div className="rspress-directive danger">
+        <_components.div className="rspress-directive-title">
+          {"DANGER"}
         </_components.div>
-        <_components.div className=\\"rspress-directive-content\\">
+        <_components.div className="rspress-directive-content">
           <_components.p>
-            {\\"This is a \\"}
-            <_components.code>{\\"block\\"}</_components.code>
-            {\\" of type \\"}
-            <_components.code>{\\"danger\\"}</_components.code>
-            {\\"<LF>\\"}
+            {"This is a "}
+            <_components.code>{"block"}</_components.code>
+            {" of type "}
+            <_components.code>{"danger"}</_components.code>
+            {"\\n"}
           </_components.p>
         </_components.div>
       </_components.div>
-      {\\"<LF>\\"}
-      <_components.div className=\\"rspress-directive caution\\">
-        <_components.div className=\\"rspress-directive-title\\">
-          {\\"CAUTION\\"}
+      {"\\n"}
+      <_components.div className="rspress-directive caution">
+        <_components.div className="rspress-directive-title">
+          {"CAUTION"}
         </_components.div>
-        <_components.div className=\\"rspress-directive-content\\">
+        <_components.div className="rspress-directive-content">
           <_components.p>
-            {\\"This is a \\"}
-            <_components.code>{\\"block\\"}</_components.code>
-            {\\" of type \\"}
-            <_components.code>{\\"danger\\"}</_components.code>
-            {\\"<LF>\\"}
+            {"This is a "}
+            <_components.code>{"block"}</_components.code>
+            {" of type "}
+            <_components.code>{"danger"}</_components.code>
+            {"\\n"}
           </_components.p>
         </_components.div>
       </_components.div>
@@ -612,120 +612,120 @@ exports[`compile > should render container type with space correctly 1`] = `
 `;
 
 exports[`compile > should render container type with space correctly 2`] = `
-"import { useMDXComponents as _provideComponents } from \\"@mdx-js/react\\";
+"import { useMDXComponents as _provideComponents } from "@mdx-js/react";
 function _createMdxContent(props) {
   const _components = Object.assign(
     {
-      div: \\"div\\",
-      p: \\"p\\",
-      code: \\"code\\",
+      div: "div",
+      p: "p",
+      code: "code",
     },
     _provideComponents(),
     props.components
   );
   return (
     <>
-      <_components.div className=\\"rspress-directive tip\\">
-        <_components.div className=\\"rspress-directive-title\\">
-          {\\"TIP\\"}
+      <_components.div className="rspress-directive tip">
+        <_components.div className="rspress-directive-title">
+          {"TIP"}
         </_components.div>
-        <_components.div className=\\"rspress-directive-content\\">
+        <_components.div className="rspress-directive-content">
           <_components.p>
-            {\\"This is a \\"}
-            <_components.code>{\\"block\\"}</_components.code>
-            {\\" of type \\"}
-            <_components.code>{\\"tip\\"}</_components.code>
-            {\\"<LF>\\"}
+            {"This is a "}
+            <_components.code>{"block"}</_components.code>
+            {" of type "}
+            <_components.code>{"tip"}</_components.code>
+            {"\\n"}
           </_components.p>
         </_components.div>
       </_components.div>
-      {\\"<LF>\\"}
-      <_components.div className=\\"rspress-directive tip\\">
-        <_components.div className=\\"rspress-directive-title\\">
-          {\\"TIP\\"}
+      {"\\n"}
+      <_components.div className="rspress-directive tip">
+        <_components.div className="rspress-directive-title">
+          {"TIP"}
         </_components.div>
-        <_components.div className=\\"rspress-directive-content\\">
+        <_components.div className="rspress-directive-content">
           <_components.p>
-            {\\"This is a \\"}
-            <_components.code>{\\"block\\"}</_components.code>
-            {\\" of type \\"}
-            <_components.code>{\\"tip\\"}</_components.code>
-            {\\"<LF>\\"}
+            {"This is a "}
+            <_components.code>{"block"}</_components.code>
+            {" of type "}
+            <_components.code>{"tip"}</_components.code>
+            {"\\n"}
           </_components.p>
         </_components.div>
       </_components.div>
-      {\\"<LF>\\"}
-      <_components.div className=\\"rspress-directive info\\">
-        <_components.div className=\\"rspress-directive-title\\">
-          {\\"INFO\\"}
+      {"\\n"}
+      <_components.div className="rspress-directive info">
+        <_components.div className="rspress-directive-title">
+          {"INFO"}
         </_components.div>
-        <_components.div className=\\"rspress-directive-content\\">
+        <_components.div className="rspress-directive-content">
           <_components.p>
-            {\\"This is a \\"}
-            <_components.code>{\\"block\\"}</_components.code>
-            {\\" of type \\"}
-            <_components.code>{\\"info\\"}</_components.code>
-            {\\"<LF>\\"}
+            {"This is a "}
+            <_components.code>{"block"}</_components.code>
+            {" of type "}
+            <_components.code>{"info"}</_components.code>
+            {"\\n"}
           </_components.p>
         </_components.div>
       </_components.div>
-      {\\"<LF>\\"}
-      <_components.div className=\\"rspress-directive note\\">
-        <_components.div className=\\"rspress-directive-title\\">
-          {\\"NOTE\\"}
+      {"\\n"}
+      <_components.div className="rspress-directive note">
+        <_components.div className="rspress-directive-title">
+          {"NOTE"}
         </_components.div>
-        <_components.div className=\\"rspress-directive-content\\">
+        <_components.div className="rspress-directive-content">
           <_components.p>
-            {\\"This is a \\"}
-            <_components.code>{\\"block\\"}</_components.code>
-            {\\" of type \\"}
-            <_components.code>{\\"info\\"}</_components.code>
-            {\\"<LF>\\"}
+            {"This is a "}
+            <_components.code>{"block"}</_components.code>
+            {" of type "}
+            <_components.code>{"info"}</_components.code>
+            {"\\n"}
           </_components.p>
         </_components.div>
       </_components.div>
-      {\\"<LF>\\"}
-      <_components.div className=\\"rspress-directive warning\\">
-        <_components.div className=\\"rspress-directive-title\\">
-          {\\"WARNING\\"}
+      {"\\n"}
+      <_components.div className="rspress-directive warning">
+        <_components.div className="rspress-directive-title">
+          {"WARNING"}
         </_components.div>
-        <_components.div className=\\"rspress-directive-content\\">
+        <_components.div className="rspress-directive-content">
           <_components.p>
-            {\\"This is a \\"}
-            <_components.code>{\\"block\\"}</_components.code>
-            {\\" of type \\"}
-            <_components.code>{\\"warning\\"}</_components.code>
-            {\\"<LF>\\"}
+            {"This is a "}
+            <_components.code>{"block"}</_components.code>
+            {" of type "}
+            <_components.code>{"warning"}</_components.code>
+            {"\\n"}
           </_components.p>
         </_components.div>
       </_components.div>
-      {\\"<LF>\\"}
-      <_components.div className=\\"rspress-directive danger\\">
-        <_components.div className=\\"rspress-directive-title\\">
-          {\\"DANGER\\"}
+      {"\\n"}
+      <_components.div className="rspress-directive danger">
+        <_components.div className="rspress-directive-title">
+          {"DANGER"}
         </_components.div>
-        <_components.div className=\\"rspress-directive-content\\">
+        <_components.div className="rspress-directive-content">
           <_components.p>
-            {\\"This is a \\"}
-            <_components.code>{\\"block\\"}</_components.code>
-            {\\" of type \\"}
-            <_components.code>{\\"danger\\"}</_components.code>
-            {\\"<LF>\\"}
+            {"This is a "}
+            <_components.code>{"block"}</_components.code>
+            {" of type "}
+            <_components.code>{"danger"}</_components.code>
+            {"\\n"}
           </_components.p>
         </_components.div>
       </_components.div>
-      {\\"<LF>\\"}
-      <_components.div className=\\"rspress-directive caution\\">
-        <_components.div className=\\"rspress-directive-title\\">
-          {\\"CAUTION\\"}
+      {"\\n"}
+      <_components.div className="rspress-directive caution">
+        <_components.div className="rspress-directive-title">
+          {"CAUTION"}
         </_components.div>
-        <_components.div className=\\"rspress-directive-content\\">
+        <_components.div className="rspress-directive-content">
           <_components.p>
-            {\\"This is a \\"}
-            <_components.code>{\\"block\\"}</_components.code>
-            {\\" of type \\"}
-            <_components.code>{\\"danger\\"}</_components.code>
-            {\\"<LF>\\"}
+            {"This is a "}
+            <_components.code>{"block"}</_components.code>
+            {" of type "}
+            <_components.code>{"danger"}</_components.code>
+            {"\\n"}
           </_components.p>
         </_components.div>
       </_components.div>
