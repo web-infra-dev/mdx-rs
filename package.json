@@ -26,6 +26,7 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "path-serializer": "0.2.1",
     "@mdx-js/mdx": "^2.3.0",
     "@napi-rs/cli": "^2.14.8",
     "benchmark": "^2.1.4",
