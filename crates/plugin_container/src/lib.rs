@@ -127,14 +127,14 @@ fn parse_github_alerts_container_meta(meta: &str) -> (String, String) {
   // GitHub Alert's verification is very strict.
   // space and breaks are not allowed, they must be a whole.
   // but can remove spaces or breaks at the beginning and end.
-  let mut lines = meta.lines();
+  let lines = meta.lines();
 
   let mut container_type = String::new();
   let mut remaining_data = String::new();
 
   let mut is_first_line = true;
 
-  while let Some(line) = lines.next() {
+  for line in lines {
     // clear breaks if no container_type
     if container_type.is_empty() && line.is_empty() {
       continue;
@@ -143,7 +143,7 @@ fn parse_github_alerts_container_meta(meta: &str) -> (String, String) {
     if container_type.is_empty() && is_first_line {
       is_first_line = false;
 
-      let split_line = line.trim().split_once("]");
+      let split_line = line.trim().split_once(']');
 
       container_type = split_line
         .unwrap_or(("", ""))
@@ -229,7 +229,8 @@ fn traverse_children(root: &mut hast::Root) {
                 if text.value.trim().starts_with("[!") {
                   // split data if previous step parse in one line
                   // e.g <p>[!TIP] this is a tip</p>
-                  let (self_container_type, remaining_data) = parse_github_alerts_container_meta(&text.value);
+                  let (self_container_type, remaining_data) =
+                    parse_github_alerts_container_meta(&text.value);
                   if !is_valid_container_type(&self_container_type) {
                     index += 1;
                     continue;
@@ -244,9 +245,9 @@ fn traverse_children(root: &mut hast::Root) {
 
                   // reform paragraph tag
                   let mut paragraph_children = first_element.children.clone();
-                  if remaining_data.len() > 0 {
+                  if !remaining_data.is_empty() {
                     paragraph_children[0] = hast::Node::Text(hast::Text {
-                      value: remaining_data.into(),
+                      value: remaining_data,
                       position: None,
                     })
                   } else {
@@ -736,12 +737,21 @@ mod tests {
     );
   }
 
- #[test]
- fn test_parse_github_alerts_container_meta() {
-  assert_eq!(parse_github_alerts_container_meta("[!TIP]"), ("TIP".into(), "".into()));
-  assert_eq!(parse_github_alerts_container_meta("[!TIP this is tip block"), ("".into(), "".into()));
-  assert_eq!(parse_github_alerts_container_meta("[!TIP] this is tip block"), ("TIP".into(), " this is tip block".into()));
- }
+  #[test]
+  fn test_parse_github_alerts_container_meta() {
+    assert_eq!(
+      parse_github_alerts_container_meta("[!TIP]"),
+      ("TIP".into(), "".into())
+    );
+    assert_eq!(
+      parse_github_alerts_container_meta("[!TIP this is tip block"),
+      ("".into(), "".into())
+    );
+    assert_eq!(
+      parse_github_alerts_container_meta("[!TIP] this is tip block"),
+      ("TIP".into(), " this is tip block".into())
+    );
+  }
 
   #[test]
   fn test_container_plugin_with_mdx_flow_in_content() {
@@ -961,12 +971,10 @@ mod tests {
                 "className".into(),
                 hast::PropertyValue::SpaceSeparated(vec!["rspress-directive-content".into()])
               )],
-              children: vec![
-                hast::Node::Text(hast::Text {
-                  value: "\n".into(),
-                  position: None,
-                }),
-              ],
+              children: vec![hast::Node::Text(hast::Text {
+                value: "\n".into(),
+                position: None,
+              }),],
               position: None,
             })
           ],
