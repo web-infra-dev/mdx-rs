@@ -107,4 +107,19 @@ describe("compile", () => {
     expect(html).toMatchSnapshot();
     expect(result).toMatchSnapshot();
   });
+
+  test("should render github alerts correctly", async () => {
+    const { code: result, html } = await testCompile({
+      value: readFileSync(
+          path.join(__dirname, "./github-alert-syntax.md"),
+          "utf8",
+      ),
+      filepath: "xxx.mdx",
+      development: true,
+      root: "xxx",
+    });
+
+    expect(html).toMatchSnapshot();
+    expect(result).toMatchSnapshot();
+  });
 });

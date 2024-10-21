@@ -21,3 +21,7 @@ This is a `block` of type `danger`
 :::caution
 This is a `block` of type `danger`
 :::
+
+:::details
+This is a `block` of type `details`
+:::
