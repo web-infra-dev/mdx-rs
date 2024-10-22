@@ -1,3 +1,12 @@
+# [0.6.0](https://github.com/web-infra-dev/mdx-rs/compare/v0.5.7...v0.6.0) (2024-10-22)
+
+
+### Features
+
+* **plugin_container:** support for GitHub markdown alerts syntax ([#58](https://github.com/web-infra-dev/mdx-rs/issues/58)) ([3abca5f](https://github.com/web-infra-dev/mdx-rs/commit/3abca5f4ce53974dfa3dacca1679eb231de434c5))
+
+
+
 ## [0.5.7](https://github.com/web-infra-dev/mdx-rs/compare/v0.5.6...v0.5.7) (2024-05-16)
 
 
@@ -106,7 +115,7 @@
 
 ### Bug Fixes
 
-* anchor missed when link existed in header ([6504df2](https://github.com/web-infra-dev/mdx-rs/commit/6504df27555565aba8262326d5947b3427915fb2))
+* anchor missed when link exsited in header ([6504df2](https://github.com/web-infra-dev/mdx-rs/commit/6504df27555565aba8262326d5947b3427915fb2))
 
 
 
