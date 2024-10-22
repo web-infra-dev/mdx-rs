@@ -42,9 +42,9 @@ describe("compile", () => {
   test("should render container type correctly", async () => {
     const { code: result, html } = await testCompile({
       value: readFileSync(path.join(__dirname, "./container-type.md"), "utf8"),
-      filepath: "xxx.mdx",
+      filepath: "container-type.md",
       development: true,
-      root: "xxx",
+      root: "",
     });
 
     expect(html).toMatchSnapshot();
@@ -57,9 +57,9 @@ describe("compile", () => {
         path.join(__dirname, "./container-type-with-space.md"),
         "utf8",
       ),
-      filepath: "xxx.mdx",
+      filepath: "container-type-with-space.md",
       development: true,
-      root: "xxx",
+      root: "",
     });
 
     expect(html).toMatchSnapshot();
@@ -72,9 +72,9 @@ describe("compile", () => {
         path.join(__dirname, "./container-content.md"),
         "utf8",
       ),
-      filepath: "xxx.mdx",
+      filepath: "container-content.md",
       development: true,
-      root: "xxx",
+      root: "",
     });
 
     expect(html).toMatchSnapshot();
@@ -87,9 +87,9 @@ describe("compile", () => {
         path.join(__dirname, "./container-title.mdx"),
         "utf8",
       ),
-      filepath: "xxx.mdx",
+      filepath: "container-title.mdx",
       development: true,
-      root: "xxx",
+      root: "",
     });
 
     expect(html).toMatchSnapshot();
@@ -99,9 +99,24 @@ describe("compile", () => {
   test("should render container title in md correctly", async () => {
     const { code: result, html } = await testCompile({
       value: readFileSync(path.join(__dirname, "./container-title.md"), "utf8"),
-      filepath: "xxx.md",
+      filepath: "container-title.md",
       development: true,
-      root: "xxx",
+      root: "",
+    });
+
+    expect(html).toMatchSnapshot();
+    expect(result).toMatchSnapshot();
+  });
+
+  test("should render github alerts correctly", async () => {
+    const { code: result, html } = await testCompile({
+      value: readFileSync(
+          path.join(__dirname, "./github-alert-syntax.md"),
+          "utf8",
+      ),
+      filepath: "github-alert-syntax.md",
+      development: true,
+      root: "",
     });
 
     expect(html).toMatchSnapshot();

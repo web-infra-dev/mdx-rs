@@ -438,6 +438,12 @@ exports[`compile > should render container type correctly 1`] = `
     <p>This is a <code>block</code> of type <code>danger</code></p>
   </div>
 </div>
+<details>
+  <summary>DETAILS</summary>
+  <div>
+    <p>This is a <code>block</code> of type <code>details</code></p>
+  </div>
+</details>
 "
 `;
 
@@ -449,6 +455,8 @@ function _createMdxContent(props) {
       div: "div",
       p: "p",
       code: "code",
+      details: "details",
+      summary: "summary",
     },
     _provideComponents(),
     props.components
@@ -544,6 +552,21 @@ function _createMdxContent(props) {
           </_components.p>
         </_components.div>
       </_components.div>
+      {"\\n"}
+      <_components.details className="rspress-directive details">
+        <_components.summary className="rspress-directive-title">
+          {"DETAILS"}
+        </_components.summary>
+        <_components.div className="rspress-directive-content">
+          <_components.p>
+            {"This is a "}
+            <_components.code>{"block"}</_components.code>
+            {" of type "}
+            <_components.code>{"details"}</_components.code>
+            {"\\n"}
+          </_components.p>
+        </_components.div>
+      </_components.details>
     </>
   );
 }
@@ -729,6 +752,160 @@ function _createMdxContent(props) {
           </_components.p>
         </_components.div>
       </_components.div>
+    </>
+  );
+}
+function MDXContent(props = {}) {
+  const { wrapper: MDXLayout } = Object.assign(
+    {},
+    _provideComponents(),
+    props.components
+  );
+  return MDXLayout ? (
+    <MDXLayout {...props}>
+      <_createMdxContent {...props} />
+    </MDXLayout>
+  ) : (
+    _createMdxContent(props)
+  );
+}
+export default MDXContent;
+"
+`;
+
+exports[`compile > should render github alerts correctly 1`] = `
+"<div>
+  <div>TIP</div>
+  <div>
+    <p>
+      <strong>Helpful advice for doing things better or more easily.</strong>
+    </p>
+  </div>
+</div>
+<div>
+  <div>NOTE</div>
+  <div>
+    <h1>Please read this note!</h1>
+  </div>
+</div>
+<div>
+  <div>WARNING</div>
+  <div>
+    <p>Use <code>dummy</code> instead of <code>demo</code></p>
+  </div>
+</div>
+<div>
+  <div>CAUTION</div>
+  <div>
+    <p>Use this code:-</p>
+    <pre><code>console.log(69);
+</code></pre>
+  </div>
+</div>
+<details>
+  <summary>DETAILS</summary>
+  <div>
+    <p>This is a <code>block</code> of type <code>details</code></p>
+  </div>
+</details>
+"
+`;
+
+exports[`compile > should render github alerts correctly 2`] = `
+"import { useMDXComponents as _provideComponents } from "@mdx-js/react";
+function _createMdxContent(props) {
+  const _components = Object.assign(
+    {
+      div: "div",
+      p: "p",
+      strong: "strong",
+      h1: "h1",
+      code: "code",
+      pre: "pre",
+      details: "details",
+      summary: "summary",
+    },
+    _provideComponents(),
+    props.components
+  );
+  return (
+    <>
+      <_components.div className="rspress-directive TIP">
+        <_components.div className="rspress-directive-title">
+          {"TIP"}
+        </_components.div>
+        <_components.div className="rspress-directive-content">
+          {"\\n"}
+          <_components.p>
+            <_components.strong>
+              {"Helpful advice for doing things better or more easily."}
+            </_components.strong>
+          </_components.p>
+          {"\\n"}
+        </_components.div>
+      </_components.div>
+      {"\\n"}
+      <_components.div className="rspress-directive NOTE">
+        <_components.div className="rspress-directive-title">
+          {"NOTE"}
+        </_components.div>
+        <_components.div className="rspress-directive-content">
+          {"\\n"}
+          {"\\n"}
+          <_components.h1>{"Please read this note!"}</_components.h1>
+          {"\\n"}
+        </_components.div>
+      </_components.div>
+      {"\\n"}
+      <_components.div className="rspress-directive warning">
+        <_components.div className="rspress-directive-title">
+          {"WARNING"}
+        </_components.div>
+        <_components.div className="rspress-directive-content">
+          {"\\n"}
+          <_components.p>
+            {"Use "}
+            <_components.code>{"dummy"}</_components.code>
+            {" instead of "}
+            <_components.code>{"demo"}</_components.code>
+          </_components.p>
+          {"\\n"}
+        </_components.div>
+      </_components.div>
+      {"\\n"}
+      <_components.div className="rspress-directive CAUTION">
+        <_components.div className="rspress-directive-title">
+          {"CAUTION"}
+        </_components.div>
+        <_components.div className="rspress-directive-content">
+          {"\\n"}
+          {"\\n"}
+          <_components.p>{"Use this code:-"}</_components.p>
+          {"\\n"}
+          <_components.pre>
+            <_components.code className="language-javascript">
+              {"console.log(69);\\n"}
+            </_components.code>
+          </_components.pre>
+          {"\\n"}
+        </_components.div>
+      </_components.div>
+      {"\\n"}
+      <_components.details className="rspress-directive details">
+        <_components.summary className="rspress-directive-title">
+          {"DETAILS"}
+        </_components.summary>
+        <_components.div className="rspress-directive-content">
+          {"\\n"}
+          <_components.p>
+            {"This is a "}
+            <_components.code>{"block"}</_components.code>
+            {" of type "}
+            <_components.code>{"details"}</_components.code>
+          </_components.p>
+          {"\\n"}
+        </_components.div>
+      </_components.details>
     </>
   );
 }
