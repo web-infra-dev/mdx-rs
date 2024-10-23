@@ -51,13 +51,15 @@ fn create_new_container_node(
   container_content: &Vec<hast::Node>,
 ) -> hast::Node {
   // if the container title is empty, we use the container type and use camel case.
-  let title = if container_title.is_empty() {
+  let container_title = if container_title.is_empty() {
     let mut title = container_type.to_string();
     title.make_ascii_uppercase();
     title
   } else {
     container_title.to_string()
   };
+
+  let container_type = container_type.to_lowercase();
 
   let is_details = container_type == "details";
   let title_tag_name = if is_details { "summary" } else { "div" };
@@ -70,7 +72,7 @@ fn create_new_container_node(
       hast::PropertyValue::SpaceSeparated(vec!["rspress-directive-title".into()]),
     )],
     children: vec![hast::Node::Text(hast::Text {
-      value: title,
+      value: container_title,
       position: None,
     })],
     position: None,
@@ -88,7 +90,7 @@ fn create_new_container_node(
     tag_name: root_tag_name.into(),
     properties: vec![(
       "className".into(),
-      hast::PropertyValue::SpaceSeparated(vec!["rspress-directive".into(), container_type.into()]),
+      hast::PropertyValue::SpaceSeparated(vec!["rspress-directive".into(), container_type]),
     )],
     children: vec![
       hast::Node::Element(container_title_node),
@@ -380,8 +382,8 @@ pub fn mdx_plugin_container(root: &mut hast::Node) {
   // > [!tip]
   // > this is a tip
   // Will be transformed to:
-  // <div class="rspress-directive">
-  //   <div class="rspress-directive-title">tip</div>
+  // <div class="rspress-directive tip">
+  //   <div class="rspress-directive-title">TIP</div>
   //   <div class="rspress-directive-content">
   //     <p>This is a tip</p>
   //   </div>
@@ -950,7 +952,7 @@ mod tests {
           tag_name: "div".into(),
           properties: vec![(
             "className".into(),
-            hast::PropertyValue::SpaceSeparated(vec!["rspress-directive".into(), "TIP".into()])
+            hast::PropertyValue::SpaceSeparated(vec!["rspress-directive".into(), "tip".into()])
           ),],
           children: vec![
             hast::Node::Element(hast::Element {
