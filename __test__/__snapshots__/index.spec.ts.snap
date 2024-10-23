@@ -830,7 +830,7 @@ function _createMdxContent(props) {
   );
   return (
     <>
-      <_components.div className="rspress-directive TIP">
+      <_components.div className="rspress-directive tip">
         <_components.div className="rspress-directive-title">
           {"TIP"}
         </_components.div>
@@ -845,7 +845,7 @@ function _createMdxContent(props) {
         </_components.div>
       </_components.div>
       {"\\n"}
-      <_components.div className="rspress-directive NOTE">
+      <_components.div className="rspress-directive note">
         <_components.div className="rspress-directive-title">
           {"NOTE"}
         </_components.div>
@@ -873,7 +873,7 @@ function _createMdxContent(props) {
         </_components.div>
       </_components.div>
       {"\\n"}
-      <_components.div className="rspress-directive CAUTION">
+      <_components.div className="rspress-directive caution">
         <_components.div className="rspress-directive-title">
           {"CAUTION"}
         </_components.div>
