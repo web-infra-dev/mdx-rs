@@ -1,3 +1,12 @@
+## [0.6.1](https://github.com/web-infra-dev/mdx-rs/compare/v0.6.0...v0.6.1) (2024-10-23)
+
+
+### Bug Fixes
+
+* container syntax should output lowerCase className ([964a42d](https://github.com/web-infra-dev/mdx-rs/commit/964a42d4910b6710e7501f765a27e3e5a900e3a6))
+
+
+
 # [0.6.0](https://github.com/web-infra-dev/mdx-rs/compare/v0.5.7...v0.6.0) (2024-10-22)
 
 
