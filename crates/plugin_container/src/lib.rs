@@ -90,10 +90,7 @@ fn create_new_container_node(
     tag_name: root_tag_name.into(),
     properties: vec![(
       "className".into(),
-      hast::PropertyValue::SpaceSeparated(vec![
-        "rspress-directive".into(),
-        container_type,
-      ]),
+      hast::PropertyValue::SpaceSeparated(vec!["rspress-directive".into(), container_type]),
     )],
     children: vec![
       hast::Node::Element(container_title_node),
