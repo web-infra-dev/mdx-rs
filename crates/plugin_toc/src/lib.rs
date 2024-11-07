@@ -26,6 +26,7 @@ pub enum NodeType {
   Link,
   Strong,
   Emphasis,
+  Delete,
 }
 
 pub fn extract_text_from_node(node: &mdast::Node, node_type: NodeType) -> String {
@@ -58,6 +59,13 @@ pub fn extract_text_from_node(node: &mdast::Node, node_type: NodeType) -> String
         }
       }
     }
+    NodeType::Delete => {
+      if let mdast::Node::Delete(delete) = node {
+        if let mdast::Node::Text(text) = &delete.children[0] {
+          return text.value.clone();
+        }
+      }
+    }
   }
   String::new()
 }
@@ -78,6 +86,9 @@ pub fn collect_title_in_mdast(heading: &mut Heading) -> (String, String) {
       }
       mdast::Node::Emphasis(_) => {
         title.push_str(format!("*{}*", extract_text_from_node(child, NodeType::Emphasis)).as_str())
+      }
+      mdast::Node::Delete(_) => {
+        title.push_str(format!("~~{}~~", extract_text_from_node(child, NodeType::Delete)).as_str())
       }
       mdast::Node::InlineCode(code) => title.push_str(format!("`{}`", code.value).as_str()),
       mdast::Node::Link(_) => {
@@ -201,6 +212,23 @@ mod tests {
       ],
       position: None,
     };
+    let mut heading5 = mdast::Heading {
+      depth: 1,
+      children: vec![
+        mdast::Node::Text(mdast::Text {
+          value: "Hello".to_string(),
+          position: None,
+        }),
+        mdast::Node::Delete(mdast::Delete {
+          children: vec![mdast::Node::Text(mdast::Text {
+            value: "World".to_string(),
+            position: None,
+          })],
+          position: None,
+        }),
+      ],
+      position: None,
+    };
 
     assert_eq!(
       collect_title_in_mdast(&mut heading),
@@ -217,6 +245,10 @@ mod tests {
     assert_eq!(
       collect_title_in_mdast(&mut heading4),
       ("Hello World".to_string(), "".to_string())
+    );
+    assert_eq!(
+      collect_title_in_mdast(&mut heading5),
+      ("Hello~~World~~".to_string(), "".to_string())
     );
   }
 
