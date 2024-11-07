@@ -29,7 +29,12 @@ fn collect_title_in_hast(node: &mut hast::Element) -> (String, String) {
         }
       }
       hast::Node::Element(element) => {
-        if element.tag_name == "code" || element.tag_name == "a" {
+        if element.tag_name == "code"
+          || element.tag_name == "a"
+          || element.tag_name == "strong"
+          || element.tag_name == "em"
+          || element.tag_name == "del"
+        {
           for child in &element.children {
             if let hast::Node::Text(text) = child {
               title.push_str(&text.value);
@@ -176,6 +181,51 @@ mod tests {
       position: None,
     };
 
+    let mut element3 = hast::Element {
+      tag_name: "h3".to_string(),
+      properties: vec![],
+      children: vec![Node::Element(hast::Element {
+        tag_name: "strong".to_string(),
+        properties: vec![],
+        children: vec![Node::Text(hast::Text {
+          value: "Bold".to_string(),
+          position: None,
+        })],
+        position: None,
+      })],
+      position: None,
+    };
+
+    let mut element4 = hast::Element {
+      tag_name: "h4".to_string(),
+      properties: vec![],
+      children: vec![Node::Element(hast::Element {
+        tag_name: "em".to_string(),
+        properties: vec![],
+        children: vec![Node::Text(hast::Text {
+          value: "Italic".to_string(),
+          position: None,
+        })],
+        position: None,
+      })],
+      position: None,
+    };
+
+    let mut element5 = hast::Element {
+      tag_name: "h5".to_string(),
+      properties: vec![],
+      children: vec![Node::Element(hast::Element {
+        tag_name: "del".to_string(),
+        properties: vec![],
+        children: vec![Node::Text(hast::Text {
+          value: "Strikethrough".to_string(),
+          position: None,
+        })],
+        position: None,
+      })],
+      position: None,
+    };
+
     assert_eq!(
       collect_title_in_hast(&mut element1),
       ("HelloWorldWorld".to_string(), "".to_string())
@@ -183,6 +233,18 @@ mod tests {
     assert_eq!(
       collect_title_in_hast(&mut element2),
       ("Hello World".to_string(), "".to_string())
+    );
+    assert_eq!(
+      collect_title_in_hast(&mut element3),
+      ("Bold".to_string(), "".to_string())
+    );
+    assert_eq!(
+      collect_title_in_hast(&mut element4),
+      ("Italic".to_string(), "".to_string())
+    );
+    assert_eq!(
+      collect_title_in_hast(&mut element5),
+      ("Strikethrough".to_string(), "".to_string())
     );
   }
 
