@@ -1,3 +1,12 @@
+## [0.6.3](https://github.com/web-infra-dev/mdx-rs/compare/v0.6.2...v0.6.3) (2024-11-07)
+
+
+### Bug Fixes
+
+* generate header anchor for strong/em/del syntax ([#64](https://github.com/web-infra-dev/mdx-rs/issues/64)) ([ae73f70](https://github.com/web-infra-dev/mdx-rs/commit/ae73f70a55f39a849d4f2ec5fef6f120907bddde))
+
+
+
 ## [0.6.2](https://github.com/web-infra-dev/mdx-rs/compare/v0.6.1...v0.6.2) (2024-11-07)
 
 
