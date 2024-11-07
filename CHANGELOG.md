@@ -1,9 +1,18 @@
+## [0.6.2](https://github.com/web-infra-dev/mdx-rs/compare/v0.6.1...v0.6.2) (2024-11-07)
+
+
+### Features
+
+* support delete syntax in toc ([#62](https://github.com/web-infra-dev/mdx-rs/issues/62)) ([00f645e](https://github.com/web-infra-dev/mdx-rs/commit/00f645e843a645b95ff75c39d889c554542ef6f8))
+
+
+
 ## [0.6.1](https://github.com/web-infra-dev/mdx-rs/compare/v0.6.0...v0.6.1) (2024-10-23)
 
 
 ### Bug Fixes
 
-* container syntax should output lowerCase className ([964a42d](https://github.com/web-infra-dev/mdx-rs/commit/964a42d4910b6710e7501f765a27e3e5a900e3a6))
+* container syntax should output lowerCase className ([#60](https://github.com/web-infra-dev/mdx-rs/issues/60)) ([0c4c243](https://github.com/web-infra-dev/mdx-rs/commit/0c4c243905c38cf52dc3a4ff50853058c5ea4333))
 
 
 
