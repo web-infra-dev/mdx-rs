@@ -58,6 +58,9 @@ impl Slugger {
     } else {
       value.to_lowercase()
     };
+
+    // Normalize the slug and use it as the base for counting
+    result = normalize_slug(&result).to_string();
     let original_slug = result.clone();
 
     while self.occurrences.contains_key(&result) {
@@ -68,7 +71,7 @@ impl Slugger {
 
     self.occurrences.insert(result.clone(), 0);
 
-    normalize_slug(&result).to_string()
+    result
   }
 
   /**
@@ -139,5 +142,16 @@ mod tests {
     assert_eq!(slug("Hello World", false), "hello-world");
     assert_eq!(slug("`Hello` **World**", false), "hello-world");
     assert_eq!(slug("export 'function'", false), "export-function");
+  }
+
+  #[test]
+  fn test_slugger_with_similar_inputs() {
+    let mut slugger = Slugger::new();
+    assert_eq!(slugger.slug("inline", false), "inline");
+    assert_eq!(slugger.slug("**inline**", false), "inline-1");
+    assert_eq!(slugger.slug("*inline*", false), "inline-2");
+    assert_eq!(slugger.slug("Inline", false), "inline-3");
+    assert_eq!(slugger.slug("inline", true), "inline-4");
+    assert_eq!(slugger.slug("Inline", true), "Inline");
   }
 }
