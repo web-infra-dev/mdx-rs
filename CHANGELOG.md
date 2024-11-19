@@ -1,3 +1,12 @@
+## [0.6.4](https://github.com/web-infra-dev/mdx-rs/compare/v0.6.3...v0.6.4) (2024-11-18)
+
+
+### Bug Fixes
+
+* should generate unique id with counter when using different syntax ([#67](https://github.com/web-infra-dev/mdx-rs/issues/67)) ([79a361f](https://github.com/web-infra-dev/mdx-rs/commit/79a361f11a17c36679483a504e6db64db9e46cf6))
+
+
+
 ## [0.6.3](https://github.com/web-infra-dev/mdx-rs/compare/v0.6.2...v0.6.3) (2024-11-07)
 
 
