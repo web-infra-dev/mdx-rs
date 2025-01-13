@@ -1,4 +1,13 @@
-## [0.6.4](https://github.com/web-infra-dev/mdx-rs/compare/v0.6.3...v0.6.4) (2024-11-18)
+## [0.6.5](https://github.com/web-infra-dev/mdx-rs/compare/v0.6.4...v0.6.5) (2025-01-13)
+
+
+### Features
+
+* support nested container syntax in list and component ([#69](https://github.com/web-infra-dev/mdx-rs/issues/69)) ([6e704d7](https://github.com/web-infra-dev/mdx-rs/commit/6e704d7a2604aa326b63861bd0f7f8e6104c4106))
+
+
+
+## [0.6.4](https://github.com/web-infra-dev/mdx-rs/compare/v0.6.3...v0.6.4) (2024-11-19)
 
 
 ### Bug Fixes
