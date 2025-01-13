@@ -181,8 +181,15 @@ fn traverse_children(root: &mut hast::Root) {
   let mut container_content_end_index = 0;
   let mut index = 0;
   while index < root.children.len() {
-    let child = &root.children[index];
+    let child = &mut root.children[index];
     if let hast::Node::Element(element) = child {
+      let mut element_as_root = hast::Root {
+        children: element.children.clone(),
+        position: element.position.clone(),
+      };
+      traverse_children(&mut element_as_root);
+      element.children = element_as_root.children;
+
       // Meet the start of the container
       if !container_content_start {
         // e.g. :::tip
@@ -982,6 +989,182 @@ mod tests {
           ],
           position: None,
         })],
+        position: None,
+      })
+    );
+  }
+
+  #[test]
+  fn test_container_plugin_with_nested_in_list() {
+    let mut root = hast::Node::Root(hast::Root {
+      children: vec![
+        hast::Node::Element(hast::Element {
+          tag_name: "ol".into(),
+          properties: vec![],
+          children: vec![
+            hast::Node::Element(hast::Element {
+              tag_name: "p".into(),
+              properties: vec![],
+              children: vec![hast::Node::Text(hast::Text {
+                value: ":::tip Note".into(),
+                position: None,
+              })],
+              position: None,
+            }),
+            hast::Node::Element(hast::Element {
+              tag_name: "p".into(),
+              properties: vec![],
+              children: vec![hast::Node::Text(hast::Text {
+                value: "This is a tip".into(),
+                position: None,
+              })],
+              position: None,
+            }),
+            hast::Node::Element(hast::Element {
+              tag_name: "p".into(),
+              properties: vec![],
+              children: vec![hast::Node::Text(hast::Text {
+                value: ":::".into(),
+                position: None,
+              })],
+              position: None,
+            }),
+          ],
+          position: None,
+        }),
+        hast::Node::Element(hast::Element {
+          tag_name: "ul".into(),
+          properties: vec![],
+          children: vec![
+            hast::Node::Element(hast::Element {
+              tag_name: "p".into(),
+              properties: vec![],
+              children: vec![hast::Node::Text(hast::Text {
+                value: ":::tip Note".into(),
+                position: None,
+              })],
+              position: None,
+            }),
+            hast::Node::Element(hast::Element {
+              tag_name: "p".into(),
+              properties: vec![],
+              children: vec![hast::Node::Text(hast::Text {
+                value: "This is a tip".into(),
+                position: None,
+              })],
+              position: None,
+            }),
+            hast::Node::Element(hast::Element {
+              tag_name: "p".into(),
+              properties: vec![],
+              children: vec![hast::Node::Text(hast::Text {
+                value: ":::".into(),
+                position: None,
+              })],
+              position: None,
+            }),
+          ],
+          position: None,
+        }),
+      ],
+      position: None,
+    });
+
+    mdx_plugin_container(&mut root);
+
+    assert_eq!(
+      root,
+      hast::Node::Root(hast::Root {
+        children: vec![
+          hast::Node::Element(hast::Element {
+            tag_name: "ol".into(),
+            properties: vec![],
+            children: vec![hast::Node::Element(hast::Element {
+              tag_name: "div".into(),
+              properties: vec![(
+                "className".into(),
+                hast::PropertyValue::SpaceSeparated(vec!["rspress-directive".into(), "tip".into()])
+              ),],
+              children: vec![
+                hast::Node::Element(hast::Element {
+                  tag_name: "div".into(),
+                  properties: vec![(
+                    "className".into(),
+                    hast::PropertyValue::SpaceSeparated(vec!["rspress-directive-title".into()])
+                  )],
+                  children: vec![hast::Node::Text(hast::Text {
+                    value: "Note".into(),
+                    position: None,
+                  })],
+                  position: None,
+                }),
+                hast::Node::Element(hast::Element {
+                  tag_name: "div".into(),
+                  properties: vec![(
+                    "className".into(),
+                    hast::PropertyValue::SpaceSeparated(vec!["rspress-directive-content".into()])
+                  )],
+                  children: vec![hast::Node::Element(hast::Element {
+                    tag_name: "p".into(),
+                    properties: vec![],
+                    children: vec![hast::Node::Text(hast::Text {
+                      value: "This is a tip".into(),
+                      position: None,
+                    })],
+                    position: None,
+                  })],
+                  position: None,
+                })
+              ],
+              position: None,
+            })],
+            position: None
+          }),
+          hast::Node::Element(hast::Element {
+            tag_name: "ul".into(),
+            properties: vec![],
+            children: vec![hast::Node::Element(hast::Element {
+              tag_name: "div".into(),
+              properties: vec![(
+                "className".into(),
+                hast::PropertyValue::SpaceSeparated(vec!["rspress-directive".into(), "tip".into()])
+              ),],
+              children: vec![
+                hast::Node::Element(hast::Element {
+                  tag_name: "div".into(),
+                  properties: vec![(
+                    "className".into(),
+                    hast::PropertyValue::SpaceSeparated(vec!["rspress-directive-title".into()])
+                  )],
+                  children: vec![hast::Node::Text(hast::Text {
+                    value: "Note".into(),
+                    position: None,
+                  })],
+                  position: None,
+                }),
+                hast::Node::Element(hast::Element {
+                  tag_name: "div".into(),
+                  properties: vec![(
+                    "className".into(),
+                    hast::PropertyValue::SpaceSeparated(vec!["rspress-directive-content".into()])
+                  )],
+                  children: vec![hast::Node::Element(hast::Element {
+                    tag_name: "p".into(),
+                    properties: vec![],
+                    children: vec![hast::Node::Text(hast::Text {
+                      value: "This is a tip".into(),
+                      position: None,
+                    })],
+                    position: None,
+                  })],
+                  position: None,
+                })
+              ],
+              position: None,
+            })],
+            position: None
+          })
+        ],
         position: None,
       })
     );
