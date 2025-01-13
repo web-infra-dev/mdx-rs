@@ -398,6 +398,7 @@ jobs:
   publish:
     name: Publish
     runs-on: ubuntu-latest
+    environment: production
     needs:
       - test-linux-x64-gnu-binding
       - test-linux-x64-musl-binding
