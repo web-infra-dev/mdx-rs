@@ -182,7 +182,15 @@ fn traverse_children(root: &mut hast::Root) {
   let mut index = 0;
   while index < root.children.len() {
     let child = &mut root.children[index];
-    if let hast::Node::Element(element) = child {
+
+    if let hast::Node::MdxJsxElement(element) = child {
+      let mut element_as_root = hast::Root {
+        children: element.children.clone(),
+        position: element.position.clone(),
+      };
+      traverse_children(&mut element_as_root);
+      element.children = element_as_root.children;
+    } else if let hast::Node::Element(element) = child {
       let mut element_as_root = hast::Root {
         children: element.children.clone(),
         position: element.position.clone(),

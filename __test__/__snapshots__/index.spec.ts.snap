@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`compile > should render container content correctly 1`] = `
+exports[`compile > should render container content in md correctly 1`] = `
 "<div>
   <div>TIP</div>
   <div>
@@ -25,10 +25,28 @@ exports[`compile > should render container content correctly 1`] = `
 </code></pre>
   </div>
 </div>
+<ol>
+  <li>
+    <p>Title 1</p>
+    <div>
+      <div>TIP</div>
+      <div><p>This is a tip.</p></div>
+    </div>
+  </li>
+</ol>
+<ul>
+  <li>
+    <p>Title 2</p>
+    <div>
+      <div>NOTE</div>
+      <div><p>This is a note.</p></div>
+    </div>
+  </li>
+</ul>
 "
 `;
 
-exports[`compile > should render container content correctly 2`] = `
+exports[`compile > should render container content in md correctly 2`] = `
 "import { useMDXComponents as _provideComponents } from "@mdx-js/react";
 function _createMdxContent(props) {
   const _components = Object.assign(
@@ -39,6 +57,7 @@ function _createMdxContent(props) {
       ul: "ul",
       li: "li",
       pre: "pre",
+      ol: "ol",
     },
     _provideComponents(),
     props.components
@@ -104,6 +123,44 @@ function _createMdxContent(props) {
           {"\\n"}
         </_components.div>
       </_components.div>
+      {"\\n"}
+      <_components.ol>
+        {"\\n"}
+        <_components.li>
+          {"\\n"}
+          <_components.p>{"Title 1"}</_components.p>
+          {"\\n"}
+          <_components.div className="rspress-directive tip">
+            <_components.div className="rspress-directive-title">
+              {"TIP"}
+            </_components.div>
+            <_components.div className="rspress-directive-content">
+              <_components.p>{"This is a tip."}</_components.p>
+            </_components.div>
+          </_components.div>
+          {"\\n"}
+        </_components.li>
+        {"\\n"}
+      </_components.ol>
+      {"\\n"}
+      <_components.ul>
+        {"\\n"}
+        <_components.li>
+          {"\\n"}
+          <_components.p>{"Title 2"}</_components.p>
+          {"\\n"}
+          <_components.div className="rspress-directive note">
+            <_components.div className="rspress-directive-title">
+              {"NOTE"}
+            </_components.div>
+            <_components.div className="rspress-directive-content">
+              <_components.p>{"This is a note."}</_components.p>
+            </_components.div>
+          </_components.div>
+          {"\\n"}
+        </_components.li>
+        {"\\n"}
+      </_components.ul>
     </>
   );
 }
@@ -122,6 +179,243 @@ function MDXContent(props = {}) {
   );
 }
 export default MDXContent;
+"
+`;
+
+exports[`compile > should render container content in mdx correctly 1`] = `
+"<div>
+  <div>TIP</div>
+  <div>
+    <p>First line <code>block</code></p>
+    <p>Second line <code>block2</code></p>
+  </div>
+</div>
+<div>
+  <div>TIP</div>
+  <div>
+    <ul>
+      <li>List item 1 <code>block</code>。</li>
+      <li>List item 2 <code>block2</code>。</li>
+    </ul>
+  </div>
+</div>
+<div>
+  <div>TIP</div>
+  <div>
+    <p>Some code:</p>
+    <pre><code>console.log('hello world');
+</code></pre>
+  </div>
+</div>
+<ol>
+  <li>
+    <p>Title 1</p>
+    <div>
+      <div>TIP</div>
+      <div><p>This is a tip.</p></div>
+    </div>
+  </li>
+</ol>
+<ul>
+  <li>
+    <p>Title 2</p>
+    <div>
+      <div>NOTE</div>
+      <div><p>This is a note.</p></div>
+    </div>
+  </li>
+</ul>
+"
+`;
+
+exports[`compile > should render container content in mdx correctly 2`] = `
+"import { useMDXComponents as _provideComponents } from "@mdx-js/react";
+function _createMdxContent(props) {
+  const _components = Object.assign(
+      {
+        div: "div",
+        p: "p",
+        code: "code",
+        ul: "ul",
+        li: "li",
+        pre: "pre",
+        ol: "ol",
+      },
+      _provideComponents(),
+      props.components
+    ),
+    { Steps } = _components;
+  if (!Steps) _missingMdxReference("Steps", true, "36:1-50:9");
+  return (
+    <>
+      <_components.div className="rspress-directive tip">
+        <_components.div className="rspress-directive-title">
+          {"TIP"}
+        </_components.div>
+        <_components.div className="rspress-directive-content">
+          <_components.p>
+            {"First line "}
+            <_components.code>{"block"}</_components.code>
+          </_components.p>
+          {"\\n"}
+          <_components.p>
+            {"Second line "}
+            <_components.code>{"block2"}</_components.code>
+            {"\\n"}
+          </_components.p>
+        </_components.div>
+      </_components.div>
+      {"\\n"}
+      <_components.div className="rspress-directive tip">
+        <_components.div className="rspress-directive-title">
+          {"TIP"}
+        </_components.div>
+        <_components.div className="rspress-directive-content">
+          {"\\n"}
+          <_components.ul>
+            {"\\n"}
+            <_components.li>
+              {"List item 1 "}
+              <_components.code>{"block"}</_components.code>
+              {"。"}
+            </_components.li>
+            {"\\n"}
+            <_components.li>
+              {"List item 2 "}
+              <_components.code>{"block2"}</_components.code>
+              {"。"}
+            </_components.li>
+            {"\\n"}
+          </_components.ul>
+          {"\\n"}
+        </_components.div>
+      </_components.div>
+      {"\\n"}
+      <_components.div className="rspress-directive tip">
+        <_components.div className="rspress-directive-title">
+          {"TIP"}
+        </_components.div>
+        <_components.div className="rspress-directive-content">
+          {"\\n"}
+          <_components.p>{"Some code:"}</_components.p>
+          {"\\n"}
+          <_components.pre>
+            <_components.code className="language-ts">
+              {"console.log('hello world');\\n"}
+            </_components.code>
+          </_components.pre>
+          {"\\n"}
+        </_components.div>
+      </_components.div>
+      {"\\n"}
+      <_components.ol>
+        {"\\n"}
+        <_components.li>
+          {"\\n"}
+          <_components.p>{"Title 1"}</_components.p>
+          {"\\n"}
+          <_components.div className="rspress-directive tip">
+            <_components.div className="rspress-directive-title">
+              {"TIP"}
+            </_components.div>
+            <_components.div className="rspress-directive-content">
+              <_components.p>{"This is a tip."}</_components.p>
+            </_components.div>
+          </_components.div>
+          {"\\n"}
+        </_components.li>
+        {"\\n"}
+      </_components.ol>
+      {"\\n"}
+      <_components.ul>
+        {"\\n"}
+        <_components.li>
+          {"\\n"}
+          <_components.p>{"Title 2"}</_components.p>
+          {"\\n"}
+          <_components.div className="rspress-directive note">
+            <_components.div className="rspress-directive-title">
+              {"NOTE"}
+            </_components.div>
+            <_components.div className="rspress-directive-content">
+              <_components.p>{"This is a note."}</_components.p>
+            </_components.div>
+          </_components.div>
+          {"\\n"}
+        </_components.li>
+        {"\\n"}
+      </_components.ul>
+      {"\\n"}
+      <Steps>
+        <_components.ol>
+          {"\\n"}
+          <_components.li>
+            {"\\n"}
+            <_components.p>{"Title 3"}</_components.p>
+            {"\\n"}
+            <_components.div className="rspress-directive warning">
+              <_components.div className="rspress-directive-title">
+                {"WARNING"}
+              </_components.div>
+              <_components.div className="rspress-directive-content">
+                <_components.p>{"This is a warning."}</_components.p>
+              </_components.div>
+            </_components.div>
+            {"\\n"}
+          </_components.li>
+          {"\\n"}
+        </_components.ol>
+        <_components.ul>
+          {"\\n"}
+          <_components.li>
+            {"\\n"}
+            <_components.p>{"Title 4"}</_components.p>
+            {"\\n"}
+            <_components.div className="rspress-directive danger">
+              <_components.div className="rspress-directive-title">
+                {"DANGER"}
+              </_components.div>
+              <_components.div className="rspress-directive-content">
+                <_components.p>{"This is a danger."}</_components.p>
+              </_components.div>
+            </_components.div>
+            {"\\n"}
+          </_components.li>
+          {"\\n"}
+        </_components.ul>
+      </Steps>
+    </>
+  );
+}
+function MDXContent(props = {}) {
+  const { wrapper: MDXLayout } = Object.assign(
+    {},
+    _provideComponents(),
+    props.components
+  );
+  return MDXLayout ? (
+    <MDXLayout {...props}>
+      <_createMdxContent {...props} />
+    </MDXLayout>
+  ) : (
+    _createMdxContent(props)
+  );
+}
+export default MDXContent;
+function _missingMdxReference(id, component, place) {
+  throw new Error(
+    "Expected " +
+      (component ? "component" : "object") +
+      " \`" +
+      id +
+      "\` to be defined: you likely forgot to import, pass, or provide it." +
+      (place
+        ? "\\nIt’s referenced in your code at \`" +
+          place +
+          "\` in \`container-content.mdx\`"
+        : "")
+  );
+}
 "
 `;
 
