@@ -171,7 +171,7 @@ fn parse_github_alerts_container_meta(meta: &str) -> (String, String) {
   (container_type, remaining_data)
 }
 
-fn traverse_children(root: &mut hast::Root) {
+fn traverse_children(children: &mut Vec<hast::Node>) {
   let mut container_type = String::new();
   let mut container_title = String::new();
   let mut container_content = vec![];
@@ -180,24 +180,10 @@ fn traverse_children(root: &mut hast::Root) {
   let mut container_content_start_index = 0;
   let mut container_content_end_index = 0;
   let mut index = 0;
-  while index < root.children.len() {
-    let child = &mut root.children[index];
-
-    if let hast::Node::MdxJsxElement(element) = child {
-      let mut element_as_root = hast::Root {
-        children: element.children.clone(),
-        position: element.position.clone(),
-      };
-      traverse_children(&mut element_as_root);
-      element.children = element_as_root.children;
-    } else if let hast::Node::Element(element) = child {
-      let mut element_as_root = hast::Root {
-        children: element.children.clone(),
-        position: element.position.clone(),
-      };
-      traverse_children(&mut element_as_root);
-      element.children = element_as_root.children;
-
+  while index < children.len() {
+    let child = &mut children[index];
+    traverse_node(child);
+    if let hast::Node::Element(element) = child {
       // Meet the start of the container
       if !container_content_start {
         // e.g. :::tip
@@ -353,13 +339,8 @@ fn traverse_children(root: &mut hast::Root) {
           &container_content,
         );
 
-        root
-          .children
-          .drain(container_content_start_index..=container_content_end_index);
-
-        root
-          .children
-          .insert(container_content_start_index, new_container_children);
+        children.drain(container_content_start_index..=container_content_end_index);
+        children.insert(container_content_start_index, new_container_children);
 
         container_title = String::new();
         container_content = vec![];
@@ -383,6 +364,12 @@ fn traverse_children(root: &mut hast::Root) {
   }
 }
 
+fn traverse_node(node: &mut hast::Node) {
+  if let Some(children) = node.children_mut() {
+    traverse_children(children);
+  }
+}
+
 pub fn mdx_plugin_container(root: &mut hast::Node) {
   // 1. Traverse children, get all p tags, check if they start with :::
   // If it is, it is regarded as container syntax, and the content from the beginning of ::: to the end of a certain ::: is regarded as a container
@@ -403,9 +390,7 @@ pub fn mdx_plugin_container(root: &mut hast::Node) {
   //     <p>This is a tip</p>
   //   </div>
   // </div>
-  if let hast::Node::Root(root) = root {
-    traverse_children(root);
-  }
+  traverse_node(root);
 }
 
 #[cfg(test)]
