@@ -66,13 +66,28 @@ describe("compile", () => {
     expect(result).toMatchSnapshot();
   });
 
-  test("should render container content correctly", async () => {
+  test("should render container content in md correctly", async () => {
     const { code: result, html } = await testCompile({
       value: readFileSync(
         path.join(__dirname, "./container-content.md"),
         "utf8",
       ),
       filepath: "container-content.md",
+      development: true,
+      root: "",
+    });
+
+    expect(html).toMatchSnapshot();
+    expect(result).toMatchSnapshot();
+  });
+
+  test("should render container content in mdx correctly", async () => {
+    const { code: result, html } = await testCompile({
+      value: readFileSync(
+        path.join(__dirname, "./container-content.mdx"),
+        "utf8",
+      ),
+      filepath: "container-content.mdx",
       development: true,
       root: "",
     });
