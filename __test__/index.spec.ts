@@ -3,7 +3,7 @@ import path from "node:path";
 import { createSnapshotSerializer } from "path-serializer";
 // @ts-ignore TODO: add types for pretter
 import prettier from "prettier";
-import { describe, expect, test } from "vitest";
+import { describe, expect, test } from "@rstest/core";
 
 import { type CompileOptions, compile } from "../index.js";
 

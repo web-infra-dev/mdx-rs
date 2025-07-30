@@ -26,18 +26,17 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "path-serializer": "0.2.2",
     "@mdx-js/mdx": "^2.3.0",
     "@napi-rs/cli": "^2.14.8",
+    "@rstest/core": "^0.0.10",
+    "@types/node": "16.18.101",
     "benchmark": "^2.1.4",
     "cli-table": "^0.3.11",
     "conventional-changelog": "^3.1.25",
     "conventional-changelog-cli": "^2.2.2",
+    "path-serializer": "0.2.2",
     "prettier": "^2.8.7",
-    "typescript": "^5.0.2",
-    "vite": "^4.4.11",
-    "vitest": "^0.29.7",
-    "@types/node": "16.18.101"
+    "typescript": "^5.0.2"
   },
   "engines": {
     "node": ">= 10"
@@ -48,9 +47,9 @@
     "build": "napi build --cargo-cwd crates/binding --platform --release",
     "build:debug": "napi build --cargo-cwd crates/binding --platform",
     "prepublishOnly": "napi prepublish -t npm",
-    "test": "vitest run",
-    "test:local": "vitest run",
-    "test:watch": "vitest dev",
+    "test": "rstest run",
+    "test:local": "rstest run",
+    "test:watch": "rstest dev",
     "universal": "napi universal",
     "version": "napi version",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
