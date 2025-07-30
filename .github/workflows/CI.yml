@@ -169,7 +169,7 @@ jobs:
           version: 0.10.1
 
       - name: Cache cargo
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             ~/.cargo/registry/index/
@@ -243,7 +243,7 @@ jobs:
         run: npm install -g pnpm@8.7.0
 
       - name: Cache NPM dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ~/.pnpm-store
           key: npm-cache-test-${{ matrix.settings.target }}-${{ matrix.node }}-${{ hashFiles('pnpm-lock.yaml') }}
@@ -419,7 +419,7 @@ jobs:
         run: npm install -g pnpm@8.7.0
 
       - name: Cache NPM dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ~/.pnpm-store
           key: npm-cache-ubuntu-latest-${{ hashFiles('pnpm-lock.yaml') }}
