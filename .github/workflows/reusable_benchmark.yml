@@ -45,7 +45,7 @@ jobs:
           tar czf benchmark_${{ matrix.branch }}.tar.gz benchmark_${{ matrix.branch }}
 
       - name: Upload binary
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: binaries_${{ inputs.os }}
           path: |
@@ -86,7 +86,7 @@ jobs:
           ./benchmark_pr --save-baseline pr
 
       - name: Upload benchmark results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: benchmark-results-${{ inputs.os }}
           path: ./target/criterion
