@@ -139,7 +139,7 @@ jobs:
           - host: windows-latest
             target: aarch64-pc-windows-msvc
             build: pnpm run build --target aarch64-pc-windows-msvc
-    name: ${{ matrix.settings.target }} - node@16
+    name: ${{ matrix.settings.target }} - node@18
     runs-on: ${{ matrix.settings.host }}
     steps:
       - uses: actions/checkout@v3
@@ -147,7 +147,7 @@ jobs:
         uses: actions/setup-node@v3
         if: ${{ !matrix.settings.docker }}
         with:
-          node-version: 16
+          node-version: 18
 
       - name: Setup node dependencies
         run: |
@@ -196,7 +196,7 @@ jobs:
         uses: actions/setup-node@v3
         if: matrix.settings.target == 'i686-pc-windows-msvc'
         with:
-          node-version: 16
+          node-version: 18
           architecture: x86
       - name: Build in docker
         uses: addnab/docker-run-action@v3
@@ -227,7 +227,7 @@ jobs:
             target: "aarch64-apple-darwin"
           - host: windows-latest
             target: "x86_64-pc-windows-msvc"
-        node: ["16", "18"]
+        node: ["18"]
     runs-on: ${{ matrix.settings.host }}
 
     steps:
@@ -270,7 +270,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node: ["16", "18"]
+        node: ["18"]
     runs-on: ubuntu-latest
 
     steps:
@@ -301,7 +301,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node: ["16", "18"]
+        node: ["18"]
     runs-on: ubuntu-latest
 
     steps:
@@ -332,7 +332,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node: ["16", "18"]
+        node: ["18"]
     runs-on: ubuntu-latest
 
     steps:
@@ -368,7 +368,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node: ["16", "18"]
+        node: ["18"]
     runs-on: ubuntu-latest
 
     steps:
